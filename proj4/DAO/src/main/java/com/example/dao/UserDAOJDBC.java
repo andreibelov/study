@@ -55,6 +55,7 @@ public class UserDAOJDBC implements UserDAO {
 
     // Actions ------------------------------------------------------------------------------------
 
+
     @Override
     public User find(Long id) throws DAOException {
         return find(SQL_FIND_BY_ID, id);
@@ -64,7 +65,6 @@ public class UserDAOJDBC implements UserDAO {
     public User find(String email, String password) throws DAOException {
         return find(SQL_FIND_BY_EMAIL_AND_PASSWORD, email, password);
     }
-
     /**
      * Returns the user from the database matching the given SQL query with the given values.
      * @param sql The SQL query to be executed in the database.
