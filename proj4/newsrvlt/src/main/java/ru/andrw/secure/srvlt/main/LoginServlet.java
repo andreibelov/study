@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         UserDAO userDAO = UserDAOList.getInstance();
         String username = request.getParameter("email");
         String password = request.getParameter("password");
-        User user = userDAO.find(0L);
+        User user = userDAO.find(username, password);
         if (user != null) {
             request.getSession().setAttribute("user", user); // Put user in session.
             Cookie userName = new Cookie("user", user.getFirstname());

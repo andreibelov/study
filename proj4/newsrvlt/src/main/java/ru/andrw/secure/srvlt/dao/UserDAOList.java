@@ -63,11 +63,12 @@ public class UserDAOList implements UserDAO, Serializable {
         for (User entry : userlist ) {
             if (entry.getEmail().equals(email)){
                 if (entry.getPassword().equals(password)){
-                    return entry;
+                    user = entry;
                 }
+                user = entry;
             }
         }
-        return null;
+        return user;
     }
 
     private static User map(Long id, String email, String firstname, String lastname, Date birthdate) {
