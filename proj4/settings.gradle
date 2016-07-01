@@ -1,9 +1,5 @@
 rootProject.name = 'proj4'
-include 'core'
 include 'webservlet'
-include 'ServletCookieEx'
-include 'secured'
 include 'DAO'
-include 'try1'
 include 'newsrvlt'
-
+include 'websocket'

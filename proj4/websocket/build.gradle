@@ -1,0 +1,14 @@
+apply plugin: 'war'
+apply plugin: 'idea'
+
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+
+    compile group: 'org.apache.cayenne', name: 'cayenne-tools', version: '4.0.M3'
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1208'
+    compile 'javax.websocket:javax.websocket-api:1.0'
+    providedCompile 'org.apache.tomcat:tomcat-api:+'
+}
