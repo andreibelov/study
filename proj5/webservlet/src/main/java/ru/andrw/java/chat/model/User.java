@@ -11,7 +11,9 @@ import java.util.Date;
  *
  */
 
-public class User implements Serializable {
+@Setter
+@Getter
+public final class User implements Serializable {
 
     // Constants ----------------------------------------------------------------------------------
 
@@ -19,12 +21,14 @@ public class User implements Serializable {
 
     // Properties ---------------------------------------------------------------------------------
 
-    @Getter @Setter private Long id;
-    @Getter @Setter private String email;
-    @Getter @Setter private String password;
-    @Getter @Setter private String firstname;
-    @Getter @Setter private String lastname;
-    @Getter @Setter private Date birthdate;
+    private Long id;
+    private String email;
+    private String login;
+    private String phone;
+    private String password;
+    private String firstname;
+    private String lastname;
+    private Date birthday;
 
     // Object overrides ---------------------------------------------------------------------------
 
@@ -43,7 +47,17 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return String.format("User[id=%d,email=%s,firstname=%s,lastname=%s,birthdate=%s]",
-                id, email, firstname, lastname, birthdate);
+                id, email, firstname, lastname, birthday);
     }
 
+    public User map(Long id, String email, String login, String password, String firstname, String lastname, Date birthday){
+        this.id = id;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthday = birthday;
+        return this;
+    }
 }
