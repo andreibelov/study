@@ -17,9 +17,9 @@ public class Demo {
     public static void main(String[] args) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(UserList.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        //jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxbMarshaller.marshal(fromXML("users.xml"), System.out);
+        toXMLFile(fromXML("users.xml"), "userlist.xml");
     }
 
     //reads list from file
@@ -29,13 +29,13 @@ public class Demo {
                 .createUnmarshaller().unmarshal(new File(Demo.class.getClassLoader().getResource(path).getFile()));
     }
 
-    private static void toXMLFile(UserList userList) throws JAXBException
+    private static void toXMLFile(UserList userList, String path) throws JAXBException
     {
         JAXBContext jaxbContext = JAXBContext.newInstance(UserList.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        jaxbMarshaller.marshal(userList, new File("userlist.xml"));
+        jaxbMarshaller.marshal(userList, (new File(Demo.class.getClassLoader().getResource(path).getFile())));
     }
 
 }
