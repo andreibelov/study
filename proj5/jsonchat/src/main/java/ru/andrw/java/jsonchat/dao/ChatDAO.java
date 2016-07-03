@@ -2,10 +2,13 @@ package ru.andrw.java.jsonchat.dao;
 
 import ru.andrw.java.jsonchat.model.ChatMessage;
 import ru.andrw.java.jsonchat.model.User;
-import sun.plugin2.message.Message;
+import ru.andrw.java.jsonchat.servlet.Chat;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * Created by john on 7/3/2016.
@@ -23,17 +26,30 @@ public class ChatDAO implements DAO {
 
     @Override
     public User getUser(Long id) throws DAOException {
-        return null;
+       return users.stream().filter(user -> id.equals(user.getId()))
+               .findAny().orElse(null);
     }
 
     @Override
     public User findUser(String login, String pass) throws DAOException {
-        return null;
+        return users.stream().filter(user -> login.equals(user.getLogin()))
+                .findAny().filter(user -> pass.equals(user.getPassword()))
+                .orElse(null);
     }
 
     @Override
     public boolean addUser(User user) {
-        return false;
+        if(!userValidator(user)) return false;
+        else users.add(user);
+        return true;
+    }
+
+    private boolean userValidator(User user){
+        return ofNullable(user).filter(u -> u != null)
+                .filter(u -> u.getLogin() != null)
+                .filter(u -> u.getPassword() != null)
+                .filter(u -> u.getEmail() != null)
+                .isPresent();
     }
 
     @Override
@@ -57,12 +73,13 @@ public class ChatDAO implements DAO {
     }
 
     @Override
-    public long addMessage(Message message) {
+    public long addMessage(ChatMessage message) {
+
         return 0;
     }
 
     @Override
-    public boolean deleteMessage(Message message) {
+    public boolean deleteMessage(ChatMessage message) {
         return false;
     }
 }
