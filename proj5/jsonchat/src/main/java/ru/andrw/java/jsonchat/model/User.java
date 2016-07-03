@@ -1,22 +1,17 @@
-package ru.andrw.java.core.model;
+package ru.andrw.java.jsonchat.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 /**
- * Created by john on 7/2/2016.
- *
+ * Created by john on 7/3/2016.
  */
-@Setter
-@Getter
-@Accessors(chain = true)
-@XmlRootElement(name="user")
-@XmlAccessorType(XmlAccessType.FIELD)
+@Data
 public class User implements Serializable {
 
     // Constants ----------------------------------------------------------------------------------
@@ -28,11 +23,5 @@ public class User implements Serializable {
     private Long id;
     private String email;
     private String login;
-    private String phone;
     private String password;
-    private String firstname;
-    private String lastname;
-    private Date birthday;
-
-
 }

@@ -6,6 +6,7 @@ import ru.andrw.java.chat.dao.exeptions.DAOException;
 import ru.andrw.java.chat.dao.ifaces.UserDAO;
 import ru.andrw.java.chat.model.User;
 
+import javax.xml.bind.annotation.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -22,22 +23,13 @@ import static java.util.Optional.ofNullable;
  * Created by john on 7/2/2016.
  * Implements UserDAO based on the List
  */
-
-public enum UserDAOList implements UserDAO {
-    INSTANCE((ArrayList<User>) Arrays.asList(new User()));
-
-    private final List<User> userList;
-
-    private UserDAOList(ArrayList<User> list_of_users){
-        this.userList = list_of_users;
-    }
-
-    public static UserDAOList getINSTANCE(){
-        synchronized (INSTANCE) {
-            return INSTANCE;
-        }
-    }
-
+@XmlRootElement(name="root")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class UserDAOList implements UserDAO {
+    @XmlElementWrapper(name="users")
+    @XmlElement(name="user")
+    private List<User> userList;
+    
     @Override
     public User find(Long id) throws DAOException {
 
@@ -79,10 +71,5 @@ public enum UserDAOList implements UserDAO {
 
     }
 
-    public static Document fromXML(String xml) throws ParserConfigurationException, IOException, SAXException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        return builder.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
-    }
+
 }
