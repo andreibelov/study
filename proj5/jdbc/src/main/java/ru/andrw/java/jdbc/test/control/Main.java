@@ -1,6 +1,5 @@
 package ru.andrw.java.jdbc.test.control;
 
-import ru.andrw.java.jdbc.test.model.User;
 import ru.andrw.java.jdbc.test.model.UserList;
 
 
@@ -27,7 +26,7 @@ public class Main {
             jaxbContext = JAXBContext.newInstance(UserList.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-            UserList userList = fromXML("/users.xml");
+            UserList userList = fromXML("/META-INF/users.xml");
 
             System.out.println(userList.users);
             //Long id, Date birthday, String email, String login,
