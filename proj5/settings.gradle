@@ -3,4 +3,6 @@ rootProject.name = 'proj5'
 include 'webservlet'
 include 'core'
 include 'jsonchat'
+include 'jdbc'
+include 'webchat'
 
