@@ -28,18 +28,21 @@ public class Main {
 
             UserList userList = fromXML("/META-INF/users.xml");
 
-            System.out.println(userList.users);
+            System.out.println(UserList.users);
             //Long id, Date birthday, String email, String login,
             // String phone, String password, String firstname,
             // String lastname
             String[] map = new String[] {"email","login","phone", "pass","",""};
-            UserList.add(map);
-
+            UserList.addUser(map);
+            System.out.println(UserList.users);
             et.begin();
             em.persist(UserList.getUser(1L));
             em.persist(UserList.getUser(2L));
             em.persist(UserList.getUser(3L));
             et.commit();
+
+
+
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (Exception e) {

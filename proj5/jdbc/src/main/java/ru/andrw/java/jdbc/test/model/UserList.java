@@ -43,7 +43,7 @@ public class UserList {
         return mapUser(al.getAndIncrement(),new Date(),map[0],map[1],map[2],map[3],map[4],map[5]);
     }
 
-    public static void add(User user){
+    public static void addUser(User user){
         try {
             users.add(user);
         } catch (Exception ex){
@@ -51,7 +51,7 @@ public class UserList {
         }
     }
 
-    public static void add(String[] map){
+    public static void addUser(String[] map){
         try {
             users.add(mapUser(map));
         } catch (Exception ex){
