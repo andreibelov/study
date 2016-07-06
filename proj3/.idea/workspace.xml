@@ -1,169 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="caf527b6-77b2-4f14-9382-ac3234ce6e8b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/data/Message.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/data/User.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/queue/FirstDequeue.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/queue/MainQueue.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/queue/Queueing.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Manager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Worker.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/test/java/test/ru/andrw/java/multithreading/workers/ManagerTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/proj3.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/1869355291-comment_from_post_iframe.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/2129857996-widgets.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/269344_430702123616927_1048322616_n.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/300lo.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/306752634-lightbox_bundle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/3375562265-css_bundle_v2.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/403601619-lbx__en_gb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/AP1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/FB.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/SPS.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/SUB-BAN.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/Valon_160x160.JPG" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/a.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/a.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/a_002.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/a_003.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/a_004.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/a_005.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/a_006.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/a_007.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/addthis_widget.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/ajax_java_example.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/ajax_jsp_servlet_jsonarray_mysql_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/ajax_servlet_example.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/all.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/angry.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/authorization.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/b16-rounded.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/blank.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/boost" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/button.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/buysiteads-ad.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/cascading_dropdownlist_with_autocomplete.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/cbgapi.loaded_0" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/cbgapi.loaded_1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/cbgapi.loaded_2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/clap.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/comment-iframe.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/comment-iframe_data/2218177523-cmtfp.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/comment-iframe_data/4153619375-cmt__en_gb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/comment-iframe_data/b16-rounded.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/comment-iframe_data/bjEnSSRtkQDmV5c2Pm_sWdo8WoIWRicVzzTAt_BvtSY.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/comment-iframe_data/blank.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/comment-iframe_data/close.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/comments.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/contact.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/counter.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/cry.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/css.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/css_002.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/css_003.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/cuff.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/disappointed.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/dislike.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/emoticon-button-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/escort.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/fastbutton.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/fear.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/fist.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/fixed_header_gridview_jquery.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/ga.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/google.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/happy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/hate.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/heart.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/icon18_edit_allbkg.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/icon18_wrench_allbkg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/jquery_002.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/jvmhost_728x90_adroll2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/like.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/like.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/link.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/love.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/mqdefault.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/noprob.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/ok.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/pf_header_transparent.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/pf_yt_subscribe.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/pfs_java_string_pipe_split.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_002.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_003.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_004.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_005.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_006.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_007.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_008.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_009.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_010.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_011.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_012.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_013.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_014.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_015.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/photo_016.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/ping.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/place.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/plusone.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/postmessageRelay.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/postmessageRelay_data/1077434459-postmessagerelay.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/postmessageRelay_data/cbgapi.loaded_0" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/postmessageRelay_data/rpcshindig_random.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/programmingfree.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/rapt.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/rss.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/ru.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/s.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/sad.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/sh.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shBrushCSharp.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shBrushCss.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shBrushJScript.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shBrushJava.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shBrushSql.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shBrushXml.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shCore.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shCore.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shThemeRDark.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shares.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/show_ads.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/shy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/sigh.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/smile.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/sneered.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/spring_security_jdbc_authentication.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/spring_security_jdbc_password.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/spring_security_spring_data_jpa.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/surprise.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/trope.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/tweet_button.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/twitter.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/unbelieve.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/webfont.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/widgets.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/xd_arbiter.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AJAX with JSP and Servlet using Jquery Example _ ProgrammingFree_files/xd_arbiter_002.htm" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="c203ba8d-826b-4612-a17e-24a84194c05e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/exec/ThreadDemo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/util/PropagateExceptionsSample.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/util/UtilException.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Worker.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj4/build.gradle" afterPath="$PROJECT_DIR$/../proj4/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj5/jsonchat/src/main/java/ru/andrw/java/jsonchat/model/ChatMessage.java" afterPath="$PROJECT_DIR$/../proj5/jsonchat/src/main/java/ru/andrw/java/jsonchat/model/ChatMessage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj5/jsonchat/src/main/java/ru/andrw/java/jsonchat/model/User.java" afterPath="$PROJECT_DIR$/../proj5/jsonchat/src/main/java/ru/andrw/java/jsonchat/model/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/queue/Queueing.java" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/queue/Queueing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Manager.java" afterPath="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Manager.java" />
     </list>
     <ignored path="proj3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -194,32 +39,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ManagerTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/queueing/src/test/java/test/ru/andrw/java/multithreading/workers/ManagerTest.java">
+      <file leaf-file-name="Manager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Manager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state relative-caret-position="229">
+              <caret line="45" column="70" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="70" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThreadDemo.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/exec/ThreadDemo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="59">
+              <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1087#1088#0" expanded="true" />
+                <element signature="e#1115#1116#0" expanded="true" />
+                <element signature="e#1154#1155#0" expanded="true" />
+                <element signature="e#1215#1216#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Consumer.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/util/function/Consumer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LinkedList.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/util/LinkedList.java">
+      <file leaf-file-name="ThreadGroup.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/lang/ThreadGroup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="892" column="0" selection-start-line="892" selection-start-column="0" selection-end-line="892" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="280">
+              <caret line="984" column="16" selection-start-line="984" selection-start-column="16" selection-end-line="984" selection-end-column="16" />
+              <folding>
+                <element signature="e#34258#34259#0" expanded="true" />
+                <element signature="e#34293#34294#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Iterable.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/lang/Iterable.java">
+      <file leaf-file-name="UtilException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/util/UtilException.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="68">
+              <caret line="34" column="49" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2906#2936#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PropagateExceptionsSample.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/util/PropagateExceptionsSample.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="765">
+              <caret line="45" column="14" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -227,53 +118,31 @@
       <file leaf-file-name="Queueing.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/queue/Queueing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-              <folding>
-                <element signature="e#983#984#0" expanded="true" />
-                <element signature="e#1019#1020#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/data/Message.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
-              <folding>
-                <element signature="e#1710#1711#0" expanded="true" />
-                <element signature="e#1757#1758#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Manager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Manager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="34" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="36" />
+            <state relative-caret-position="-179">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Worker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Worker.java">
+      <file leaf-file-name="ManagerTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/queueing/src/test/java/test/ru/andrw/java/multithreading/workers/ManagerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding>
-                <element signature="e#225#226#0" expanded="true" />
-                <element signature="e#252#253#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -747,11 +616,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/queueing/src/test/java/test/ru/andrw/java/multithreading/workers/ManagerTest.java" />
-        <option value="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Worker.java" />
-        <option value="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/data/Message.java" />
-        <option value="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Manager.java" />
         <option value="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/queue/Queueing.java" />
+        <option value="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/util/PropagateExceptionsSample.java" />
+        <option value="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/util/UtilException.java" />
+        <option value="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Worker.java" />
+        <option value="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Manager.java" />
+        <option value="$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/exec/ThreadDemo.java" />
       </list>
     </option>
   </component>
@@ -771,31 +641,8 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="-8" />
     <option name="width" value="1370" />
     <option name="height" value="744" />
-  </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-          <State>
-            <id>Declaration redundancyJava</id>
-          </State>
-          <State>
-            <id>Java</id>
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>unused</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -822,8 +669,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -963,6 +811,44 @@
               <option name="myItemId" value="workers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Manager.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proj3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proj3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="queueing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multithreading" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1028,13 +914,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
+              <option name="myItemId" value="exec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ThreadDemo.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proj3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proj3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="queueing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multithreading" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1044,7 +963,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/settings.gradle" />
     <property name="WebServerToolWindowFactoryState" value="true" />
   </component>
   <component name="RunManager" selected="JUnit.ManagerTest">
@@ -1526,52 +1445,52 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="caf527b6-77b2-4f14-9382-ac3234ce6e8b" name="Default" comment="" />
-      <created>1467762279448</created>
+      <changelist id="c203ba8d-826b-4612-a17e-24a84194c05e" name="Default" comment="" />
+      <created>1467802273090</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1467762279448</updated>
-      <workItem from="1467762285395" duration="5331000" />
+      <updated>1467802273090</updated>
+      <workItem from="1467802294723" duration="9477000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 21m 20s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 14h 02m 32s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 21m 50s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 14h 02m 35s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 23m 19s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 14h 02m 36s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 23m 22s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 17h 15m 11s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 51m 15s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 17h 15m 14s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 51m 20s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 17h 15m 17s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 51m 24s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 17h 15m 21s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 51m 34s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 17h 15m 23s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 52m 48s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 17h 53m 46s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerTest - 2016.07.06 at 03h 53m 06s.xml">
+    <history-entry file="ManagerTest - 2016.07.06 at 18h 15m 13s.xml">
       <configuration name="ManagerTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5331000" />
+    <option name="totallyTimeSpent" value="9477000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1370" height="744" extended-state="0" />
+    <frame x="-8" y="0" width="1370" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1594,7 +1513,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39934534" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1607,12 +1526,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-      <option name="time" value="7" />
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1620,84 +1534,99 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/queueing/build.gradle">
+    <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/queue/Queueing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="-179">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Main.java">
+    <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/util/PropagateExceptionsSample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="765">
+          <caret line="45" column="14" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/util/UtilException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="34" column="49" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2906#2936#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/lang/ThreadGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="984" column="16" selection-start-line="984" selection-start-column="16" selection-end-line="984" selection-end-column="16" />
+          <folding>
+            <element signature="e#34258#34259#0" expanded="true" />
+            <element signature="e#34293#34294#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/util/function/Consumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/util/LinkedList.java">
+    <entry file="file://$PROJECT_DIR$/queueing/src/test/java/test/ru/andrw/java/multithreading/workers/ManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="892" column="0" selection-start-line="892" selection-start-column="0" selection-end-line="892" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/lang/Iterable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state relative-caret-position="187">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Worker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#225#226#0" expanded="true" />
-            <element signature="e#252#253#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/data/Message.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
-          <folding>
-            <element signature="e#1710#1711#0" expanded="true" />
-            <element signature="e#1757#1758#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/queueing/src/test/java/test/ru/andrw/java/multithreading/workers/ManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state relative-caret-position="119">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/queue/Queueing.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/util/function/IntFunction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-          <folding>
-            <element signature="e#983#984#0" expanded="true" />
-            <element signature="e#1019#1020#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="246">
+          <caret line="48" column="6" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/workers/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="34" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="229">
+          <caret line="45" column="70" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/queueing/src/main/java/ru/andrw/java/multithreading/exec/ThreadDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1087#1088#0" expanded="true" />
+            <element signature="e#1115#1116#0" expanded="true" />
+            <element signature="e#1154#1155#0" expanded="true" />
+            <element signature="e#1215#1216#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
