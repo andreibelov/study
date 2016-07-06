@@ -18,8 +18,8 @@ public class ThreadDemo {
         int poolSize = 10;
         ExecutorService service = Executors.newFixedThreadPool(poolSize);
         ThreadGroup mainGroup = new ThreadGroup("mainGroup");
-        List<Object> futures =
-        IntStream.rangeClosed(1, 3)
+        List<Future> futures =
+        IntStream.rangeClosed(1, 25)
                 .mapToObj(MyThread::new)
                 .map(service::submit)
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -31,7 +31,7 @@ public class ThreadDemo {
                 e.printStackTrace();
             }
         });
-
+        Queueing.printAll();
     }
 
 }
