@@ -1,5 +1,5 @@
 subprojects {
-    group 'ru.andrw.java'
+    group 'ru.andrw.java.multithreading'
     version '1.0-SNAPSHOT'
 
     apply plugin: "java"

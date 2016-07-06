@@ -1,17 +1,20 @@
-package ru.andrw.java.jsonchat.model;
+package ru.andrw.java.multithreading.data;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 /**
- * Created by john on 7/3/2016.
+ * Created by john on 7/5/2016.
  */
-@Data
-public class ChatMessage implements Serializable {
+@Getter
+@Setter
+@Accessors(chain = true)
+public class Message implements Serializable {
 
     // Constants ----------------------------------------------------------------------------------
     private static final long serialVersionUID = 1L;
@@ -19,7 +22,8 @@ public class ChatMessage implements Serializable {
     // Properties ---------------------------------------------------------------------------------
 
     private Long id;
-    private User creator;
+    private UUID uuid;
+    private int from;
     private String text;
     private Date crated;
 
@@ -31,8 +35,8 @@ public class ChatMessage implements Serializable {
      */
     @Override
     public boolean equals(Object other) {
-        return (other instanceof ChatMessage) && (id != null)
-                ? id.equals(((ChatMessage) other).id)
+        return (other instanceof Message) && (id != null)
+                ? id.equals(((Message) other).id)
                 : (other == this);
     }
 
@@ -53,7 +57,6 @@ public class ChatMessage implements Serializable {
      */
     @Override
     public String toString() {
-        return text;
+        return "[from #"+from+"] "+text;
     }
-
 }
