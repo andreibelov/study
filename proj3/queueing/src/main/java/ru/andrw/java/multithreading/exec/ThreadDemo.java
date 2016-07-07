@@ -22,7 +22,7 @@ public class ThreadDemo {
         IntStream.rangeClosed(1, 25)
                 .mapToObj(MyThread::new)
                 .map(service::submit)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
 
         futures.forEach(f -> {
             try {

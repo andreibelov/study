@@ -1,7 +1,0 @@
-apply plugin: 'application'
-
-dependencies {
-    compile 'mysql:mysql-connector-java:+'
-    compile 'org.eclipse.persistence:eclipselink:+'
-    compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
-}

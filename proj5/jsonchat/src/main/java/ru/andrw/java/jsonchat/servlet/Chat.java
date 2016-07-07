@@ -1,10 +1,6 @@
 package ru.andrw.java.jsonchat.servlet;
 
-
-
-import ru.andrw.java.jsonchat.dao.DAO;
-import ru.andrw.java.jsonchat.dao.DAOException;
-import ru.andrw.java.jsonchat.dao.DaoFactory;
+import ru.andrw.java.jsonchat.dao.*;
 import ru.andrw.java.jsonchat.model.ChatMessage;
 import ru.andrw.java.jsonchat.model.User;
 

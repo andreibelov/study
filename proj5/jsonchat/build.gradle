@@ -2,6 +2,6 @@ apply plugin: 'war'
 
 dependencies {
     providedCompile 'org.apache.tomcat:tomcat-api:+'
-    compile 'javax.websocket:javax.websocket-api:1.0'
+    compile 'javax.websocket:javax.websocket-api:+'
     compile 'org.postgresql:postgresql:+'
 }

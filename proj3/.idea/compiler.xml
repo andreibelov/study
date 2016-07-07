@@ -19,6 +19,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="jdbc_main" target="1.8" />
+      <module name="jdbc_test" target="1.8" />
       <module name="queueing_main" target="1.8" />
       <module name="queueing_test" target="1.8" />
     </bytecodeTargetLevel>
