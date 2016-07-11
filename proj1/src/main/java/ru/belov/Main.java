@@ -57,8 +57,7 @@ public class Main extends Application {
             @Override
             public void changed(ObservableValue<?> observable, Object oldValue,
                                 Object newValue) {
-                txt.setScrollTop(Double.MAX_VALUE);
-                //this will scroll to the bottom
+                txt.setScrollTop(Double.MAX_VALUE); //this will scroll to the bottom
                 //use Double.MIN_VALUE to scroll to the top
             }
         });

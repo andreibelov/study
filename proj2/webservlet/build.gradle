@@ -1,0 +1,17 @@
+apply plugin: 'war'
+
+dependencies {
+    compile 'javax.servlet.jsp.jstl:jstl-api:1.2'
+    //providedCompile 'org.apache.tomcat:tomcat-api:+'
+    compile 'javax.websocket:javax.websocket-api:1.0'
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1208'
+    compile 'org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6'
+    compile 'org.apache.tomcat.embed:tomcat-embed-core:9.0.0.M6'
+    compile 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.0.M6'
+    //compile 'org.apache.tomcat.embed:tomcat-embed-el:9.0.0.M6'
+    //compile 'org.apache.tomcat.embed:tomcat-embed-websocket:9.0.0.M6'
+    //compile 'org.apache.tomcat:tomcat-websocket:9.0.0.M6'
+    compile 'org.apache.tomcat:tomcat-jasper-el:9.0.0.M6'
+    compile 'org.apache.tomcat:tomcat-jsp-api:9.0.0.M6'
+    compile 'org.apache.tomcat:tomcat-jasper:9.0.0.M6'
+}

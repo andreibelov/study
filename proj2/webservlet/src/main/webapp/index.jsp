@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: john
-  Date: 7/8/2016
-  Time: 1:37 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:forward page="/employee" />
 <html>
 <head>
     <title>Title</title>

@@ -1,0 +1,7 @@
+apply plugin: 'application'
+
+dependencies {
+    compile 'org.postgresql:postgresql:+'
+    compile 'org.eclipse.persistence:eclipselink:+'
+    compile 'joda-time:joda-time:2.9.4'
+}

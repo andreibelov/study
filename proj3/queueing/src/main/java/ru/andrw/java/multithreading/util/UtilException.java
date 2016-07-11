@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 /**
  * Created by john on 7/6/2016.
  */
-public final class UtilException {
+public final class UtilException extends Exception {
 
     @FunctionalInterface
     public interface Consumer_WithExceptions<T> {

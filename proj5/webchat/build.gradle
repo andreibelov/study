@@ -1,8 +1,9 @@
 apply plugin: 'war'
 
 dependencies {
-    compile 'org.jsoup:jsoup:+'
+    compile 'javax.servlet.jsp.jstl:jstl-api:1.2'
     providedCompile 'org.apache.tomcat:tomcat-api:+'
     compile 'javax.websocket:javax.websocket-api:1.0'
-    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1208'
+    compile 'org.postgresql:postgresql:+'
+    compile 'org.apache.tomcat:tomcat-catalina:+'
 }

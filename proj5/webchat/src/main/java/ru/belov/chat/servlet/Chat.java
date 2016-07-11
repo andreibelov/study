@@ -7,12 +7,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import java.io.IOException;
 
+import org.apache.catalina.servlets.WebdavServlet;
+
 /**
  * Created by john on 7/7/2016.
  */
 
 @WebServlet(name = "Chat", urlPatterns = {"/chat"})
 public class Chat extends javax.servlet.http.HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
