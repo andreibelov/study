@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<root>
+    <users>
+        <user>
+            <id>0</id>
+            <email>andrei.belov@mail.ru</email>
+            <login>white.rabbit</login>
+            <password>202cb962ac59075b964b07152d234b70</password>
+            <firstname>Andrei</firstname>
+            <lastname>Belov</lastname>
+            <birthday>05.08.1989</birthday>
+        </user>
+    </users>
+</root>
