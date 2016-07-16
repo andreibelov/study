@@ -1,0 +1,19 @@
+plugins {
+    id "io.github.divinespear.jpa-schema-generate" version "0.2.0-1"
+}
+
+apply plugin: 'war'
+apply plugin: "jpa-schema-generate"
+
+dependencies {
+
+    compile 'jstl:jstl:1.2'
+    providedCompile 'org.apache.tomcat:tomcat-api:+'
+    providedCompile 'org.apache.tomcat:tomcat-jasper:+'
+    providedCompile 'org.apache.tomcat:tomcat-jasper-el:+'
+    providedCompile 'org.apache.tomcat:tomcat-jsp-api:+'
+    compile 'javax.websocket:javax.websocket-api:1.0'
+    compile 'org.postgresql:postgresql:+'
+    compile 'org.eclipse.persistence:eclipselink:+'
+    compile 'org.apache.tomcat:tomcat-catalina:+'
+}

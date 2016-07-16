@@ -16,7 +16,7 @@
             <property name="javax.persistence.jdbc.user" value="jdbc"/>
             <property name="javax.persistence.jdbc.password" value="s3cret"/>
             <!--property name="eclipselink.logging.level" value="FINEST"/-->
-            <property name="eclipselink.target-database" value="MySQL"/>
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
             <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>
             <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>
