@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.xml.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -44,7 +45,7 @@ public class UserList {
 
     public static User mapUser(String[] map) throws Exception {
         return mapUser(new Date(),map[0],map[1],map[2],map[3],map[4],map[5]);
-}
+    }
 
     public static void addUser(User user){
         try {
@@ -62,9 +63,9 @@ public class UserList {
         }
     }
 
-    public static User getUser(Long id){
+    public static Optional<User> getUser(Long id){
         return users.stream().filter(user -> id.equals(user.getId()))
-                .findAny().orElse(null);
+                .findAny();
     }
 
 }

@@ -56,4 +56,6 @@ public class ChatMessage implements Serializable {
         return text;
     }
 
+
+
 }

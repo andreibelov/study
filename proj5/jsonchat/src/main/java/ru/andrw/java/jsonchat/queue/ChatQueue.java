@@ -1,5 +1,7 @@
 package ru.andrw.java.jsonchat.queue;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Queue;
 
 /**
@@ -8,5 +10,15 @@ import java.util.Queue;
 public class ChatQueue {
     private Queue<ChatRequest> queue;
 
+
+    @Contract(pure = true)
+    private boolean myMethod(){
+        try {
+            throw null;
+        } finally {
+
+            if(true) return true;
+        }
+    }
 
 }

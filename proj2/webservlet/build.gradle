@@ -1,17 +1,18 @@
+plugins {
+    id "io.github.divinespear.jpa-schema-generate" version "0.2.0-1"
+}
+
 apply plugin: 'war'
+apply plugin: "jpa-schema-generate"
 
 dependencies {
-    compile 'javax.servlet.jsp.jstl:jstl-api:1.2'
-    //providedCompile 'org.apache.tomcat:tomcat-api:+'
+    compile 'org.postgresql:postgresql:+'
+    compile 'com.google.code.gson:gson:+'
+    compile 'org.eclipse.persistence:eclipselink:+'
     compile 'javax.websocket:javax.websocket-api:1.0'
-    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1208'
-    compile 'org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6'
-    compile 'org.apache.tomcat.embed:tomcat-embed-core:9.0.0.M6'
-    compile 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.0.M6'
-    //compile 'org.apache.tomcat.embed:tomcat-embed-el:9.0.0.M6'
-    //compile 'org.apache.tomcat.embed:tomcat-embed-websocket:9.0.0.M6'
-    //compile 'org.apache.tomcat:tomcat-websocket:9.0.0.M6'
-    compile 'org.apache.tomcat:tomcat-jasper-el:9.0.0.M6'
-    compile 'org.apache.tomcat:tomcat-jsp-api:9.0.0.M6'
-    compile 'org.apache.tomcat:tomcat-jasper:9.0.0.M6'
+    compile 'org.cometd.java:cometd-java-annotations:3.0.9'
+    compile 'org.cometd.java:cometd-java-server:3.0.9'
+    compile 'org.cometd.java:bayeux-api:3.0.9'
+    providedCompile 'org.apache.tomcat:tomcat-jasper:+'
+    compile 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
 }

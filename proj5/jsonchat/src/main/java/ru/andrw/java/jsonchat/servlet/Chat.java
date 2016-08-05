@@ -5,6 +5,7 @@ import ru.andrw.java.jsonchat.model.ChatMessage;
 import ru.andrw.java.jsonchat.model.User;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ public class Chat extends javax.servlet.http.HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-
+        ServletInputStream input = request.getInputStream();
         DAO chat; User user;
         //Read the request
         try {

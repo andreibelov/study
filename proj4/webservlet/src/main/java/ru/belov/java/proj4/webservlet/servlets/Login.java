@@ -38,7 +38,7 @@ public class Login extends HttpServlet{
             Cookie userName = new Cookie("user", user);
             userName.setMaxAge(30*60);
             response.addCookie(userName);
-            response.sendRedirect(request.getContextPath()+"/wellcome");
+            response.sendRedirect(request.getContextPath()+"/welcome");
         }else{
             RequestDispatcher rd = getServletContext().getRequestDispatcher("jsp\\login.jsp");
             rd.include(request, response);
