@@ -29,5 +29,4 @@ public class ChatUser extends User {
     private String nickname;
     private String jsessionid;
 
-
 }

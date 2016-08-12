@@ -21,13 +21,12 @@
                 <br />
                 <br />
             </form>
-
             <!--Employees List-->
-            <c:if test="${not empty message}">                
+            <c:if test="${not empty message}">
                 <div class="alert alert-success">
                     ${message}
                 </div>
-            </c:if> 
+            </c:if>
             <form action="${pageContext.request.contextPath}/employee" method="post" id="employeeForm" role="form" >
                 <input type="hidden" id="idEmployee" name="idEmployee">
                 <input type="hidden" id="action" name="action">
@@ -48,13 +47,13 @@
                             </thead>
                             <c:forEach var="employee" items="${employeeList}">
                                 <c:set var="classSucess" value=""/>
-                                <c:if test ="${idEmployee == employee.id}">                        	
+                                <c:if test ="${idEmployee == employee.id}">
                                     <c:set var="classSucess" value="info"/>
                                 </c:if>
                                 <tr class="${classSucess}">
                                     <td>
                                         <a href="${pageContext.request.contextPath}/employee?idEmployee=${employee.id}&searchAction=searchById">${employee.id}</a>
-                                    </td>                                    
+                                    </td>
                                     <td>${employee.name}</td>
                                     <td>${employee.lastName}</td>
                                     <td>${employee.birthDate}</td>
@@ -72,14 +71,14 @@
                                 </tr>
                             </c:forEach>               
                         </table>  
-                    </c:when>                    
+                    </c:when>
                     <c:otherwise>
-                        <br>           
+                        <br>
                         <div class="alert alert-info">
                             No people found matching your search criteria
                         </div>
                     </c:otherwise>
-                </c:choose>                        
+                </c:choose>
             </form>
             <form action ="${pageContext.request.contextPath}/new-employee.jsp">
                 <br />

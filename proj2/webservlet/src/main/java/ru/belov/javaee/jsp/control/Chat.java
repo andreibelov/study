@@ -24,6 +24,8 @@ import java.util.Deque;
 
 /**
  * Created by john on 7/22/2016.
+ * @author andrei.belov aka john
+ * @link http://vk.com/andrei.belov
  */
 @WebServlet(name = "Chat", urlPatterns = {"/chat"})
 public class Chat extends javax.servlet.http.HttpServlet {

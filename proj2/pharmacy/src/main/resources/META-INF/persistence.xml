@@ -13,10 +13,10 @@
             <property name="javax.persistence.nonJtaDataSource" value=""/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:postgresql://localhost:5432/javabase"/>
+                      value="jdbc:postgresql://localhost:5432/java"/>
             <property name="javax.persistence.jdbc.user" value="jdbc"/>
             <property name="javax.persistence.jdbc.password" value="s3cret"/>
-            <!--property name="eclipselink.logging.level" value="FINEST"/-->
+            <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.target-database" value="PostgreSQL"/>
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
             <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.sql"/>
