@@ -1,8 +1,0 @@
-rootProject.name = 'proj5'
-include 'webservlet'
-include 'dao'
-include 'jdbc'
-include 'comet'
-include 'jsonchat'
-include 'webchat'
-include 'crud'

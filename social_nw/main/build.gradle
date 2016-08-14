@@ -1,0 +1,15 @@
+plugins {
+    id "io.github.divinespear.jpa-schema-generate" version "0.2.0-1"
+}
+apply plugin: "jpa-schema-generate"
+apply plugin: 'war'
+
+dependencies {
+    compile 'javax.servlet:jstl:1.2'
+    compile 'com.google.code.gson:gson:+'
+    compile 'org.postgresql:postgresql:+'
+    compile 'org.eclipse.persistence:eclipselink:+'
+    compile 'javax.websocket:javax.websocket-api:1.0'
+    providedCompile 'org.apache.tomcat:tomcat-api:+'
+    providedCompile 'org.apache.tomcat:tomcat-jasper:+'
+}

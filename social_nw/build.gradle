@@ -1,0 +1,18 @@
+subprojects {
+    group 'ru.andrw.java'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile 'ch.qos.logback:logback-classic:+'
+        compile 'org.projectlombok:lombok:+'
+        testCompile 'junit:junit:+'
+    }
+}

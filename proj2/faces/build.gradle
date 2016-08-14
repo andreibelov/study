@@ -1,8 +1,0 @@
-apply plugin: 'war'
-
-dependencies {
-    compile 'org.postgresql:postgresql:+'
-    compile 'javax.websocket:javax.websocket-api:1.0'
-    providedCompile 'org.apache.tomcat:tomcat-jasper:+'
-    compile 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
-}
