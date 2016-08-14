@@ -1,4 +1,4 @@
-package com.example.chat.control;
+package com.example.chat.servlet;
 
 import com.example.chat.dao.DaoFactory;
 import com.example.chat.dao.UserDao;
@@ -23,7 +23,7 @@ import java.util.Date;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-@WebServlet(name = "UserController", urlPatterns = {"/UserController"})
+@WebServlet(name = "UserController", urlPatterns = {"/users"})
 public class UserController extends HttpServlet {
 
     private static String INSERT_OR_EDIT = "/user.jsp";
@@ -74,6 +74,7 @@ public class UserController extends HttpServlet {
             e.printStackTrace();
         }
         user.setEmail(request.getParameter("email"));
+        user.setPassword(request.getParameter("password"));
         String userid = request.getParameter("userid");
         if(userid == null || userid.isEmpty())
         {

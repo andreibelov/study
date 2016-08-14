@@ -1,6 +1,6 @@
-package example.dao;
+package com.example.chat.dao;
 
-import example.model.User;
+import com.example.chat.model.User;
 
 import java.util.List;
 

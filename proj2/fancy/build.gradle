@@ -1,0 +1,7 @@
+apply plugin: 'war'
+
+dependencies {
+    compile 'com.google.code.gson:gson:+'
+    providedCompile 'org.apache.tomcat:tomcat-jasper:+'
+    compile 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
+}

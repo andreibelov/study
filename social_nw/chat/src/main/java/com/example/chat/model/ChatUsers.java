@@ -1,4 +1,4 @@
-package example.model;
+package com.example.chat.model;
 
 import lombok.Data;
 

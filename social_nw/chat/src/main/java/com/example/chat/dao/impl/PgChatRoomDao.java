@@ -1,12 +1,16 @@
-package example.dao.impl;
+package com.example.chat.dao.impl;
 
-import example.dao.ChatRoomDao;
-import example.model.User;
-import example.util.DbUtil;
+import com.example.chat.dao.ChatRoomDao;
+import com.example.chat.model.User;
+import com.example.chat.util.DbUtil;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Created by john on 8/12/2016.
@@ -17,8 +21,8 @@ public class PgChatRoomDao implements ChatRoomDao {
 
     private Connection connection;
 
-    public PgChatRoomDao() {
-        connection = DbUtil.getConnection();
+    public PgChatRoomDao(Supplier<Connection> connectionSupplier) {
+        connection = connectionSupplier.get();
     }
 
     @Override

@@ -20,7 +20,7 @@ public class InitListener implements ServletContextListener {
     private final String GSON = "gson";
     private final String USER_DAO = "userDao";
     private final String MSG_QUEUE = "msgQueue";
-    private final String MESSAGE_DAO_LIST = "chatdao";
+    private final String CHAT_DAO = "chatdao";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -29,7 +29,7 @@ public class InitListener implements ServletContextListener {
         servletContext.setAttribute(GSON, new Gson());
         servletContext.setAttribute(MSG_QUEUE, new MsgQueue());
 //        servletContext.setAttribute(USER_DAO, UserDAOList.getInstance());
-        servletContext.setAttribute(MESSAGE_DAO_LIST, MessageDAOList.getInstance());
+        servletContext.setAttribute(CHAT_DAO, MessageDAOList.getInstance());
 
     }
 

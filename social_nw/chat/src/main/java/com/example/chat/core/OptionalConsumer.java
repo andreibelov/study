@@ -1,4 +1,4 @@
-package ru.belov.study.proj5.core;
+package com.example.chat.core;
 
 import java.util.Optional;
 import java.util.function.Consumer;

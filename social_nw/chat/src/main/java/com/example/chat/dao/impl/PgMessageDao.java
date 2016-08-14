@@ -1,12 +1,13 @@
-package example.dao.impl;
+package com.example.chat.dao.impl;
 
-import example.dao.MessageDao;
-import example.model.Message;
-import example.util.DbUtil;
+import com.example.chat.dao.MessageDao;
+import com.example.chat.model.Message;
+import com.example.chat.util.DbUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Created by john on 8/12/2016.
@@ -16,9 +17,9 @@ import java.util.List;
 public class PgMessageDao implements MessageDao {
 
     private Connection connection;
-
-    public PgMessageDao() {
-        connection = DbUtil.getConnection();
+    
+    public PgMessageDao(Supplier<Connection> connectionSupplier) {
+        connection = connectionSupplier.get();
     }
 
     @Override
@@ -28,7 +29,7 @@ public class PgMessageDao implements MessageDao {
                     .prepareStatement("INSERT INTO MESSAGES(text,timestamp,user_from,chat_room_id) " +
                             "VALUES (?, ?, ?, ? )");
             preparedStatement.setString(1, message.getText());
-            preparedStatement.setDate(2, new java.sql.Date(message.getTimestamp().getTime()));
+            preparedStatement.setDate(2, new Date(message.getTimestamp().getTime()));
             preparedStatement.setInt(3, message.getFromUserId());
             preparedStatement.setInt(4, message.getChatRoomId());
             preparedStatement.executeUpdate();
@@ -59,7 +60,7 @@ public class PgMessageDao implements MessageDao {
                             "SET TEXT=?, TIMESTAMP=?, USER_FROM=?, CHAT_ROOM_ID=?" +
                             "WHERE ID=?");
             preparedStatement.setString(1, message.getText());
-            preparedStatement.setDate(2, new java.sql.Date(message.getTimestamp().getTime()));
+            preparedStatement.setDate(2, new Date(message.getTimestamp().getTime()));
             preparedStatement.setInt(3, message.getFromUserId());
             preparedStatement.setInt(4, message.getChatRoomId());
             preparedStatement.executeUpdate();

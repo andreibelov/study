@@ -1,4 +1,4 @@
 rootProject.name = 'proj2'
 include 'webservlet'
-include 'faces'
 include 'pharmacy'
+include 'fancy'

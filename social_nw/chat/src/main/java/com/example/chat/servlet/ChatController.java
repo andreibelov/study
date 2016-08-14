@@ -1,4 +1,4 @@
-package com.example.chat.control;
+package com.example.chat.servlet;
 
 import com.example.chat.dao.ChatRoomDao;
 import com.example.chat.dao.DaoFactory;

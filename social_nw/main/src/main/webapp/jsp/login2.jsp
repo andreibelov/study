@@ -65,6 +65,10 @@
 <div class="container-fluid">
     <div class="container">
 
+        <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+        </div>
+
         <form class="form-signin" method="POST" action="${pageContext.request.contextPath}/login.do">
             <h2 class="form-signin-heading">Please sign in</h2>
             <label for="inputEmail" class="sr-only">Email address</label>

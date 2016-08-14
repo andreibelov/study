@@ -1,4 +1,4 @@
-package example.model;
+package com.example.chat.model;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -25,5 +25,6 @@ public class User implements Serializable {
     private String lastName;
     private Date dob;
     private String email;
+    private String password;
 
 }

@@ -17,7 +17,7 @@ import static java.util.stream.StreamSupport.stream;
  */
 @WebFilter(filterName = "IncludeFilter",
         urlPatterns = {"/jsp/include/*"},
-        dispatcherTypes={DispatcherType.INCLUDE})
+        dispatcherTypes={DispatcherType.INCLUDE,DispatcherType.FORWARD})
 public class IncludeFilter implements Filter {
 
     @Override

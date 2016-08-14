@@ -25,6 +25,8 @@ import static java.util.Optional.ofNullable;
 
 /**
  * Created by john on 7/22/2016.
+ * @author andrei.belov aka john
+ * @link http://vk.com/andrei.belov
  */
 @WebFilter(filterName = "SecurityFilter", urlPatterns = {"/*"})
 public class SecurityFilter implements Filter {
@@ -58,7 +60,7 @@ public class SecurityFilter implements Filter {
             else {
                 request.getRequestDispatcher("/jsp" + path).forward(request, response); // Goes to your controller.
             } // User is logged in or wants to access allowed space, just continue request.
-        }else response.sendRedirect(request.getContextPath() + "/login2.jsp"); // Not logged in, show login page.}
+        } else response.sendRedirect(request.getContextPath() + "/login2.jsp"); // Not logged in, show login page.}
 
     }
 }

@@ -1,6 +1,8 @@
-package example.listener;
+package com.example.chat.listener;
 
-import example.dao.impl.PostgreUserDao;
+import com.example.chat.dao.impl.PgDaoFactory;
+import com.example.chat.dao.impl.PostgreUserDao;
+import com.example.chat.util.DbUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -15,13 +17,13 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class InitListener implements ServletContextListener {
 
-    private final String USER_DAO = "userDao";
+    private final String DAO_FACTORY = "daoFactory";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
 
         ServletContext servletContext = sce.getServletContext();
-        servletContext.setAttribute(USER_DAO, new PostgreUserDao());
+        servletContext.setAttribute(DAO_FACTORY, new PgDaoFactory(new DbUtil()));
     }
 
     @Override

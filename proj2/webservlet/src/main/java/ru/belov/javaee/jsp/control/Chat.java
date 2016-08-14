@@ -12,6 +12,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,7 +29,7 @@ import java.util.Deque;
  * @link http://vk.com/andrei.belov
  */
 @WebServlet(name = "Chat", urlPatterns = {"/chat"})
-public class Chat extends javax.servlet.http.HttpServlet {
+public class Chat extends HttpServlet {
     private Gson gson;
     private MsgQueue queue;
     private MessageDAOList chatdao;
@@ -48,7 +49,12 @@ public class Chat extends javax.servlet.http.HttpServlet {
         HttpSession session = req.getSession();
 
         ChatUser chatUser = (ChatUser) session.getAttribute("chat_user");
-        Deque<Message> messageDeque = (Deque<Message>) session.getAttribute("user_deque");
+        Deque<Message> messageDeque = null;
+        try {
+            messageDeque = (Deque<Message>) session.getAttribute("user_deque");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         StringBuilder sb = new StringBuilder();
         String line = null;
         try (BufferedReader reader = req.getReader()) {

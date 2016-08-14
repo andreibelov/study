@@ -8,21 +8,25 @@
     <title>Add new user</title>
 </head>
 <body>
-<form method="POST" action='UserController' name="frmAddUser">
-    User ID : <input type="text" readonly="readonly" name="userid"
-                     value="<c:out value="${user.userid}" />" /> <br />
-    First Name : <input
-        type="text" name="firstName"
-        value="<c:out value="${user.firstName}" />" /> <br />
-    Last Name : <input
-        type="text" name="lastName"
-        value="<c:out value="${user.lastName}" />" /> <br />
-    DOB : <input
-        type="text" name="dob"
-        value="<fmt:formatDate pattern="MM/dd/yyyy" value="${user.dob}" />" /> <br />
-    Email : <input type="text" name="email"
-                   value="<c:out value="${user.email}" />" /> <br /> <input
-        type="submit" value="Submit" />
+<form method="POST" action='users' name="frmAddUser">
+    <label for="userid" >User ID : </label>
+    <input type="text" readonly="readonly" id="userid" name="userid"
+                     value="<c:out value="${requestScope.user.userid}" />" /> <br />
+    <label for="firstName" >First Name : </label>
+    <input type="text" name="firstName" id="firstName"
+        value="<c:out value="${requestScope.user.firstName}" />" /> <br />
+    <label for="lastName" >Last Name : </label>
+    <input type="text" name="lastName" id="lastName"
+        value="<c:out value="${requestScope.user.lastName}" />" /> <br />
+    <label for="dob" >DOB : </label>
+    <input type="text" name="dob" id="dob"
+        value="<fmt:formatDate pattern="MM/dd/yyyy" value="${requestScope.user.dob}" />" /> <br />
+    <label for="email" >Email : </label>
+    <input type="text" name="email" id="email"
+                   value="<c:out value="${requestScope.user.email}" />" /> <br />
+    <label for="pass" >Password : </label>
+    <input type="password" name="password" id="pass" value="" /> <br />
+    <input type="submit" value="Submit" />
 </form>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package example.util;
+package com.example.chat.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,17 +6,23 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.function.Supplier;
 
 /**
  * Created by john on 8/12/2016.
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-public class DbUtil {
+public class DbUtil implements Supplier<Connection> {
 
     private static Connection connection = null;
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
+        return this.get();
+    }
+
+    @Override
+    public Connection get() {
         if (connection != null)
             return connection;
         else {
@@ -35,6 +41,5 @@ public class DbUtil {
             }
             return connection;
         }
-
     }
 }

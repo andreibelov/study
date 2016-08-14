@@ -1,7 +1,6 @@
-package example.dao;
+package com.example.chat.dao;
 
-import example.model.Message;
-import example.model.User;
+import com.example.chat.model.Message;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface MessageDao {
     public void editMessage(Message message);
     public void markAsSpam(long messageId);
     public Message getMessageById(long messageId);
-    public List<Message> getMessagesByPageNum(int roomId,int pageNum);
+    public List<Message> getMessagesByPageNum(int roomId, int pageNum);
     public List<Message> getMessagesByUser(int userId);
 
 }
