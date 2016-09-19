@@ -4,16 +4,18 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
-import java.util.UUID;
 
 /**
- * Created by john on 8/12/2016.
- * Represents Message object model
+ * Created by john on 8/17/2016.
+ *
+ * @author andrei.belov aka john
+ * @link http://vk.com/andrei.belov
  */
 @Data
 @Accessors(chain = true)
-public class Message implements Serializable {
+public class JsonPack implements Serializable {
 
     // Constants ----------------------------------------------------------------------------------
 
@@ -21,12 +23,7 @@ public class Message implements Serializable {
 
     // Properties ---------------------------------------------------------------------------------
 
-    private long messageId;
-    private UUID uuid;
-    private String text;
-    private Date timestamp;
-    private boolean isSpam;
-    private int fromUserId;
-    private int chatRoomId;
-
+    private String jsessionId;
+    private Message message;
+    private String action;
 }

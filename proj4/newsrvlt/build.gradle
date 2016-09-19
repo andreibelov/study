@@ -1,0 +1,7 @@
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    providedCompile 'org.apache.tomcat:tomcat-api:+'
+}

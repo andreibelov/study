@@ -10,4 +10,6 @@ dependencies {
     compile 'javax.websocket:javax.websocket-api:1.0'
     providedCompile 'org.apache.tomcat:tomcat-api:+'
     providedCompile 'org.apache.tomcat:tomcat-jasper:+'
+    testCompile 'org.mockito:mockito-all:+'
+    testCompile 'commons-io:commons-io:2.5'
 }

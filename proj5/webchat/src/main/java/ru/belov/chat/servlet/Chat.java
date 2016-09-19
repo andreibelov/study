@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import java.io.IOException;
 
-import org.apache.catalina.servlets.WebdavServlet;
-
 /**
  * Created by john on 7/7/2016.
  */

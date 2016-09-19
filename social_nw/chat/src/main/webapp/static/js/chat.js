@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    load();
+    //load();
     $("#send").on("click", send);
     $("#clc").on("click",clc);
     //$("#attch").on("click",concatenate);
@@ -39,12 +39,15 @@ $(document).ready(function() {
 
     function send() {
         if (flag == true) return;
-        var text = '<![CDATA['+msg.val().trim()+']]>';
         var chuid = "chatuser1";
         if(text == ""){
             msg.val("");
             return;
         }
+        var txtmsg = {};
+        txtmsg.text = msg.val().trim();
+        txtmsg.
+
         var xmlDoc = $($.parseXML('<?xml version="1.0" encoding="utf-8" ?><root />'));
         var obj = $('root',xmlDoc).append($('<message />', xmlDoc));
         $('message',obj).append($('<chuid />', xmlDoc).text(chuid));

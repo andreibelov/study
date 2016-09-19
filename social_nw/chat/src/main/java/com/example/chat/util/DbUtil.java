@@ -28,7 +28,7 @@ public class DbUtil implements Supplier<Connection> {
         else {
             try {
                 Properties prop = new Properties();
-                InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("/db.properties");
+                InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("db.properties");
                 prop.load(inputStream);
                 String driver = prop.getProperty("driver");
                 String url = prop.getProperty("url");
