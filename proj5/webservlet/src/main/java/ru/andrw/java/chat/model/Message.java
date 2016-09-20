@@ -39,7 +39,7 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Message[id=%d,email=%s,firstname=%s,lastname=%s,birthdate=%s]",
+        return String.format("Message[id=%d,email=%s,name=%s,lastname=%s,birthdate=%s]",
                 id, creator, userGroup);
     }
 

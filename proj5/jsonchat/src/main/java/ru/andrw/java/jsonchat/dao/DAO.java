@@ -1,6 +1,6 @@
 package ru.andrw.java.jsonchat.dao;
 
-import ru.andrw.java.jsonchat.model.ChatMessage;
+import ru.andrw.java.jsonchat.model.chat.ChatMessage;
 import ru.andrw.java.jsonchat.model.User;
 
 /**

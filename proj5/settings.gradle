@@ -1,0 +1,6 @@
+rootProject.name = 'proj5'
+include 'dao'
+include 'jdbc'
+include 'webservlet'
+include 'webchat'
+include 'jsonchat'

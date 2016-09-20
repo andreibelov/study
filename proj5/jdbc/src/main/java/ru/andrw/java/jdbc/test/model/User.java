@@ -77,7 +77,7 @@ public class User implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("User[id=%d,email=%s,firstname=%s,lastname=%s,birthday=%s]",
+        return String.format("User[id=%d,email=%s,name=%s,lastname=%s,birthday=%s]",
                 id, email, firstname, lastname, birthday);
     }
 

@@ -22,15 +22,15 @@ public class UserDAOJDBC implements UserDAO {
     // Constants ----------------------------------------------------------------------------------
 
     private static final String SQL_FIND_BY_ID =
-            "SELECT id, email, firstname, lastname, birthdate FROM User WHERE id = ?";
+            "SELECT id, email, name, lastname, birthdate FROM User WHERE id = ?";
     private static final String SQL_FIND_BY_EMAIL_AND_PASSWORD =
-            "SELECT id, email, firstname, lastname, birthdate FROM User WHERE email = ? AND password = MD5(?)";
+            "SELECT id, email, name, lastname, birthdate FROM User WHERE email = ? AND password = MD5(?)";
     private static final String SQL_LIST_ORDER_BY_ID =
             "SELECT id, email, firstname, lastname, birthdate FROM User ORDER BY id";
     private static final String SQL_INSERT =
-            "INSERT INTO User (email, password, firstname, lastname, birthdate) VALUES (?, MD5(?), ?, ?, ?)";
+            "INSERT INTO User (email, password, name, lastname, birthdate) VALUES (?, MD5(?), ?, ?, ?)";
     private static final String SQL_UPDATE =
-            "UPDATE User SET email = ?, firstname = ?, lastname = ?, birthdate = ? WHERE id = ?";
+            "UPDATE User SET email = ?, name = ?, lastname = ?, birthdate = ? WHERE id = ?";
     private static final String SQL_DELETE =
             "DELETE FROM User WHERE id = ?";
     private static final String SQL_EXIST_EMAIL =
@@ -249,7 +249,7 @@ public class UserDAOJDBC implements UserDAO {
         User user = new User();
         user.setId(resultSet.getLong("id"));
         user.setEmail(resultSet.getString("email"));
-        user.setFirstname(resultSet.getString("firstname"));
+        user.setFirstname(resultSet.getString("name"));
         user.setLastname(resultSet.getString("lastname"));
         user.setBirthdate(resultSet.getDate("birthdate"));
         return user;

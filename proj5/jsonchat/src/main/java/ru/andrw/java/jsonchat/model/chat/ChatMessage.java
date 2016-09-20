@@ -1,16 +1,21 @@
-package ru.andrw.java.jsonchat.model;
+package ru.andrw.java.jsonchat.model.chat;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by john on 7/3/2016.
+ * @author andrei.belov aka john
+ * @link http://vk.com/andrei.belov
  */
 @Data
+@Accessors(chain = true)
 public class ChatMessage implements Serializable {
 
     // Constants ----------------------------------------------------------------------------------
@@ -18,34 +23,12 @@ public class ChatMessage implements Serializable {
 
     // Properties ---------------------------------------------------------------------------------
 
-    private Long id;
-    private User creator;
+    private UUID uuid;
     private String text;
-    private Date created;
+    private Long userId;
+    private String sender;
 
     // Object overrides ---------------------------------------------------------------------------
-
-    /**
-     * The message ID is unique for each Message. So this should compare Message by ID only.
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object other) {
-        return (other instanceof ChatMessage) && (id != null)
-                ? id.equals(((ChatMessage) other).id)
-                : (other == this);
-    }
-
-    /**
-     * The message ID is unique for each Message. So Message with same ID should return same hashcode.
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return (id != null)
-                ? (this.getClass().hashCode() + id.hashCode())
-                : super.hashCode();
-    }
 
     /**
      * Returns the String representation of this Message. Not required, it just pleases reading logs.
@@ -55,7 +38,5 @@ public class ChatMessage implements Serializable {
     public String toString() {
         return text;
     }
-
-
 
 }

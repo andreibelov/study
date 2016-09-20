@@ -1,7 +1,7 @@
 package ru.andrw.java.jsonchat.servlet;
 
 import ru.andrw.java.jsonchat.dao.*;
-import ru.andrw.java.jsonchat.model.ChatMessage;
+import ru.andrw.java.jsonchat.model.chat.ChatMessage;
 import ru.andrw.java.jsonchat.model.User;
 
 import javax.servlet.ServletException;
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 /**
@@ -32,7 +31,7 @@ public class Chat extends javax.servlet.http.HttpServlet {
                     .newInstance(ChatMessage.class)
                     .createUnmarshaller()
                     .unmarshal(request.getInputStream());
-            message.setCreator((User) request.getSession().getAttribute("user"));
+            message.setSender(((User) request.getSession().getAttribute("user")).toString());
 
             chat.addMessage(message);
 

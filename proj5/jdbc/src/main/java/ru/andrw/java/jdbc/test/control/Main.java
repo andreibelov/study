@@ -31,10 +31,10 @@ public class Main {
 
             System.out.println(UserList.users);
             //Long id, Date birthday, String email, String login,
-            // String phone, String password, String firstname,
+            // String phone, String password, String name,
             // String lastname
             String[] map = new String[]
-                    {"email", "login", "+79112935537", "password", "firstname", "lastname"};
+                    {"email", "login", "+79112935537", "password", "name", "lastname"};
             UserList.addUser(map);
             System.out.println(UserList.users);
             et.begin();

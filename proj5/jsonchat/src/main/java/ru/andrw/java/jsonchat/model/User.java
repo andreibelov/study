@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Created by john on 7/3/2016.
+ * @author andrei.belov aka john
+ * @link http://vk.com/andrei.belov
  */
 @Data
 public class User implements Serializable {

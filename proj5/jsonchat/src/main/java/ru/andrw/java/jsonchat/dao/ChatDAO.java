@@ -1,12 +1,10 @@
 package ru.andrw.java.jsonchat.dao;
 
-import ru.andrw.java.jsonchat.model.ChatMessage;
+import ru.andrw.java.jsonchat.model.chat.ChatMessage;
 import ru.andrw.java.jsonchat.model.User;
-import ru.andrw.java.jsonchat.servlet.Chat;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 

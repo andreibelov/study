@@ -1,20 +1,21 @@
-package ru.belov.pubsub.model;
+package ru.andrw.java.jsonchat.model;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by john on 9/19/2016.
+ * Created by john on 9/20/2016.
  *
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
 @Data
 @Accessors(chain = true)
-public class ChatMessage implements Serializable {
+public class UserProfile implements Serializable {
 
     // Constants ----------------------------------------------------------------------------------
 
@@ -22,20 +23,25 @@ public class ChatMessage implements Serializable {
 
     // Properties ---------------------------------------------------------------------------------
 
-    private long id;
     private UUID uuid;
-    private String text;
-    private long userId;
-    private String sender;
+    private Long userid;
+    private String link;
+    private String avatar;
+    private String name;
+    private String surname;
+    private String phone;
+    private Date dob;
 
     // Object overrides ---------------------------------------------------------------------------
 
     /**
-     * Returns the String representation of this Message. Not required, it just pleases reading logs.
+     * Returns the String representation of this User. Not required, it just pleases reading logs.
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return text;
+        return String.format("User[userid=%d, name: %s, surname: %s, phone: %s, birthday: %tA %<tB  %<te,  %<tY  %n]",
+                userid, name,surname,phone,dob);
     }
+
 }

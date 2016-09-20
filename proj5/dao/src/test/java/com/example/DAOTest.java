@@ -17,7 +17,7 @@ import com.example.model.User;
  *     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
  *     email VARCHAR(60) NOT NULL,
  *     password VARCHAR(32) NOT NULL,
- *     firstname VARCHAR(40) NULL,
+ *     name VARCHAR(40) NULL,
  *     lastname VARCHAR(40) NULL,
  *     birthdate DATE NULL,
  *
