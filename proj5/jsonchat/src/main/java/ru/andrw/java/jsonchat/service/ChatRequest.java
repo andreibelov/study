@@ -27,11 +27,7 @@ public class ChatRequest {
 
     public static void sendToAll(ChatMessage message){
         for (Session session : mainStack) {
-            try {
-                session.getBasicRemote().sendText(gson.toJson(message, ChatMessage.class));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+                session.getAsyncRemote().sendText(gson.toJson(message, ChatMessage.class));
         }
     }
 }

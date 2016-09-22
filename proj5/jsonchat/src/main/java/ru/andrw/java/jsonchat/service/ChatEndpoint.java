@@ -1,10 +1,14 @@
 package ru.andrw.java.jsonchat.service;
 
 import com.google.gson.Gson;
+import ru.andrw.java.jsonchat.listener.SessionTracker;
 import ru.andrw.java.jsonchat.model.chat.ChatMessage;
 
+import javax.servlet.http.HttpSession;
 import javax.websocket.*;
+import javax.websocket.server.HandshakeRequest;
 import javax.websocket.server.ServerEndpoint;
+import javax.websocket.server.ServerEndpointConfig;
 import java.io.IOException;
 
 /**
@@ -13,10 +17,10 @@ import java.io.IOException;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-@ServerEndpoint("/chatty")
+@ServerEndpoint(value = "/websocket", configurator = ChatEndpoint.Configurator.class)
 public class ChatEndpoint {
     private Gson gson = new Gson();
-
+    private HttpSession httpSession;
     /**
      * @OnOpen allows us to intercept the creation of a new session.
      * The session class allows us to send data to the user.
@@ -24,17 +28,20 @@ public class ChatEndpoint {
      * successful.
      */
     @OnOpen
-    public void onOpen(Session session){
+    public void onOpen(Session session, EndpointConfig config){
 
-        try {
-            RemoteEndpoint.Basic client = session.getBasicRemote();
-            ChatMessage message = (new ChatMessage())
-                    .setSender("server")
-                    .setText("Connection success. Session ID - "+session.getId());
-            client.sendText(gson.toJson(message, ChatMessage.class));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        SessionTracker tracker =
+                (SessionTracker) config.getUserProperties().get(SessionTracker.class.getName());
+        
+        httpSession = tracker.getSessionById(session.getRequestParameterMap()
+                .get("sessionId").get(0));
+        
+        RemoteEndpoint.Async client = session.getAsyncRemote();
+        ChatMessage message = (new ChatMessage())
+                .setSender("server")
+                .setText("Connection success. Session ID - "+session.getId()+
+                        " HttpSession: "+ httpSession.getId());
+        client.sendText(gson.toJson(message, ChatMessage.class));
 
         ChatRequest.sendToAll((new ChatMessage())
                 .setSender("server")
@@ -50,7 +57,7 @@ public class ChatEndpoint {
     public void onMessage(String message, Session session){
 
         ChatRequest.sendToAll((new ChatMessage())
-                .setSender("User "+session.getId())
+                .setSender("user"+session.getId())
                 .setText(message));
 
     }
@@ -67,4 +74,17 @@ public class ChatEndpoint {
                 .setSender("server")
                 .setText("user" +session.getId()+" left conversation"));
     }
+
+    public static class Configurator extends ServerEndpointConfig.Configurator {
+        @Override
+        public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request,
+                                    HandshakeResponse response) {
+            Object tracker = ((HttpSession) request.getHttpSession()).getServletContext().getAttribute(
+                    SessionTracker.class.getName());
+            // This is safe to do because it's the same instance of SessionTracker all the time
+            sec.getUserProperties().put(SessionTracker.class.getName(), tracker);
+            super.modifyHandshake(sec, request, response);
+        }
+    }
+
 }

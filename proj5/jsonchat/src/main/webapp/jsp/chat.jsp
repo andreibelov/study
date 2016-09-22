@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>JSON example</title>
-    <link type="text/css" rel="stylesheet" media="all" href="${pageContext.request.contextPath}/static/css/main.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="${pageContext.request.contextPath}/static/css/chat.css" />
 </head>
 <body>
 <div class="main">
@@ -14,16 +14,25 @@
             </tbody>
         </table>
     </div>
-    <div id="chat"><dl></dl></div>
-    <div id="input">
-        <label for="msg">Your message: (press Ctrl+Enter to send message)</label>
-        <br />
-        <textarea id="msg" name="msg" rows="4" cols="50">Type your message here</textarea>
+    <div id="content">
+        <div id="chat"><dl id="msgs"></dl></div>
+        <div id="input">
+            <label for="msg"></label>
+            <textarea id="msg" name="msg" rows="5" cols="50">Type your message here</textarea>
+            <div class="buttons">
+                <span>(press Ctrl+Enter to send message)</span>
+                <button id="send" type="button">Send</button>
+                <button id="open" type="button">Open</button>
+                <button id="close" type="button">Close</button>
+            </div>
+        </div>
     </div>
-    <div class="buttons">
-        <button id="send" type="button">Send</button>
-        <button id="open" type="button">Open</button>
-        <button id="close" type="button">Close</button>
+    <div id="sidebar">
+        <ol id="fellows">
+            <li>Coffee</li>
+            <li>Tea</li>
+            <li>Milk</li>
+        </ol>
     </div>
 </div>
 <!-- Bootstrap core JavaScript

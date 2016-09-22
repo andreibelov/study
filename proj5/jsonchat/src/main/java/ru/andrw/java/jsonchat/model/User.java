@@ -3,6 +3,7 @@ package ru.andrw.java.jsonchat.model;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.List;
  * @link http://vk.com/andrei.belov
  */
 @Data
+@Accessors(chain = true)
 public class User implements Serializable {
 
     // Constants ----------------------------------------------------------------------------------

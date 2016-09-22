@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     var webSocket;
     var chat = document.getElementById("chat");
-    var list = chat.getElementsByTagName("dl")[0];
+    var list = document.getElementById("msgs");
     var sendButton = document.getElementById("send");
     var openButton = document.getElementById("open");
     var closeButton = document.getElementById("close");
@@ -40,7 +40,8 @@ $(document).ready(function() {
             return;
         }
         // Create a new instance of the websocket
-        webSocket = new WebSocket("ws://localhost:8080/jsonchat/chatty");
+        //webSocket = new WebSocket("ws://"+ document.location.host + document.location.pathname + "websocket");
+        webSocket = new WebSocket("ws://"+ document.location.host + "/jsonchat/websocket");
 
         /**
          * Binds functions to the listeners for the websocket.
@@ -81,15 +82,15 @@ $(document).ready(function() {
         msg.focus();
     }
 
-    function closeSocket(){
-        webSocket.close();
-    }
-
     function writeResponse(user, text){
         list.innerHTML += "<dt>" +user+ "</dt>" +
             "<dd >" + text + "</dd>";
         var d = $('#chat');
         d.animate({scrollTop: d.prop("scrollHeight")}, 250);
+    }
+
+    function closeSocket(){
+        webSocket.close();
     }
 
 });
