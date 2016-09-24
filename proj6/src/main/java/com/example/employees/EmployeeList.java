@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public class EmployeeList {
-    private static final List<Employee> employeeList = new ArrayList();
+    private static final List<Employee> employeeList = new ArrayList<>();
     
     private EmployeeList(){
     }
@@ -19,7 +19,7 @@ public class EmployeeList {
         employeeList.add(new Employee("Samuel","Williams","22-03-1985","Coordinator","Finance","samuel.williams@abc.com"));
     }
     
-    public static List <Employee> getInstance(){
+    public static List<Employee> getInstance(){
         return employeeList;
     }
 }

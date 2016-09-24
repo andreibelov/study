@@ -57,7 +57,6 @@ public class ListUserDao implements UserDao {
 
     @Override
     public void deleteUser(Long userId) throws DaoException {
-
         IntStream.range(0, users.size())
                 .filter(i -> users.get(i).getId().equals(userId))
                 .findAny().ifPresent(i -> users.remove(i));
@@ -69,7 +68,7 @@ public class ListUserDao implements UserDao {
         else {
             IntStream.range(0, users.size())
                     .filter(i -> users.get(i).getId().equals(user.getId()))
-                    .findAny().ifPresent(i -> users.set(i,user));
+                    .findFirst().ifPresent(i -> users.set(i,user));
         }
     }
 

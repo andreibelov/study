@@ -27,14 +27,12 @@ import static java.util.Optional.empty;
 public class Login extends javax.servlet.http.HttpServlet {
 
     private UserDao userDao;
-    private Gson gson;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext sc = config.getServletContext();
         DaoFactory daoFactory =   (DaoFactory) sc.getAttribute("daoFactory");
-
         userDao = daoFactory.getUserDao();
     }
 
@@ -51,10 +49,10 @@ public class Login extends javax.servlet.http.HttpServlet {
         }
 
         if (user.isPresent()) {
-            request.getSession().setAttribute("user", user.get()); // Put user in session.
+            request.getSession().setAttribute("user", user.get()); // Put user in a session.
             Cookie userName = new Cookie("user", user.get().getLogin());
             response.addCookie(userName);
-            response.sendRedirect(request.getContextPath() +"/index.jsp"); // Go to some start page.
+            response.sendRedirect(request.getContextPath() +"/"); // Go to some start page.
         } else {
             request.setAttribute("error", "Unknown login, try again"); // Set error msg for ${error}
             request.getRequestDispatcher("/login.jsp").forward(request, response); // Go back to login page.

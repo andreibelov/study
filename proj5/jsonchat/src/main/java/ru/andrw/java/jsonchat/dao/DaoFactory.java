@@ -13,4 +13,5 @@ import java.io.File;
 public interface DaoFactory {
     public UserDao getUserDao();
     public ChatMessageDao getChatMessageDao();
+    public UserProfileDao getProfileDao();
 }

@@ -4,11 +4,9 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.UUID;
 
 /**
- * Created by john on 9/20/2016.
+ * Created by john on 9/23/2016.
  *
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
@@ -23,25 +21,26 @@ public class UserProfile implements Serializable {
 
     // Properties ---------------------------------------------------------------------------------
 
-    private UUID uuid;
-    private Long userid;
-    private String link;
-    private String avatar;
+    private Long id;
     private String name;
-    private String surname;
-    private String phone;
-    private Date dob;
+    private String lastName;
+    private String birthDate;
+    private String country;
+    private String city;
+    private String email;
 
     // Object overrides ---------------------------------------------------------------------------
 
     /**
-     * Returns the String representation of this User. Not required, it just pleases reading logs.
+     * Returns the String representation of this User.
+     * Not required, it just pleases reading logs.
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return String.format("User[userid=%d, name: %s, surname: %s, phone: %s, birthday: %tA %<tB  %<te,  %<tY  %n]",
-                userid, name,surname,phone,dob);
+        return "UserProfile{" + "id=" + id + ", name=" + name +
+                ", lastName=" + lastName + ", birthDate=" + birthDate +
+                ", country=" + country + ", city=" + city +
+                ", email=" + email + '}';
     }
-
 }

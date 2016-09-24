@@ -8,6 +8,20 @@ import java.util.Iterator;
  * @link http://vk.com/andrei.belov
  */
 public class DaoException extends Exception implements Iterable<Throwable> {
+
+    public DaoException() {
+        super();
+    }
+    public DaoException(String message) {
+        super(message);
+    }
+    public DaoException(String message, Throwable cause) {
+        super(message, cause);
+    }
+    public DaoException(Throwable cause) {
+        super(cause);
+    }
+
     @Override
     public Iterator<Throwable> iterator() {
         return new Iterator<Throwable>() {

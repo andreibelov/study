@@ -1,7 +1,8 @@
 apply plugin: 'war'
 version ''
 dependencies {
-    compile 'javax.servlet:jstl:+'
+    compile 'com.opencsv:opencsv:+'
+    compile 'javax.servlet:jstl:1.2'
     compile 'org.postgresql:postgresql:+'
     compile 'com.google.code.gson:gson:+'
     compile 'org.apache.activemq:activemq-core:+'

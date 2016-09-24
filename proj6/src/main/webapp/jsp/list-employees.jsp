@@ -9,7 +9,7 @@
         <div class="container">
             <h2>Employees</h2>
             <!--Search Form -->
-            <form action="/employee" method="get" id="seachEmployeeForm" role="form">
+            <form action="${pageContext.request.contextPath}/employee" method="get" id="seachEmployeeForm" role="form">
                 <input type="hidden" id="searchAction" name="searchAction" value="searchByName">
                 <div class="form-group col-xs-5">
                     <input type="text" name="employeeName" id="employeeName" class="form-control" required="true" placeholder="Type the Name or Last Name of the employee"/>                    
@@ -17,8 +17,8 @@
                 <button type="submit" class="btn btn-info">
                     <span class="glyphicon glyphicon-search"></span> Search
                 </button>
-                <br></br>
-                <br></br>
+                <br />
+                <br />
             </form>
 
             <!--Employees List-->
@@ -47,7 +47,7 @@
                             </thead>
                             <c:forEach var="employee" items="${employeeList}">
                                 <c:set var="classSucess" value=""/>
-                                <c:if test ="${idEmployee == employee.id}">                        	
+                                <c:if test ="${idEmployee == employee.id}">
                                     <c:set var="classSucess" value="info"/>
                                 </c:if>
                                 <tr class="${classSucess}">
@@ -81,7 +81,7 @@
                 </c:choose>                        
             </form>
             <form action ="jsp/new-employee.jsp">            
-                <br></br>
+                <br />
                 <button type="submit" class="btn btn-primary  btn-md">New employee</button> 
             </form>
         </div>

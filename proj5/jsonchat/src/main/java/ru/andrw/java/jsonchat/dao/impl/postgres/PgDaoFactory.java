@@ -3,6 +3,7 @@ package ru.andrw.java.jsonchat.dao.impl.postgres;
 import ru.andrw.java.jsonchat.dao.ChatMessageDao;
 import ru.andrw.java.jsonchat.dao.DaoFactory;
 import ru.andrw.java.jsonchat.dao.UserDao;
+import ru.andrw.java.jsonchat.dao.UserProfileDao;
 
 import java.sql.Connection;
 import java.util.function.Supplier;
@@ -29,5 +30,10 @@ public class PgDaoFactory implements DaoFactory {
     @Override
     public ChatMessageDao getChatMessageDao() {
         return messageDao;
+    }
+
+    @Override
+    public UserProfileDao getProfileDao() {
+        return null;
     }
 }
