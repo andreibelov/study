@@ -7,7 +7,7 @@
     <body>
         <div class="container">
             <form action="${pageContext.request.contextPath}/employee" method="post"  role="form" data-toggle="validator" >
-                <c:if test ="${empty action}">                        	
+                <c:if test ="${empty requestScope.action}">
                     <c:set var="action" value="add"/>
                 </c:if>
                 <input type="hidden" id="action" name="action" value="${action}">

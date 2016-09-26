@@ -18,7 +18,7 @@ import static java.util.Optional.ofNullable;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-public class ListUserDao implements UserDao {
+class ListUserDao implements UserDao {
 
     private List<User> users;
     private AtomicLong al;

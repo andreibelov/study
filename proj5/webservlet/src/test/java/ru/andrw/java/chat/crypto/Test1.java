@@ -14,7 +14,7 @@ public class Test1 {
     @Test
     public void main() throws Exception {
         String password = "123";
-        assertThat(MD5Encrypter.encrypt(password), is("202cb962ac59075b964b07152d234b70"));
+        assertThat(MD5Encryptors.encrypt(password), is("202cb962ac59075b964b07152d234b70"));
     }
 
 }

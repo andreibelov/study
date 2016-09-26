@@ -5,6 +5,8 @@ apply plugin: "jpa-schema-generate"
 apply plugin: 'war'
 
 dependencies {
+    compile 'javax.mail:mail:1.4.7'
+    compile 'com.opencsv:opencsv:+'
     compile 'javax.servlet:jstl:1.2'
     compile 'com.google.code.gson:gson:+'
     compile 'org.postgresql:postgresql:+'

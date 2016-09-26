@@ -43,7 +43,7 @@ public class ListDaoFactory implements DaoFactory {
 
         this.userDao = new ListUserDao(userList,al);
 
-        AtomicLong counter = new AtomicLong(0L);
+        AtomicLong counter = new AtomicLong(500L);
 
         String csvPath = "initial_profiles.csv";
         List<UserProfile> profileList = new CopyOnWriteArrayList<>();
@@ -66,10 +66,10 @@ public class ListDaoFactory implements DaoFactory {
                         .setEmail(line[5])
                         .setId(counter.getAndIncrement()));
             }
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         this.profileDao = new ListUserProfileDao(profileList,counter);
     }
 

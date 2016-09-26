@@ -40,6 +40,8 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/core.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/chat.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="${pageContext.request.contextPath}/static/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

@@ -53,7 +53,7 @@ public class ListUserProfileDao implements UserProfileDao {
     @Override
     public long addUserProfile(UserProfile profile) throws DaoException {
         if(!userProfileValidator(profile)) throw new DaoException();
-        profile.setId(counter.incrementAndGet());
+        profile.setId(counter.getAndIncrement());
         userProfileList.add(profile);
         return profile.getId();
     }

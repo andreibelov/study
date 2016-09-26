@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"
 %><!DOCTYPE html>
 <html lang="en">
@@ -31,9 +32,14 @@
 
 <div class="container-fluid">
     <div class="container">
-        <div class="alert alert-danger" role="alert">
-            <strong>Oh snap!</strong> ${requestScope.error}
-        </div>
+
+        <br />
+
+        <c:if test="${not empty requestScope.message}">
+            <div class="alert alert-danger" role="alert">
+                <strong>${requestScope.message}</strong>
+            </div>
+        </c:if>
 
         <form class="form-signin" method="POST" action="${pageContext.request.contextPath}/login">
             <h2 class="form-signin-heading">Please sign in</h2>

@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="${pageContext.request.contextPath}/favicon.ico">
+    <link rel="icon" href="${pageContext.request.contextPath}/static/favicon.ico">
 
     <title>Dashboard Template for Bootstrap</title>
 
@@ -60,7 +60,8 @@
             </div>
             <h2 class="sub-header">Section title</h2>
             <!-- Section content -->
-            <jsp:include page="/profile" flush="true" />
+            <div id="sec1" class="table-responsive">
+            </div>
             <!-- end Section content -->
         </div>
     </div>
@@ -71,6 +72,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/dashboard.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="${pageContext.request.contextPath}/static/js/ie10-viewport-bug-workaround.js"></script>
 </body>

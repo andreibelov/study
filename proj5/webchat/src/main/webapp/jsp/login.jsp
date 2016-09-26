@@ -25,7 +25,7 @@
 </head>
 
 <body>
-
+<div id="wrapper">
 <!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -60,8 +60,10 @@
         </form>
     </div>
 </nav>
-<!-- end Fixed navbar -->
 
+
+<!-- end Fixed navbar -->
+</div>
 <div class="container-fluid">
     <div class="container">
 
