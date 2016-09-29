@@ -19,6 +19,7 @@ public class ScInitListener implements ServletContextListener {
 
     private final String DAO_FACTORY = "daoFactory";
     private final String GSON = "gson";
+    private final String PROJECT_NAME = "projectName";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -26,6 +27,7 @@ public class ScInitListener implements ServletContextListener {
         ServletContext servletContext = sce.getServletContext();
         servletContext.setAttribute(DAO_FACTORY, new ListDaoFactory());
         servletContext.setAttribute(GSON, new Gson());
+        servletContext.setAttribute(PROJECT_NAME, "Vault 101");
     }
 
     @Override

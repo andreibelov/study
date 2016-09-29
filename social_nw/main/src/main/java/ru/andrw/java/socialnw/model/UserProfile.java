@@ -2,12 +2,10 @@ package ru.andrw.java.socialnw.model;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 
 /**
  * Created by john on 9/25/2016.
- *
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
@@ -15,11 +13,11 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class UserProfile implements Serializable {
 
-    // Constants ----------------------------------------------------------------------------------
+    // Constants ------------------------------------------------------------------
 
     private static final long serialVersionUID = 1L;
 
-    // Properties ---------------------------------------------------------------------------------
+    // Properties -----------------------------------------------------------------
 
     private Long id;
     private Long userid;
@@ -32,7 +30,7 @@ public class UserProfile implements Serializable {
     private String status;
     private String photoid;
 
-    // Object overrides ---------------------------------------------------------------------------
+    // Object overrides -----------------------------------------------------------
 
     /**
      * Returns the String representation of this User.
@@ -47,4 +45,3 @@ public class UserProfile implements Serializable {
                 ", email=" + email + '}';
     }
 }
-

@@ -14,43 +14,23 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class User implements Serializable {
 
-    // Constants ----------------------------------------------------------------------------------
+    // Constants -----------------------------------------------------------------
 
     private static final long serialVersionUID = 1L;
 
-    // Properties ---------------------------------------------------------------------------------
+    // Properties ----------------------------------------------------------------
 
     private Long id;
     private String email;
     private String login;
     private String password;
+    //Add role
 
-    // Object overrides ---------------------------------------------------------------------------
-
-    /**
-     * The user ID is unique for each User. So this should compare User by ID only.
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object other) {
-        return (other instanceof User) && (id != null)
-                ? id.equals(((User) other).id)
-                : (other == this);
-    }
+    // Object overrides -----------------------------------------------------------
 
     /**
-     * The user ID is unique for each User. So User with same ID should return same hashcode.
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return (id != null)
-                ? (this.getClass().hashCode() + id.hashCode())
-                : super.hashCode();
-    }
-
-    /**
-     * Returns the String representation of this User. Not required, it just pleases reading logs.
+     * Returns the String representation of this User.
+     * Not required, it just pleases reading logs.
      * @see java.lang.Object#toString()
      */
     @Override

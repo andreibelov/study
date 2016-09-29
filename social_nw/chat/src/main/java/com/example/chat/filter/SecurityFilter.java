@@ -50,4 +50,9 @@ public class SecurityFilter extends HttpFilter {
         } else response.sendRedirect(request.getContextPath() + "/login.jsp"); // Not logged in, show login page.}
     }
 
+    @Override
+    public void destroy(){
+        filterConfig = null;
+    }
+
 }

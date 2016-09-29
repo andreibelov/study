@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">${requestScope.PROJECT_NAME}</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/home">${requestScope.PROJECT_NAME}</a>
     </div>
     <!-- Top Menu Items -->
     <div id="navbar-top" class="navbar-collapse collapse">
@@ -21,7 +21,7 @@
                 </c:if>
                 <ul class="dropdown-menu">
                     <li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
-                    <li><a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a></li>
+                    <li><a href="${pageContext.request.contextPath}/inbox"><i class="fa fa-fw fa-envelope"></i> Inbox</a></li>
                     <li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
                     <li class="divider"></li>
                     <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>

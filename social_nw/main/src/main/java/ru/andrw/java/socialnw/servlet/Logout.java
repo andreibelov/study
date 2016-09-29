@@ -24,7 +24,7 @@ public class Logout extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Logout");
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LogoutService.onLogOut(request,response, logger);
+        LogoutService.onLogOut(request,response);
     }
 
     @Override

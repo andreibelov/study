@@ -2,8 +2,9 @@ package ru.andrw.java.socialnw.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.andrw.java.socialnw.dao.DaoFactory;
+import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
+import ru.andrw.java.socialnw.model.UserProfile;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +24,7 @@ public class ProfileService {
 
     private static final Map<String, ServiceMethod> methods;
     private static final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.service.ProfileService");
-    private static DaoFactory daoFactory;
+    private static UserProfileDao profileDao;
 
     static {
         methods = new HashMap<>();
@@ -47,7 +48,8 @@ public class ProfileService {
     private static void getEditForm(HttpServletRequest request,
                                     HttpServletResponse response) {
         String nextJSP = "/WEB-INF/include/profile-edit.jsp";
-        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(nextJSP);
+        RequestDispatcher dispatcher = request.getServletContext()
+                .getRequestDispatcher(nextJSP);
         try {
             dispatcher.include(request, response);
         } catch (ServletException | IOException e) {
@@ -55,22 +57,50 @@ public class ProfileService {
         }
     }
 
-    private static void addUserProfile(HttpServletRequest httpServletRequest,
-                                       HttpServletResponse httpServletResponse) {
-
+    private static void addUserProfile(HttpServletRequest req,
+                                       HttpServletResponse resp) {
+        UserProfile profile = (new UserProfile())
+                .setName(req.getParameter("name"))
+                .setLastName(req.getParameter("lastName"))
+                .setBirthDate(req.getParameter("birthDate"))
+                .setCountry(req.getParameter("country"))
+                .setCity(req.getParameter("city"))
+                .setEmail(req.getParameter("email"));
+        long userProfileId = 0;
+        try {
+            userProfileId = profileDao.addUserProfile(profile);
+        } catch (DaoException e) {
+            logger.error(e.getMessage(),e);
+        }
     }
 
-    private static void editUserProfile(HttpServletRequest request,
-                                        HttpServletResponse response){
-
+    private static void editUserProfile(HttpServletRequest req,
+                                        HttpServletResponse resp) {
+        long userProfileId = Long.valueOf(req.getParameter("userProfileId"));
+        UserProfile profile = (new UserProfile())
+                .setName(req.getParameter("name"))
+                .setLastName(req.getParameter("lastName"))
+                .setBirthDate(req.getParameter("birthDate"))
+                .setCountry(req.getParameter("country"))
+                .setCity(req.getParameter("city"))
+                .setEmail(req.getParameter("email"))
+                .setStatus(req.getParameter("status"))
+                .setPhotoid("")
+                .setId(userProfileId);
+        boolean success = profileDao.updateUserProfile(profile);
     }
 
-    private static void removeUserProfile(HttpServletRequest request,
-                                          HttpServletResponse response){
-
+    private static void removeUserProfile(HttpServletRequest req,
+                                         HttpServletResponse resp) {
+        long userProfileId = Long.valueOf(req.getParameter("userProfileId"));
+        boolean confirm = profileDao.deleteUserProfile(userProfileId);
+        if (confirm){
+            String message = "The profile has been successfully removed.";
+            req.setAttribute("message", message);
+        }
     }
 
-    public static void setDaoFactory(DaoFactory daoFactory) {
-        ProfileService.daoFactory = daoFactory;
+    public static void setProfileDao(UserProfileDao profileDao) {
+        ProfileService.profileDao = profileDao;
     }
 }

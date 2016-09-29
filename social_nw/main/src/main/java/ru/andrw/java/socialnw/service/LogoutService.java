@@ -1,6 +1,7 @@
 package ru.andrw.java.socialnw.service;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.model.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,9 @@ import java.io.IOException;
  */
 public class LogoutService {
 
-    public static void onLogOut(HttpServletRequest request, HttpServletResponse response, Logger logger) throws IOException {
+    private static final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.service.LogoutService");
+
+    public static void onLogOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //invalidate the session if exists
         HttpSession session = request.getSession(false);
         if(session != null){

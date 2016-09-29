@@ -31,6 +31,7 @@ public class Profile extends HttpServlet {
 
     private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Profile");
     private UserProfileDao profileDao;
+    private String projectName;
     private Gson gson;
 
     @Override
@@ -38,8 +39,9 @@ public class Profile extends HttpServlet {
         super.init(config);
         ServletContext sc = config.getServletContext();
         DaoFactory daoFactory =   (DaoFactory) sc.getAttribute("daoFactory");
-        ProfileService.setDaoFactory(daoFactory);
+        projectName = (String) sc.getAttribute("projectName");
         profileDao = daoFactory.getProfileDao();
+        ProfileService.setProfileDao(profileDao);
         gson = (Gson) sc.getAttribute("GSON");
     }
 
@@ -56,10 +58,9 @@ public class Profile extends HttpServlet {
         String action = request.getParameter("action");
         if (action!=null) ProfileService.doAction(request,response);
         else{
-            List<UserProfile> result = null;
             try {
-                result = profileDao.getUserProfilesSubList(0L,30L);
-                includeListUserProfiles(request, response, result);
+                includeListUserProfiles(request, response,
+                        profileDao.getUserProfilesSubList(0L,30L));
             } catch (DaoException e) {
                 logger.error("Limits out of bounds",e);
             }
