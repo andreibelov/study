@@ -24,7 +24,7 @@ public class User implements Serializable {
     private String email;
     private String login;
     private String password;
-    //Add role
+    private Integer accessLevel;
 
     // Object overrides -----------------------------------------------------------
 

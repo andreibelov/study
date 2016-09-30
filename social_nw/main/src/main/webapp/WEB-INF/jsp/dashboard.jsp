@@ -62,7 +62,7 @@
                 <div class="col-xs-6 col-sm-3 placeholder">
                 </div>
             </div>
-            <h2 class="sub-header">Section title</h2>
+            <h2 class="sub-header" id="sectionName">${requestScopeScope.sectionName}</h2>
             <!-- Section content -->
             <div id="sec1" class="table-responsive">
             </div>

@@ -1,13 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${not empty requestScope.message}">
+    <div class="alert alert-danger" role="alert">
+        <strong>${requestScope.message}</strong>
+    </div>
+</c:if>
+<br />
 <form action="${pageContext.request.contextPath}/profile" method="post" id="profileForm" role="form" >
-    <input type="hidden" id="idEmployee" name="idEmployee">
-    <input type="hidden" id="action" name="action">
     <c:choose>
         <c:when test="${not empty requestScope.profileList}">
             <table  class="table table-striped">
                 <thead>
                 <tr>
                     <td>#</td>
+                    <td>User ID</td>
                     <td>Name</td>
                     <td>Last name</td>
                     <td>Birth date</td>
@@ -24,6 +29,7 @@
                         <td>
                             <a href="#" id="edit">${profile.id}</a>
                         </td>
+                        <td>${profile.userid}</td>
                         <td>${profile.name}</td>
                         <td>${profile.lastName}</td>
                         <td>${profile.birthDate}</td>
@@ -36,15 +42,8 @@
                         </td>
                     </tr>
                 </c:forEach>
-                    <tr id="addNew" class="inverse">
-                        <td>*</td>
-                        <td>+</td>
-                        <td>+</td>
-                        <td>+</td>
-                        <td>+</td>
-                        <td>+</td>
-                        <td>+</td>
-                        <td>+</td>
+                    <tr id="loadMore" class="text-center warning">
+                        <td colspan="9"><h3>Load more</h3></td>
                     </tr>
                 </tbody>
             </table>

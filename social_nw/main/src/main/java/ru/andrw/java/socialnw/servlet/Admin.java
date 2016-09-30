@@ -22,19 +22,19 @@ import java.io.IOException;
 public class Admin extends HttpServlet {
 
     private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Home");
-    private String projectName;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext sc = config.getServletContext();
-        projectName = (String) sc.getAttribute("projectName");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("PROJECT_NAME", projectName);
+
+
+
         request.setAttribute("pageTitle", "Dashboard");
         request.getRequestDispatcher("/WEB-INF/jsp/dashboard.jsp").include(request, response);
     }

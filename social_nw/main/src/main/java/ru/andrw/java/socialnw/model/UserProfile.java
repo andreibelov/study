@@ -3,6 +3,7 @@ package ru.andrw.java.socialnw.model;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by john on 9/25/2016.
@@ -23,7 +24,7 @@ public class UserProfile implements Serializable {
     private Long userid;
     private String name;
     private String lastName;
-    private String birthDate;
+    private Date birthDate;
     private String country;
     private String city;
     private String email;

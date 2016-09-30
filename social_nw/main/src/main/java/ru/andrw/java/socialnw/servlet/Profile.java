@@ -31,24 +31,22 @@ public class Profile extends HttpServlet {
 
     private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Profile");
     private UserProfileDao profileDao;
-    private String projectName;
-    private Gson gson;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext sc = config.getServletContext();
         DaoFactory daoFactory =   (DaoFactory) sc.getAttribute("daoFactory");
-        projectName = (String) sc.getAttribute("projectName");
         profileDao = daoFactory.getProfileDao();
         ProfileService.setProfileDao(profileDao);
-        gson = (Gson) sc.getAttribute("GSON");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ProfileService.listProfiles(request,response);
 
+//        response.sendRedirect(request.getContextPath() +"/home"); // Go to some start page.
     }
 
     @Override
@@ -57,22 +55,6 @@ public class Profile extends HttpServlet {
 
         String action = request.getParameter("action");
         if (action!=null) ProfileService.doAction(request,response);
-        else{
-            try {
-                includeListUserProfiles(request, response,
-                        profileDao.getUserProfilesSubList(0L,30L));
-            } catch (DaoException e) {
-                logger.error("Limits out of bounds",e);
-            }
-        }
+        else ProfileService.listProfiles(request,response);
     }
-
-    private void includeListUserProfiles(HttpServletRequest req, HttpServletResponse resp, List profileList)
-            throws ServletException, IOException {
-        String nextJSP = "/WEB-INF/include/profiles.jsp";
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
-        req.setAttribute("profileList", profileList);
-        dispatcher.include(req, resp);
-    }
-
 }

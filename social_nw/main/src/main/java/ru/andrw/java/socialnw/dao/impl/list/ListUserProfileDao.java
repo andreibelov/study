@@ -1,16 +1,21 @@
 package ru.andrw.java.socialnw.dao.impl.list;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.UserProfile;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Comparator;
 import java.util.stream.IntStream;
 import java.util.stream.Collectors;
 import java.util.function.Predicate;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Stream;
 
 import static java.util.Optional.ofNullable;
 
@@ -21,6 +26,9 @@ import static java.util.Optional.ofNullable;
  */
 class ListUserProfileDao implements UserProfileDao {
 
+    private final Logger logger = LoggerFactory
+            .getLogger("ru.andrw.java.socialnw.dao.impl.list.ListUserProfileDao");
+
     private List<UserProfile> userProfileList;
     private AtomicLong counter;
 
@@ -30,11 +38,19 @@ class ListUserProfileDao implements UserProfileDao {
     }
 
     @Override
-    public List<UserProfile> getUserProfilesSubList(Long skipFirst, Long limitMax) throws DaoException {
-        if (skipFirst != null && limitMax != null)
+    public List<UserProfile> getUserProfilesSubList(Integer offset, Integer limit)
+            throws DaoException {
+        Integer size = userProfileList.size();
+        Integer result =
+                Stream.of(offset,limit)
+                        .filter(Objects::nonNull)
+                        .filter(e -> e >= 0)
+                        .filter(e -> e < size)
+                        .collect(Collectors.summingInt(Integer::intValue));
+        if (result != null && result.compareTo(size) <=0)
         return userProfileList.stream()
-                .skip(skipFirst)
-                .limit(limitMax)
+                .skip(offset)
+                .limit(limit)
                 .collect(Collectors.toList());
         else throw new DaoException("Provided limits is out of bound");
     }
@@ -84,13 +100,12 @@ class ListUserProfileDao implements UserProfileDao {
     }
 
     @Override
-    public boolean updateUserProfile(UserProfile profile){
-        if(!userProfileValidator(profile)) return false;
+    public void updateUserProfile(UserProfile profile) throws DaoException {
+        if(!userProfileValidator(profile)) throw new DaoException("UserProfile not valid!");
         else {
             IntStream.range(0, userProfileList.size())
                     .filter(i -> userProfileList.get(i).getId().equals(profile.getId()))
                     .findFirst().ifPresent(i -> userProfileList.set(i,profile));
-            return true;
         }
     }
 

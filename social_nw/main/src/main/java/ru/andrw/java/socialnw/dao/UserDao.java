@@ -24,8 +24,9 @@ public interface UserDao {
 
     public void addUser(User user) throws DaoException;
     public void deleteUser(Long userId) throws DaoException;
+    public void changePassword(Long userId, String pass) throws DaoException;
     public void updateUser(User user) throws DaoException;
-    public List<User> getUsersSubList(Long skipFirst, Long limitMax) throws DaoException;
+    public List<User> getUsersSubList(Integer offset, Integer limit) throws DaoException;
     public Optional<User> getUserById(Long userId) throws DaoException;
 }
 

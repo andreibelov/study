@@ -25,7 +25,6 @@ public class Inbox extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("pageTitle", "Inbox");
-        request.setAttribute("PROJECT_NAME", "MySocialNW");
         request.setAttribute("includeSection", "/WEB-INF/include/inbox.jsp");
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
     }

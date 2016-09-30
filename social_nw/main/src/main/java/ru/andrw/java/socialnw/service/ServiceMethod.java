@@ -1,5 +1,8 @@
 package ru.andrw.java.socialnw.service;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,5 +15,5 @@ import javax.servlet.http.HttpServletResponse;
 @FunctionalInterface
 public interface ServiceMethod {
     public void execute(HttpServletRequest request,
-                        HttpServletResponse response);
+                        HttpServletResponse response) throws ServletException, IOException;
 }

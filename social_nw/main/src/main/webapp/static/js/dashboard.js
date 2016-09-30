@@ -3,8 +3,10 @@ $(document).ready(function() {
     var pathname = document.location.pathname.substring(1);
     var parts = pathname.split(/\//);
     var myurl = "/"+parts[0]+"/profile";
+    var offset = 0;
+    var limit = 3;
 
-    load();
+    load(offset,limit);
 
     var section = $("#sec1");
 
@@ -22,8 +24,15 @@ $(document).ready(function() {
         $(this).toggleClass("info");
     });
 
-    section.delegate( "table > tbody > tr#addNew", "click", function() {
-        addNew();
+    section.delegate( "table > tbody > tr:not(#loadMore)", "click", function() {
+        var row = $(this);
+        editProfile(row)
+    });
+
+    section.delegate( "table > tbody > tr#loadMore", "click", function() {
+        offset = 0;
+        limit = 6;
+        load(offset,limit)
     });
 
     section.delegate( "#accept", "click", function() {
@@ -37,9 +46,18 @@ $(document).ready(function() {
     });
 
 
-    function load() {
-        $.post( myurl, function( data ) {
-            $("#sec1").html( data );
+    function load(offset, limit) {
+
+        $.ajax({
+           url: myurl,
+           type: 'POST',
+           data: {
+               action: "list",
+               offset: offset,
+               limit: limit
+           }
+        }).done(function(result) {
+            section.html(result);
         });
     }
 
@@ -50,7 +68,7 @@ $(document).ready(function() {
             type: 'POST',
             data: {
                 action: "remove",
-                idUserProfile: profileId
+                userProfileId: profileId
             }
         }).done(function(result) {
             row.remove();
@@ -65,8 +83,20 @@ $(document).ready(function() {
                 action: "getform"
             }
         }).done(function(result) {
-            $("#profileForm").remove();
-            section.append(result);
+            section.html(result);
+        });
+    }
+    function editProfile(row) {
+        var profileId = row.data('target');
+        $.ajax({
+            url: myurl,
+            type: 'POST',
+            data: {
+                action: "getform",
+                userProfileId: profileId
+            }
+        }).done(function(result) {
+            section.html(result);
         });
     }
 });

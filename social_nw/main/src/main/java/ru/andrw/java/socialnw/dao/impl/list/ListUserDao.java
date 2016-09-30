@@ -5,10 +5,12 @@ import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.model.User;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.Optional.ofNullable;
 
@@ -26,6 +28,25 @@ class ListUserDao implements UserDao {
     ListUserDao(List<User> users, AtomicLong al){
         this.users = users;
         this.al = al;
+    }
+
+    @Override
+    public List<User> getUsersSubList(final Integer offset, final Integer limit) throws DaoException {
+
+        Integer size = users.size();
+        Integer result =
+        Stream.of(offset,limit)
+                .filter(Objects::nonNull)
+                .filter(e -> e >= 0L)
+                .filter(e -> e < size)
+                .collect(Collectors.summingInt(Integer::intValue));
+
+        if (result != null && result.compareTo(size) <=0)
+            return users.stream()
+                    .skip(offset)
+                    .limit(limit)
+                    .collect(Collectors.toList());
+        else throw new DaoException("Provided limits is out of bound");
     }
 
     @Override
@@ -62,6 +83,13 @@ class ListUserDao implements UserDao {
     }
 
     @Override
+    public void changePassword(Long userId, String pass) throws DaoException {
+        IntStream.range(0, users.size())
+                .filter(i -> users.get(i).getId().equals(userId))
+                .findFirst().ifPresent(i -> users.get(i).setPassword(pass));
+    }
+
+    @Override
     public void updateUser(User user) throws DaoException {
         if(!userValidator(user)) throw new DaoException();
         else {
@@ -69,21 +97,6 @@ class ListUserDao implements UserDao {
                     .filter(i -> users.get(i).getId().equals(user.getId()))
                     .findFirst().ifPresent(i -> users.set(i,user));
         }
-    }
-
-    @Override
-    public List<User> getUsersSubList(Long skipFirst, Long limitMax) throws DaoException {
-
-        if (skipFirst != null &&
-                limitMax != null &&
-                skipFirst < limitMax &&
-                skipFirst >= 0 &&
-                limitMax <= users.size())
-        return users.stream()
-                .skip(skipFirst)
-                .limit(limitMax)
-                .collect(Collectors.toList());
-        else throw new DaoException("Provided limits is out of bound");
     }
 
 }

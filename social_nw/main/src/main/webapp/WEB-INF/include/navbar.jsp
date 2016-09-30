@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/home">${requestScope.PROJECT_NAME}</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/home">${applicationScope.projectName}</a>
     </div>
     <!-- Top Menu Items -->
     <div id="navbar-top" class="navbar-collapse collapse">
