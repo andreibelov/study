@@ -1,5 +1,6 @@
 package ru.andrw.java.socialnw.util;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
@@ -9,4 +10,8 @@ import javax.servlet.jsp.tagext.TagSupport;
  * @link http://vk.com/andrei.belov
  */
 public class UserNameTag extends TagSupport {
+    @Override
+    public int doStartTag() throws JspException {
+        return super.doStartTag();
+    }
 }

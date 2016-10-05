@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
+import ru.andrw.java.socialnw.model.SectionModule;
 import ru.andrw.java.socialnw.model.UserProfile;
 import ru.andrw.java.socialnw.service.ProfileService;
 
@@ -29,24 +30,25 @@ import java.util.List;
 @WebServlet(name = "ProfileServlet", urlPatterns = {"/profile"})
 public class Profile extends HttpServlet {
 
-    private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Profile");
-    private UserProfileDao profileDao;
+    private final Logger logger = LoggerFactory.getLogger(Profile.class);
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext sc = config.getServletContext();
         DaoFactory daoFactory =   (DaoFactory) sc.getAttribute("daoFactory");
-        profileDao = daoFactory.getProfileDao();
-        ProfileService.setProfileDao(profileDao);
+        ProfileService.setProfileDao(daoFactory.getProfileDao());
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProfileService.listProfiles(request,response);
-
-//        response.sendRedirect(request.getContextPath() +"/home"); // Go to some start page.
+        SectionModule section = new SectionModule();
+        section.setCssFile("profile.css").setJsFile("profile.js");
+        request.setAttribute("section", section);
+        request.setAttribute("pageTitle", "Profile edit");
+        request.setAttribute("includeSection", "/WEB-INF/include/profile.jsp");
+        request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
     }
 
     @Override

@@ -64,7 +64,7 @@ public class Login extends HttpServlet {
                 logger.error("UserDao err", e);
             }
 
-            if (user.isPresent()) LoginService.onLoginSuccess(request,response,user.get(),logger);
+            if (user.isPresent()) LoginService.onLoginSuccess(request,response,user.get());
             else {
                 logger.error("Bad login try "+email);
                 request.setAttribute("error", "Unknown login, try again"); // Set error msg for ${error}

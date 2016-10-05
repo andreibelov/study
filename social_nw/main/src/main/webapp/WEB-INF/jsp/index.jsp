@@ -18,6 +18,9 @@
 
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet">
+    <c:if test="${not empty requestScope.section}">
+        <link href="${pageContext.request.contextPath}/static/css/${requestScope.section.cssFile}" rel="stylesheet">
+    </c:if>
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -46,6 +49,9 @@
             <!-- ./Side Menu Items -->
             <!-- Main content -->
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <c:if test="${not empty requestScope.section}">
+                    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/${requestScope.section.jsFile}"></script>
+                </c:if>
                 <jsp:include page="${requestScope.includeSection}" />
             </div>
         </div>
@@ -56,6 +62,9 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<c:if test="${not empty requestScope.section}">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/${requestScope.section.jsFile}"></script>
+</c:if>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="${pageContext.request.contextPath}/static/js/ie10-viewport-bug-workaround.js"></script>
 </body>

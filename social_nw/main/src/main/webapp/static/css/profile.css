@@ -1,0 +1,277 @@
+.group { *zoom: 1; }
+.group:before, .group:after { display: table; content: ""; }
+.group:after { clear: both; }
+textarea:focus, input[type="text"]:focus { border: none; -webkit-box-shadow: 0 0 5px #ff9c8d; -moz-box-shadow: 0 0 5px #ff9c8d; box-shadow: 0 0 5px #ff9c8d; }
+
+a { color: #b0b0b0; text-decoration: none; outline: none; }
+a:hover { color: #ff9c8d; text-decoration: none; }
+a:focus { outline: none; }
+.main_content { margin-top: 18px; }
+.widget { background-color: white; clear: both; margin-bottom: 18px; -webkit-box-shadow: 0px 2px 0px rgba(217, 217, 217, 0.2); -moz-box-shadow: 0px 2px 0px rgba(217, 217, 217, 0.2); box-shadow: 0px 2px 0px rgba(217, 217, 217, 0.2); }
+.widget > section { border: 1px solid #d5d5d5; }
+.checkbox { min-height: 18px; }
+select { border: 1px solid #d5d5d5; }
+.control-group .checkbox { padding-left: 18px; }
+.gallery_basic ul li:hover { -webkit-box-shadow: inset 0 1px 0 0 #dedede; box-shadow: inset 0px 1px 0px 0px #dedede; background: #ebebeb; }
+.btn { -webkit-border-radius: 0; -moz-border-radius: 0; -ms-border-radius: 0px; -o-border-radius: 0px; border-radius: 0px; }
+.btn:focus { outline: none; }
+select, textarea, input[type="text"], .dk_toggle { -webkit-border-radius: 0px; -moz-border-radius: 0; -ms-border-radius: 0px; -o-border-radius: 0px; border-radius: 0px; }
+[class^="sweet-"], [class*="sweet-"] { display: inline-block; width: 21px; height: 21px; *margin-right: .3em; line-height: 14px; vertical-align: text-top; background-position: 14px 14px; background-repeat: no-repeat; }
+.sweet-mail { background-position: -78px -84px; }
+.sweet-exit { background-position: 0 -630px; }
+.sweet-user { background-position: -78px -630px; }
+.sweet-cog-4 { background-position: 0 -693px; }
+.sweet-settings { background-position: -26px -693px; }
+
+code { /* color: $theme_color; */ }
+.profile_cont { margin-top: 18px; }
+.profile_cont ul { list-style: none; }
+.profile_cont .info { float: left; width: 30%; }
+.profile_cont .info h4 { font-size: 12px; font-weight: bold; border-bottom: 1px solid #d5d5d5; padding: 5px 0px; margin-bottom: 5px; }
+.profile_cont .info .profile_picture { border-bottom: 1px solid #d5d5d5; padding-bottom: 5px; margin-bottom: 5px; }
+.profile_cont .info .profile_picture .btn { float: right; padding: 1px 10px 3px 10px; }
+.profile_cont .info img { padding: 5px; border: 1px solid #d5d5d5; background-color: #f8f8f8; width: 95%; }
+.profile_cont .info ul { margin: 18px 0 0 0; border: 1px solid #d5d5d5; background-color: #f8f8f8; float: left; width: 99%; }
+.profile_cont .info li { border-bottom: 1px solid #d5d5d5; float: left; width: 100%; }
+.profile_cont .info a { color: #6b6b6d; float: left; width: 94%; height: 100%; padding: 10px 5px 5px 10px; }
+.profile_cont .info a:hover { color: #ff9c8d; background-color: #f2f2f2; }
+.profile_cont .details { float: left; width: 68%; padding-left: 2%; }
+.profile_cont .details label, .profile_cont .details input { font-size: 12px; }
+.profile_cont .details .well { background-color: #f8f8f8; -webkit-border-radius: 0px; -moz-border-radius: 0px; -ms-border-radius: 0px; -o-border-radius: 0px; border-radius: 0px; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
+.profile_cont .details h4 { font-weight: bold; font-size: 14px; border-bottom: 1px solid #d5d5d5; margin-bottom: 15px; padding-bottom: 10px; }
+.profile_cont .details h4 span { float: left; }
+.profile_cont .details .status { float: right; font-size: 12px; font-weight: normal; }
+.profile_cont .details .notification_cont label { padding-left: 0; }
+.profile_cont section { padding: 18px; }
+
+@media print { 
+  * { background: transparent !important; color: black !important; box-shadow: none !important; text-shadow: none !important; filter: none !important; -ms-filter: none !important; }
+  /* Black prints faster: h5bp.com/s */
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+a[href^="#"]:after { content: ""; }
+  /* Don't show links for images, or javascript/internal links */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; }
+  /* h5bp.com/t */
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; } }
+@media (max-width: 480px) {}
+@media (max-width: 320px) {}
+@media (max-width: 767px) {  .profile_cont .info .profile_picture div.uploader { width: 150px; }
+  .profile_cont .info .profile_picture div.uploader span.filename { width: 60px; }
+  .profile_cont .info .profile_picture div.uploader span.action { width: 65px; text-overflow: ellipsis; }
+  .profile_cont .info .profile_picture div.uploader input { width: 150px; } }
+@media (min-width: 768px) and (max-width: 979px) {  .profile_cont .info .profile_picture div.uploader { width: 100px; }
+  .profile_cont .info .profile_picture div.uploader span.filename { width: 38px; }
+  .profile_cont .info .profile_picture div.uploader span.action { width: 39px; text-overflow: ellipsis; }
+  .profile_cont .info .profile_picture div.uploader input { width: 100px; }
+  .profile_cont .details label, .profile_cont .details input { font-size: 12px; }
+  .profile_cont .details .form-horizontal .control-label { width: 100%; text-align: left; }
+  .profile_cont .details .form-horizontal .controls { margin-left: 0; }
+  .profile_cont .details .form-horizontal .form-actions { padding-left: 0; }
+  .profile_cont section { padding: 18px; } }
+@media (min-width: 980px) {}
+@media (min-width: 980px) and (max-width: 1200px) {  .profile_cont .info .profile_picture div.uploader { width: 150px; }
+  .profile_cont .info .profile_picture div.uploader span.filename { width: 60px; }
+  .profile_cont .info .profile_picture div.uploader span.action { width: 65px; text-overflow: ellipsis; }
+  .profile_cont .info .profile_picture div.uploader input { width: 150px; } }
+@media (max-width: 979px) { body { padding-top: 0; }
+}
+
+/* common.css */
+div.selector,div.selector span,div.checker span,div.uploader,div.uploader span.action{background-repeat:no-repeat;-webkit-font-smoothing:antialiased;}
+.selector,.checker,.uploader,.selector *,.checker *,.uploader *{margin:0;padding:0;}
+
+div.selector{background-position:-483px -130px;line-height:26px;height:26px;}
+div.selector span{background-position:right 0px;height:26px;line-height:26px;}
+div.selector select{/* change these to adjust positioning of select element */top:0px;left:0px;}
+div.selector:active{background-position:-483px -156px;}
+div.selector:active span{background-position:right -26px;}
+div.selector:hover{background-position:-483px -182px;}
+div.selector:hover span{background-position:right -52px;}
+div.selector:hover:active{background-position:-483px -208px;}
+div.selector:hover:active span{background-position:right -78px;}
+
+div.checker{width:19px;height:19px;}
+div.checker input{width:19px;height:19px;}
+div.checker span{background-position:0px -260px;height:19px;width:19px;}
+div.checker:active span{background-position:-19px -260px;}
+div.checker:hover span{background-position:-38px -260px;}
+div.checker:active:hover span{background-position:-57px -260px;}
+
+div.uploader{/*background-position: 0px -297px;*/background-position:0px -325px;height:28px;}
+div.uploader span.action{background-position:right -409px;height:24px;line-height:24px;}
+div.uploader span.filename{height:24px;/* change this line to adjust positioning of filename area */margin:2px 0px 2px 2px;line-height:24px;}
+div.uploader:hover{background-position:0px -353px;}
+div.uploader:hover span.action{background-position:right -437px;}
+div.uploader:active span.action{background-position:right -465px;}
+div.uploader:focus:active span.action{background-position:right -493px;}
+
+div.selector{/*width: 190px;*/min-width:60px;font-size:12px;}
+div.selector select{/*min-width: 190px;*/min-width:50px;font-family: "Helvetica Neue ",Helvetica,Arial,sans-serif;font-size:12px;border:solid 1px #fff;}
+div.selector span{padding:0px 25px 0px 2px;}
+div.selector span{color:#666;/*width: 158px;*/text-shadow:0 1px 0 #fff;}
+
+
+div.uploader{width:190px;cursor:pointer;}
+div.uploader span.action{width:85px;text-align:center;text-shadow:#fff 0px 1px 0px;background-color:#fff;font-size:11px;font-weight:bold;}
+div.uploader span.filename{color:#777;width:82px;border-right:solid 1px #bbb;font-size:11px;}
+div.uploader input{width:190px;}
+
+.selector,.checker,.uploader{display:-moz-inline-box;display:inline-block;vertical-align:middle;zoom:1;*display:inline;}
+div.selector select:focus,.checker input:focus,.uploader input:focus{outline:0;}
+div.selector{position:relative;padding-left:10px;overflow:hidden;cursor:pointer;}
+div.selector span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+div.selector select{position:absolute;opacity:0;filter:alpha(opacity:0);height:25px;border:none;background:none;}
+
+div.checker{margin-right:5px;}
+div.checker{position:relative;}
+div.checker span{display:-moz-inline-box;display:inline-block;text-align:center;}
+div.checker input{opacity:0;filter:alpha(opacity:0);display:inline-block;background:none;}
+
+div.uploader{position:relative;overflow:hidden;cursor:default;}
+div.uploader span.action{float:left;display:inline;padding:2px 0px;overflow:hidden;cursor:pointer;}
+div.uploader span.filename{padding:0px 10px;float:left;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:default;}
+div.uploader input{opacity:0;filter:alpha(opacity:0);position:absolute;top:0;right:0;bottom:0;float:right;height:25px;border:none;cursor:default;}
+
+/* dropkick */
+.dk_container {
+  
+  background: #f8f8f8;
+  background: -moz-linear-gradient(top,  #f8f8f8 1%, #f3f3f3 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f8f8f8), color-stop(100%,#f3f3f3));
+  background: -webkit-linear-gradient(top,  #f8f8f8 1%,#f3f3f3 100%);
+  background: -o-linear-gradient(top,  #f8f8f8 1%,#f3f3f3 100%);
+  background: -ms-linear-gradient(top,  #f8f8f8 1%,#f3f3f3 100%);
+  background: linear-gradient(to bottom,  #f8f8f8 1%,#f3f3f3 100%);
+  -webkit-box-shadow: 0 0 3px #ffffff inset, 0 1px 1px rgba(0,0,0,0.1);
+  -moz-box-shadow   : 0 0 3px #ffffff inset, 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow        : 0 0 3px #ffffff inset, 0 1px 1px rgba(0,0,0,0.1);
+  line-height: 14px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+  .dk_container:focus {
+    outline: 0;
+  }
+  .dk_container a {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+/* Opens the dropdown and holds the menu label */
+.dk_toggle {
+  /**
+   * Help: Arrow image not appearing
+   * Try updating this property to your correct dk_arrows.png path
+   */
+  background-repeat: no-repeat;
+  background-position: 95% center;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 7px 0 7px 10px;
+  text-shadow: #fff 1px 1px 0;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -webkit-transition: border-color .5s;
+  -moz-transition: border-color .5s;
+  -o-transition: border-color .5s;
+  transition: border-color .5s;
+}
+.dk_toggle:hover {
+  border-color: #bbb;
+}
+
+.dk_options {
+  box-shadow: rgba(0, 0, 0, .2) 0 2px 8px;
+  -moz-box-shadow: rgba(0, 0, 0, .2) 0 2px 8px;
+  -webkit-box-shadow: rgba(0, 0, 0, .2) 0 2px 8px;
+  border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+}
+.dk_options a {
+  background-color: white;
+  border-bottom: 1px solid #ccc;   
+  padding: 4px 10px;
+  color: #333;
+}
+.dk_options li:last-child a {
+  border-bottom: none;
+}
+.dk_options a:hover,
+.dk_option_current a {    
+  background: #444445;
+  background: -moz-linear-gradient(top,  #444445 0%, #373737 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#444445), color-stop(100%,#373737));
+  background: -webkit-linear-gradient(top,  #444445 0%,#373737 100%);
+  background: -o-linear-gradient(top,  #444445 0%,#373737 100%);
+  background: -ms-linear-gradient(top,  #444445 0%,#373737 100%);
+  background: linear-gradient(to bottom,  #444445 0%,#373737 100%);
+  border-bottom-color: #444445;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: rgba(0, 0, 0, .5) 0 1px 0;
+}
+
+/* Inner container for options, this is what makes the scrollbar possible. */
+.dk_options_inner {
+  border: 1px solid #bbb;
+  border-bottom-width: 2px;
+  border-bottom-color: #ccc;
+  color: #333;
+  max-height: 250px;
+  margin: 0;
+  text-shadow: #fff 0 1px 0;
+  border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+}
+
+/* Set a max-height on the options inner */
+.dk_options_inner
+ {
+  max-height: 250px;
+}
+
+.dk_container {
+  display: none;
+  float: left;
+  position: relative;
+}
+
+.dk_container a {
+  outline: 0;
+}
+
+.dk_toggle {
+  display: -moz-inline-stack;
+  display: inline-block;
+  *display: inline;
+  position: relative;
+  zoom: 1;
+  top: 0;
+}
+
+.dk_options {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 100%;  
+  background-color: #fff;
+}
+.dk_options a,
+.dk_options a:link,
+.dk_options a:visited {
+  display: block;
+}
+.dk_options_inner {
+  overflow: auto;
+  position: relative;
+}

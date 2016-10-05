@@ -168,7 +168,7 @@ ul.alert-dropdown {
 }
 .thumb img {
     display: inline-block;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
 }
 
 
@@ -183,12 +183,19 @@ ul.alert-dropdown {
 .placeholders h4 {
     margin-bottom: 0;
 }
+.placeholder {
+    margin-bottom: 20px;
+}
+.placeholder img {
+    display: inline-block;
+    border-radius: 50%;
+}
 .big-thumb {
     margin-bottom: 20px;
 }
 .big-thumb img {
     display: inline-block;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
 }
 
 /*

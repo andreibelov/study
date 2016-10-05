@@ -1,7 +1,9 @@
-<div class="col-sm-3 col-md-2 sidebar">
+<%@ taglib prefix="m" uri="/WEB-INF/taglib.tld"
+%><div class="col-sm-3 col-md-2 sidebar">
     <div class="thumb">
-        <img src="https://pp.vk.me/c630222/v630222188/3cb85/YfM5u7D9VEg.jpg" class="img-responsive" alt="Generic placeholder thumbnail" height="200" width="200">
-        <h4>John Smith</h4>
+        <img src="${pageContext.request.contextPath}/static/img/cool!.png"
+             class="img-responsive" alt="Generic placeholder thumbnail" width="200" height="200">
+        <h4><m:fullName /></h4>
         <span class="text-muted">Edit prifile</span>
 
     </div>

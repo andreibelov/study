@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * @link http://vk.com/andrei.belov
  */
 @FunctionalInterface
-public interface ServiceMethod {
+interface ServiceMethod {
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException;
 }

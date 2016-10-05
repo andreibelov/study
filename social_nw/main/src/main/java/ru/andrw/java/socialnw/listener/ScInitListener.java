@@ -1,6 +1,10 @@
 package ru.andrw.java.socialnw.listener;
 
 import com.google.gson.Gson;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ru.andrw.java.socialnw.dao.impl.list.ListDaoFactory;
 
 import javax.servlet.ServletContext;
@@ -17,21 +21,32 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class ScInitListener implements ServletContextListener {
 
+    private final Logger logger = LoggerFactory
+            .getLogger(ScInitListener.class);
     private final String DAO_FACTORY = "daoFactory";
-    private final String GSON = "gson";
     private final String PROJECT_NAME = "projectName";
 
+    static public final String TEST_GROUP = "TEST_GROUP";
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-
         ServletContext servletContext = sce.getServletContext();
         servletContext.setAttribute(DAO_FACTORY, new ListDaoFactory());
-        servletContext.setAttribute(GSON, new Gson());
-        servletContext.setAttribute(PROJECT_NAME, "Vault 101");
+        servletContext.setAttribute(PROJECT_NAME, "VAULT-TEC");
+
+        ClassLoader ctcc = Thread.currentThread().getContextClassLoader();
+        logger.debug("Classload hashcode is " + ctcc.hashCode());
+        logger.debug("Initializing for ServletContext [" +
+                servletContext.getServletContextName() + "]");
+
     }
 
     @Override
-    public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        System.out.println("Shutting down!");
+    public void contextDestroyed(ServletContextEvent sce) {
+        ServletContext servletContext = sce.getServletContext();
+        logger.debug("Shutting down ServletContext [" +
+                servletContext.getServletContextName() + "]");
+
+        ClassLoader ctcc = Thread.currentThread().getContextClassLoader();
+        logger.debug("Classload hashcode is " + ctcc.hashCode());
     }
 }

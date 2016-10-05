@@ -15,10 +15,14 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/static/css/dashboard.css" rel="stylesheet">
+    <c:if test="${not empty requestScope.section}">
+        <link href="${pageContext.request.contextPath}/static/css/${requestScope.section.cssFile}" rel="stylesheet">
+    </c:if>
+
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -43,30 +47,26 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Users <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Export</a></li>
-            </ul>
+            <!-- Admin sidebar -->
+            <jsp:include page="/WEB-INF/include/admin/admin-sidebar.jsp" />
+            <!-- end Adminsidebar -->
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
-            <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                </div>
+
+            <c:choose>
+                <c:when test="${not empty requestScope.admin_default}">
+                    <jsp:include page="/WEB-INF/include/admin/admin-console.jsp" />
+                </c:when>
+            </c:choose>
+
+            <h2 class="sub-header" id="sectionName">${requestScope.section.sectionName}</h2>
+            <div id="sec1" class="row" style="border-bottom: 1px solid #eee;">
+                <!-- Section content -->
+                <c:if test="${not empty requestScope.section}">
+                    <jsp:include page="/WEB-INF/include/admin/${requestScope.section.jspFile}" />
+                </c:if>
+                <!-- end Section content -->
             </div>
-            <h2 class="sub-header" id="sectionName">${requestScopeScope.sectionName}</h2>
-            <!-- Section content -->
-            <div id="sec1" class="table-responsive">
-            </div>
-            <!-- end Section content -->
         </div>
     </div>
 </div>
@@ -74,9 +74,13 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/dashboard.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+<c:if test="${not empty requestScope.section}">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/${requestScope.section.jsFile}"></script>
+</c:if>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="${pageContext.request.contextPath}/static/js/ie10-viewport-bug-workaround.js"></script>
 </body>

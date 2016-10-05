@@ -40,19 +40,17 @@ class ListUserProfileDao implements UserProfileDao {
     @Override
     public List<UserProfile> getUserProfilesSubList(Integer offset, Integer limit)
             throws DaoException {
-        Integer size = userProfileList.size();
         Integer result =
                 Stream.of(offset,limit)
                         .filter(Objects::nonNull)
                         .filter(e -> e >= 0)
-                        .filter(e -> e < size)
-                        .collect(Collectors.summingInt(Integer::intValue));
-        if (result != null && result.compareTo(size) <=0)
+                        .collect(Collectors.toList()).size();
+        if (result == 2)
         return userProfileList.stream()
                 .skip(offset)
                 .limit(limit)
                 .collect(Collectors.toList());
-        else throw new DaoException("Provided limits is out of bound");
+        else throw new DaoException("Provided limits is incorrect");
     }
 
     @Override
@@ -66,29 +64,17 @@ class ListUserProfileDao implements UserProfileDao {
     }
 
     @Override
-    public UserProfile searchUserProfileByEmail(String email) throws DaoException {
-        Optional<UserProfile> match
-                = userProfileList.stream()
-                .filter(e -> e.getEmail().equals(email))
-                .findFirst();
-        if (match.isPresent()) {
-            return match.get();
-        } else {
-            throw new DaoException("The UserProfile with " + email + " not found");
-        }
+    public Optional<UserProfile> searchUserProfileByEmail(String email) {
+        return userProfileList.stream()
+        .filter(e -> e.getEmail().equals(email))
+        .findFirst();
     }
 
     @Override
-    public UserProfile getUserProfileById(Long id) throws DaoException {
-        Optional<UserProfile> match
-                = userProfileList.stream()
+    public Optional<UserProfile> getUserProfileById(Long id) {
+        return userProfileList.stream()
                 .filter(e -> e.getId().equals(id))
                 .findFirst();
-        if (match.isPresent()) {
-            return match.get();
-        } else {
-            throw new DaoException("The UserProfile id " + id + " not found");
-        }
     }
 
     @Override

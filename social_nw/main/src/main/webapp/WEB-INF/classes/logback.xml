@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-
-    <property name="DEV_HOME" value="${catalina.home}/logs/" />
-
+<configuration debug="true">
+    <property name="DEV_HOME" value="${catalina.home}/logs" />
+    <property name="application-name" value="socialNW" />
+    <contextName>${application-name}</contextName>
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+    <appender name="CYCLIC"
+              class="ch.qos.logback.core.read.CyclicBufferAppender">
+        <MaxSize>512</MaxSize>
+    </appender>
     <appender name="FILE-AUDIT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${DEV_HOME}/socialNW_debug.log</file>
+        <file>${DEV_HOME}/${application-name}.log</file>
         <!-- encoders are  by default assigned the type
             ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
         </encoder>
-
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${DEV_HOME}/archived/socialNW_debug.%d{yyyy-MM-dd}.%i.log
+            <fileNamePattern>${DEV_HOME}/archived/${application-name}.%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -26,6 +30,7 @@
     <logger name="ru.andrw.java.socialnw" level="debug"
             additivity="false">
         <appender-ref ref="FILE-AUDIT" />
+        <appender-ref ref="CYCLIC"/>
     </logger>
 
     <root level="error">

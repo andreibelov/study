@@ -16,16 +16,17 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by john on 9/26/2016.
- *
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
 public class ProfileService {
 
-    private static final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.service.ProfileService");
+    private static final Logger logger = LoggerFactory
+            .getLogger("ru.andrw.java.socialnw.service.ProfileService");
     private static final Map<String, ServiceMethod> methods;
     private static UserProfileDao profileDao;
 
@@ -33,6 +34,7 @@ public class ProfileService {
         methods = new HashMap<>();
         methods.put("getform", ProfileService::getEditForm);
         methods.put("list", ProfileService::listProfiles);
+        methods.put("append", ProfileService::listAppend);
         methods.put("add",ProfileService::addUserProfile);
         methods.put("edit",ProfileService::editUserProfile);
         methods.put("remove",ProfileService::removeUserProfile);
@@ -47,6 +49,34 @@ public class ProfileService {
         if(serviceMethod != null) {
             serviceMethod.execute(request,response);
         } else logger.error("Requested method unknown");
+    }
+
+    private static void listAppend(HttpServletRequest req,
+                                   HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        String s_offset = req.getParameter("offset");
+        String s_limit = req.getParameter("limit");
+        Integer offset, limit;
+        if(s_offset != null && s_limit != null){
+            offset = Integer.valueOf(s_offset);
+            limit = Integer.valueOf(s_limit);
+        } else {
+            offset = 0;
+            limit = 0;
+        }
+        try {
+            String nextJSP = "/WEB-INF/include/admin/profiles-rows.jsp";
+
+            List<UserProfile> profileList = profileDao
+                    .getUserProfilesSubList(offset,limit);
+            req.setAttribute("profileList",profileList);
+            req.getServletContext()
+                    .getRequestDispatcher(nextJSP)
+                    .include(req, resp);
+        } catch (DaoException e) {
+            logger.error("Limits out of bounds",e);
+        }
     }
 
     public static void listProfiles(HttpServletRequest req,
@@ -64,7 +94,7 @@ public class ProfileService {
             limit = 30;
         }
         try {
-            String nextJSP = "/WEB-INF/include/profiles.jsp";
+            String nextJSP = "/WEB-INF/include/admin/profiles-table.jsp";
 
             List<UserProfile> profileList = profileDao
                     .getUserProfilesSubList(offset,limit);
@@ -84,18 +114,16 @@ public class ProfileService {
         String s = req.getParameter("userProfileId");
         if (s != null){
             Long userProfileId = Long.valueOf(s);
-            try {
-                UserProfile profile = profileDao.getUserProfileById(userProfileId);
-                req.setAttribute("userProfileId",userProfileId);
-                req.setAttribute("action","edit");
-                req.setAttribute("profile",profile);
-            } catch (DaoException e) {
-                logger.error(e.getMessage(),e);
-            }
+            Optional<UserProfile> profile = profileDao.getUserProfileById(userProfileId);
 
+            if (profile.isPresent()) {
+                req.setAttribute("userProfileId", userProfileId);
+                req.setAttribute("action", "edit");
+                req.setAttribute("profile", profile.get());
+            }
         };
 
-        String nextJSP = "/WEB-INF/include/profile-edit.jsp";
+        String nextJSP = "/WEB-INF/include/admin/profile-edit.jsp";
         req.getServletContext()
                 .getRequestDispatcher(nextJSP)
                 .include(req, resp);
@@ -104,7 +132,7 @@ public class ProfileService {
     private static void addUserProfile(HttpServletRequest req,
                                        HttpServletResponse resp)
             throws ServletException, IOException {
-        String pattern = "MM/dd/yyyy";
+        String pattern = "dd-mm-yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         UserProfile profile = null;
         try {
@@ -125,7 +153,7 @@ public class ProfileService {
         String nextJSP;
         try {
             userProfileId = profileDao.addUserProfile(profile);
-            nextJSP = "/WEB-INF/include/profiles.jsp";
+            nextJSP = "/WEB-INF/include/admin/profiles-table.jsp";
             req.setAttribute("message","User added successfully");
             req.setAttribute("profileList", profileDao.getUserProfilesSubList(0,30));
         } catch (DaoException e) {
@@ -134,7 +162,7 @@ public class ProfileService {
             req.setAttribute("message","User not updated!");
             req.setAttribute("action","edit");
             req.setAttribute("profile",profile);
-            nextJSP = "/WEB-INF/include/profile-edit.jsp";
+            nextJSP = "/WEB-INF/include/admin/profile-edit.jsp";
         }
         req.getServletContext()
                 .getRequestDispatcher(nextJSP)
@@ -145,7 +173,7 @@ public class ProfileService {
                                         HttpServletResponse resp)
             throws ServletException, IOException {
         Long userProfileId = Long.valueOf(req.getParameter("userProfileId"));
-        String pattern = "MM/dd/yyyy";
+        String pattern = "dd-mm-yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         UserProfile profile = null;
         try {
@@ -166,7 +194,7 @@ public class ProfileService {
         String nextJSP;
         try {
             profileDao.updateUserProfile(profile);
-            nextJSP = "/WEB-INF/include/profiles.jsp";
+            nextJSP = "/WEB-INF/include/admin/profiles-table.jsp";
             req.setAttribute("message","User updated successfully");
             req.setAttribute("profileList", profileDao.getUserProfilesSubList(0,30));
         } catch (DaoException e) {
@@ -175,7 +203,7 @@ public class ProfileService {
             req.setAttribute("message","User not updated!");
             req.setAttribute("action","edit");
             req.setAttribute("profile",profile);
-            nextJSP = "/WEB-INF/include/profile-edit.jsp";
+            nextJSP = "/WEB-INF/include/admin/profile-edit.jsp";
         }
         req.getServletContext()
                 .getRequestDispatcher(nextJSP)

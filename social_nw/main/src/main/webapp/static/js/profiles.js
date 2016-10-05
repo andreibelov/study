@@ -1,17 +1,17 @@
 $(document).ready(function() {
 
-    var pathname = document.location.pathname.substring(1);
-    var parts = pathname.split(/\//);
-    var myurl = "/"+parts[0]+"/profile";
+    var path = document.location.pathname.substring(1).split(/\//)[0];
+    var myurl = "/"+path+"/profile";
     var offset = 0;
-    var limit = 3;
+    var limit = 2;
 
     load(offset,limit);
 
     var section = $("#sec1");
 
 
-    section.delegate( "table > tbody > tr > td > a#remove", "click", function() {
+    section.delegate( "table > tbody > tr > td > a#remove", "click", function(event) {
+        event.stopPropagation();
         var row = $(this).parent().parent();
         removeProfile(row);
     });
@@ -30,21 +30,27 @@ $(document).ready(function() {
     });
 
     section.delegate( "table > tbody > tr#loadMore", "click", function() {
-        offset = 0;
-        limit = 6;
-        load(offset,limit)
+        offset += parseInt(limit);
+        loadMore(offset,limit)
     });
 
     section.delegate( "#accept", "click", function() {
-
-        $.post(myurl, $("#editor").serialize())
-            .done(function(result) {
-                section.empty();
-                section.append(result);
-            });
-
+        saveProfile();
     });
 
+    section.delegate( "input[type=text].date", "focusin", function(){
+        $(this).datepicker({
+                               format: "dd-mm-yyyy",
+                               orientation: "bottom auto"
+                           });
+    });
+
+    function saveProfile() {
+        $.post(myurl,$("form#editor").serialize())
+            .done(function(result) {
+            section.html(result);
+        });
+    }
 
     function load(offset, limit) {
 
@@ -58,6 +64,19 @@ $(document).ready(function() {
            }
         }).done(function(result) {
             section.html(result);
+        });
+    }
+    function loadMore(offset, limit) {
+        $.ajax({
+           url: myurl,
+           type: 'POST',
+           data: {
+               action: "append",
+               offset: offset,
+               limit: limit
+           }
+        }).done(function(result) {
+            $(result).insertBefore(("tr#loadMore"));
         });
     }
 
@@ -86,6 +105,7 @@ $(document).ready(function() {
             section.html(result);
         });
     }
+
     function editProfile(row) {
         var profileId = row.data('target');
         $.ajax({

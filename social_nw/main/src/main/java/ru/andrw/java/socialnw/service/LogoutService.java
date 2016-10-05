@@ -17,9 +17,11 @@ import java.io.IOException;
  */
 public class LogoutService {
 
-    private static final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.service.LogoutService");
+    private static final Logger logger = LoggerFactory
+            .getLogger("ru.andrw.java.socialnw.service.LogoutService");
 
-    public static void onLogOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public static void onLogOut(HttpServletRequest request,
+                                HttpServletResponse response) throws IOException {
         //invalidate the session if exists
         HttpSession session = request.getSession(false);
         if(session != null){

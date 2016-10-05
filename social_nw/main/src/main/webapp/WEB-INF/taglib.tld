@@ -8,14 +8,14 @@
     <uri>/WEB-INF/taglib.tld</uri>
 
     <tag>
-        <name>show</name>
-        <tag-class>ru.andrw.java.socialnw.util.UserNameTag</tag-class>
+        <name>fullName</name>
+        <tag-class>ru.andrw.java.socialnw.util.CustomTag</tag-class>
         <body-content>empty</body-content>
-        <elexprvalue>true</elexprvalue>
         <attribute>
             <name>fullName</name>
-            <required>true</required>
+            <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
+
 </taglib>

@@ -11,6 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
+import ru.andrw.java.socialnw.service.AdminService;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * Created by john on 9/25/2016.
@@ -21,7 +30,10 @@ import java.io.IOException;
 @WebServlet(name = "AdminServlet", urlPatterns = {"/admin"})
 public class Admin extends HttpServlet {
 
-    private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Home");
+    private final Logger logger = LoggerFactory
+            .getLogger("ru.andrw.java.socialnw.servlet.Home");
+
+
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -32,11 +44,7 @@ public class Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-
-
-        request.setAttribute("pageTitle", "Dashboard");
-        request.getRequestDispatcher("/WEB-INF/jsp/dashboard.jsp").include(request, response);
+        AdminService.doAction(request,response);
     }
 
     @Override
