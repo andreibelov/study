@@ -24,7 +24,6 @@
 
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" autocomplete="off" id="inputPassword" class="form-control" placeholder="Password" required />
-
         <c:choose>
             <c:when test="${user.accessLevel == 0}">
                 <c:set value="selected" var="selPos0"/>
@@ -39,7 +38,6 @@
                 <c:set value="selected" var="selPos3"/>
             </c:otherwise>
         </c:choose>
-
         <label for="accessLevel" class="control-label col-xs-4">Access Level:</label>
         <select class="form-control" id="accessLevel" name="accessLevel">
             <option selected ${selPos3}>Select level</option>

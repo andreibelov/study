@@ -33,9 +33,9 @@ public class CustomTag extends TagSupport {
             .getLogger("ru.andrw.java.socialnw.util.CustomTag");
 
     /**
-     * Processing of the start tag that writes list of users to the
-     * JspWriter's buffer or, if no buffer is used, directly to the
-     * underlying writer.
+     * Processing of the start tag that writes data to the
+     * JspWriter's buffer or, if no buffer is used,
+     * directly to the underlying writer.
      * @return SKIP_BODY
      */
     @Override

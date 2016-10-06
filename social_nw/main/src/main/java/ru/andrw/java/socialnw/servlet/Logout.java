@@ -21,19 +21,26 @@ import java.io.IOException;
 @WebServlet(name = "LogoutServlet", urlPatterns = {"/logout"})
 public class Logout extends HttpServlet {
 
-    private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Logout");
+    private final Logger logger = LoggerFactory
+            .getLogger("ru.andrw.java.socialnw.servlet.Logout");
 
-    private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void logout(HttpServletRequest request,
+                        HttpServletResponse response)
+            throws ServletException, IOException {
         LogoutService.onLogOut(request,response);
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws ServletException, IOException {
         logout(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
         logout(request, response);
     }
 }

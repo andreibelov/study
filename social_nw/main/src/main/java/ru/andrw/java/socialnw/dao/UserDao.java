@@ -22,11 +22,12 @@ public interface UserDao {
      */
     Optional<User> findUser(String login, String password) throws DaoException;
 
-    public void addUser(User user) throws DaoException;
+    public Long addUser(User user) throws DaoException;
     public void deleteUser(Long userId) throws DaoException;
     public void changePassword(Long userId, String pass) throws DaoException;
     public void updateUser(User user) throws DaoException;
     public List<User> getUsersSubList(Integer offset, Integer limit) throws DaoException;
     public Optional<User> getUserById(Long userId) throws DaoException;
+    public Optional<User> getUserByLogin(String login) throws DaoException;
 }
 

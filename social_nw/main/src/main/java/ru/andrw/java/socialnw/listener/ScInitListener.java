@@ -32,10 +32,9 @@ public class ScInitListener implements ServletContextListener {
         ServletContext servletContext = sce.getServletContext();
         servletContext.setAttribute(DAO_FACTORY, new ListDaoFactory());
         servletContext.setAttribute(PROJECT_NAME, "VAULT-TEC");
-
         ClassLoader ctcc = Thread.currentThread().getContextClassLoader();
-        logger.debug("Classload hashcode is " + ctcc.hashCode());
-        logger.debug("Initializing for ServletContext [" +
+        logger.info("Classload hashcode is " + ctcc.hashCode());
+        logger.info("Initializing for ServletContext [" +
                 servletContext.getServletContextName() + "]");
 
     }
@@ -43,10 +42,10 @@ public class ScInitListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         ServletContext servletContext = sce.getServletContext();
-        logger.debug("Shutting down ServletContext [" +
+        logger.warn("Shutting down ServletContext [" +
                 servletContext.getServletContextName() + "]");
 
         ClassLoader ctcc = Thread.currentThread().getContextClassLoader();
-        logger.debug("Classload hashcode is " + ctcc.hashCode());
+        logger.info("Classload hashcode is " + ctcc.hashCode());
     }
 }

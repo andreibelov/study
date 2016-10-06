@@ -18,4 +18,19 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>log</name>
+        <tag-class>ru.andrw.java.socialnw.util.LogbackTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>errorData</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>exception</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
 </taglib>

@@ -21,7 +21,7 @@
  -->
 <Server port="8005" shutdown="SHUTDOWN">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
-  <!-- Security listener. Documentation at /docs/config/listeners.html 
+  <!-- Security listener. Documentation at /docs/config/listeners.html
   <Listener className="org.apache.catalina.security.SecurityListener" />
   -->
   <!--APR library loader. Documentation at /docs/apr.html -->
@@ -80,13 +80,13 @@
          This connector uses the NIO implementation with the JSSE engine. When
          using the JSSE engine, the JSSE configuration attributes must be used.
     -->
-    
+
     <Connector protocol="org.apache.coyote.http11.Http11NioProtocol"
-           port="8443" maxThreads="200"
-           scheme="https" secure="true" SSLEnabled="true"
-           keystoreFile="${user.home}/.keystore" keystorePass="s3cret"
-           clientAuth="false" sslProtocol="TLS"/>
-    
+               port="8443" maxThreads="200"
+               scheme="https" secure="true" SSLEnabled="true"
+               keystoreFile="${user.home}/.keystore" keystorePass="s3cret"
+               clientAuth="false" sslProtocol="TLS"/>
+
     <!-- Define a SSL/TLS HTTP/1.1 Connector on port 8443 with HTTP/2
          This connector uses the APR/native implementation. When using the
          APR/native implementation or the OpenSSL engine with NIO or NIO2 then
@@ -119,7 +119,7 @@
     <Engine name="Catalina" defaultHost="localhost" jvmRoute="jvm1">
     -->
     <Engine name="Catalina" defaultHost="localhost">
-	
+
       <!--For clustering, please take a look at documentation at:
           /docs/cluster-howto.html  (simple how to)
           /docs/config/cluster.html (reference documentation) -->
@@ -153,21 +153,21 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-	      <!-- Mark HTTP as HTTPS forward from SSL termination at nginx proxy -->
-      <Valve className="org.apache.catalina.valves.RemoteIpValve"
-	internalProxies="127\.0\.[0-1]\.1"
-        remoteIpHeader="x-forwarded-for"
-        remoteIpProxiesHeader="x-forwarded-by"
-        protocolHeader="x-forwarded-proto"
+        <!-- Mark HTTP as HTTPS forward from SSL termination at nginx proxy -->
+        <Valve className="org.apache.catalina.valves.RemoteIpValve"
+               internalProxies="127\.0\.[0-1]\.1"
+               remoteIpHeader="x-forwarded-for"
+               remoteIpProxiesHeader="x-forwarded-by"
+               protocolHeader="x-forwarded-proto"
         />
       </Host>
-      <Host name="awndrw.ru" appBase="mywebapps" 
-      unpackWARS="true" autoDeploy="true">
-      <Alias>www.awndrw.ru</Alias>
+      <Host name="awndrw.ru" appBase="mywebapps"
+            unpackWARS="true" autoDeploy="true">
+        <Alias>www.awndrw.ru</Alias>
         <Valve className="org.apache.catalina.valves.RemoteIpValve"
-        remoteIpHeader="x-forwarded-for"
-        remoteIpProxiesHeader="x-forwarded-by"
-        protocolHeader="x-forwarded-proto"
+               remoteIpHeader="x-forwarded-for"
+               remoteIpProxiesHeader="x-forwarded-by"
+               protocolHeader="x-forwarded-proto"
         />
       </Host>
     </Engine>

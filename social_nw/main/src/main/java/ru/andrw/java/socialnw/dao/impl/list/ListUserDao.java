@@ -56,15 +56,22 @@ class ListUserDao implements UserDao {
     }
 
     @Override
+    public Optional<User> getUserByLogin(String login) throws DaoException {
+        return users.stream().filter(user -> login.equals(user.getLogin()))
+                .findAny();
+    }
+
+    @Override
     public Optional<User> findUser(String email, String pass) throws DaoException {
         return users.stream().filter(u -> u.getEmail().equals(email))
                 .findAny().filter(u -> u.getPassword().equals(pass));
     }
 
     @Override
-    public void addUser(User user) throws DaoException {
+    public Long addUser(User user) throws DaoException {
         if(!userValidator(user)) throw new DaoException();
         else users.add(user.setId(al.getAndIncrement()));
+        return user.getId();
     }
 
     private boolean userValidator(User user){

@@ -4,11 +4,19 @@ $(document).ready(function() {
     var myurl = "/"+path+"/profile";
     var offset = 0;
     var limit = 2;
-
-    load(offset,limit);
-
     var section = $("#sec1");
 
+    $.ajaxSetup({
+        url: myurl,
+        type: 'POST'
+    });
+    $(document).ajaxError(function(event, request, settings) {
+        if (request.getResponseHeader("Location") != null) {
+            window.location = request.getResponseHeader("Location");
+        }
+    });
+
+    load(offset,limit);
 
     section.delegate( "table > tbody > tr > td > a#remove", "click", function(event) {
         event.stopPropagation();
@@ -46,8 +54,9 @@ $(document).ready(function() {
     });
 
     function saveProfile() {
-        $.post(myurl,$("form#editor").serialize())
-            .done(function(result) {
+        $.ajax({
+            data: $("form#editor").serialize()
+        }).done(function(result) {
             section.html(result);
         });
     }
@@ -55,8 +64,6 @@ $(document).ready(function() {
     function load(offset, limit) {
 
         $.ajax({
-           url: myurl,
-           type: 'POST',
            data: {
                action: "list",
                offset: offset,
@@ -68,8 +75,6 @@ $(document).ready(function() {
     }
     function loadMore(offset, limit) {
         $.ajax({
-           url: myurl,
-           type: 'POST',
            data: {
                action: "append",
                offset: offset,
@@ -83,8 +88,6 @@ $(document).ready(function() {
     function removeProfile(row) {
         var profileId = row.data('target');
         $.ajax({
-            url: myurl,
-            type: 'POST',
             data: {
                 action: "remove",
                 userProfileId: profileId
@@ -96,8 +99,6 @@ $(document).ready(function() {
 
     function addNew() {
         $.ajax({
-            url: myurl,
-            type: 'POST',
             data: {
                 action: "getform"
             }
@@ -109,12 +110,17 @@ $(document).ready(function() {
     function editProfile(row) {
         var profileId = row.data('target');
         $.ajax({
-            url: myurl,
-            type: 'POST',
             data: {
                 action: "getform",
                 userProfileId: profileId
             }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+            if (jqXHR.getResponseHeader('Location') != null)
+            {
+                window.Location= jqXHR.getResponseHeader('Location');
+            }
+            // other conditions in failure situation.
         }).done(function(result) {
             section.html(result);
         });

@@ -33,8 +33,6 @@ public class Admin extends HttpServlet {
     private final Logger logger = LoggerFactory
             .getLogger("ru.andrw.java.socialnw.servlet.Home");
 
-
-
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);

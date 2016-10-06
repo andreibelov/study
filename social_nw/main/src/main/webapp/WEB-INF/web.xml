@@ -4,6 +4,7 @@
          version="2.4">
     <display-name>My Web App</display-name>
     <error-page>
-        <location>/error-page.jsp</location>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error</location>
     </error-page>
 </web-app>

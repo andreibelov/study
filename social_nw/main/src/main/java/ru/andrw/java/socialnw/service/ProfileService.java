@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by john on 9/26/2016.
@@ -26,12 +27,11 @@ import java.util.Optional;
 public class ProfileService {
 
     private static final Logger logger = LoggerFactory
-            .getLogger("ru.andrw.java.socialnw.service.ProfileService");
-    private static final Map<String, ServiceMethod> methods;
+            .getLogger(ProfileService.class);
+    private static final Map<String, ServiceMethod> methods = new ConcurrentHashMap<>();;
     private static UserProfileDao profileDao;
 
     static {
-        methods = new HashMap<>();
         methods.put("getform", ProfileService::getEditForm);
         methods.put("list", ProfileService::listProfiles);
         methods.put("append", ProfileService::listAppend);
@@ -123,7 +123,7 @@ public class ProfileService {
             }
         };
 
-        String nextJSP = "/WEB-INF/include/admin/profile-edit.jsp";
+        String nextJSP = "/WEB-INF/include/forms/profile-edit.jsp";
         req.getServletContext()
                 .getRequestDispatcher(nextJSP)
                 .include(req, resp);
@@ -162,7 +162,7 @@ public class ProfileService {
             req.setAttribute("message","User not updated!");
             req.setAttribute("action","edit");
             req.setAttribute("profile",profile);
-            nextJSP = "/WEB-INF/include/admin/profile-edit.jsp";
+            nextJSP = "/WEB-INF/include/forms/profile-edit.jsp";
         }
         req.getServletContext()
                 .getRequestDispatcher(nextJSP)
@@ -203,7 +203,7 @@ public class ProfileService {
             req.setAttribute("message","User not updated!");
             req.setAttribute("action","edit");
             req.setAttribute("profile",profile);
-            nextJSP = "/WEB-INF/include/admin/profile-edit.jsp";
+            nextJSP = "/WEB-INF/include/forms/profile-edit.jsp";
         }
         req.getServletContext()
                 .getRequestDispatcher(nextJSP)

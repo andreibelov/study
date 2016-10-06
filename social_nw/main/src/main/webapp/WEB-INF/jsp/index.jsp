@@ -44,16 +44,23 @@
     <!-- end Fixed navbar -->
     <div class="container-fluid">
         <div class="row">
-            <!-- Side Menu Items -->
-            <jsp:include page="/WEB-INF/include/sidebar.jsp" />
-            <!-- ./Side Menu Items -->
-            <!-- Main content -->
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <c:if test="${not empty requestScope.section}">
-                    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/${requestScope.section.jsFile}"></script>
-                </c:if>
-                <jsp:include page="${requestScope.includeSection}" />
-            </div>
+        <c:choose>
+            <c:when test="${not empty requestScope.logindata}">
+                    <jsp:include page="/WEB-INF/include/${requestScope.section.jspFile}" />
+            </c:when>
+            <c:otherwise>
+                    <!-- Side Menu Items -->
+                    <jsp:include page="/WEB-INF/include/sidebar.jsp" />
+                    <!-- ./Side Menu Items -->
+                    <!-- Main content -->
+                    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                        <c:if test="${not empty requestScope.section}">
+                            <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/${requestScope.section.jsFile}"></script>
+                        </c:if>
+                        <jsp:include page="${requestScope.includeSection}" />
+                    </div>
+            </c:otherwise>
+        </c:choose>
         </div>
     </div>
 </div>

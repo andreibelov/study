@@ -34,20 +34,20 @@ public class SecurityFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         HttpSession session = httpServletRequest.getSession();
-
+        String uri = httpServletRequest.getRequestURI()
+                .substring(httpServletRequest.getContextPath().length());
         MDC.put(Constants.SESSION_ID_MDC_KEY, session.getId());
+        MDC.put("ip",request.getRemoteAddr());
         updateMDCValues(session);
-        if (session.getAttribute("user") != null) chain.doFilter(request, response);
+        if (session.getAttribute("user") != null ||
+                uri.startsWith("/static/") ||
+                uri.equals("/login")) chain.doFilter(request, response);
         else {
-            session.setAttribute(Constants.USERID_SESSION_KEY, "anonimous"); // Put userid in a session.
-            session.setAttribute(Constants.EMAIL_SESSION_KEY, "anonimous"); // Put email in a session.
-            String uri = httpServletRequest.getRequestURI()
-                    .substring(httpServletRequest.getContextPath().length());
-            if (uri.equals("/login")) chain.doFilter(request,response);
-            else if(uri.startsWith("/static/")) request.getServletContext()
-                    .getNamedDispatcher("default").forward(request, response);
-            else httpServletResponse // Not logged in, show login page.
-                        .sendRedirect(httpServletRequest.getContextPath() + "/login");
+            session.setAttribute(Constants.USERID_SESSION_KEY, "anon"); // Put userid in a session.
+            session.setAttribute(Constants.EMAIL_SESSION_KEY, "anon@domain.com"); // Put email in a session.
+            updateMDCValues(session);
+            // Not logged in, show login page.
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
         }
         MDC.clear();
     }
@@ -55,11 +55,13 @@ public class SecurityFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException{
         this.filterConfig = filterConfig;
+        logger.info("SecurityFilter initialised");
     }
 
     @Override
     public void destroy(){
         filterConfig = null;
+        logger.info("SecurityFilter destroyed");
     }
 
     private void updateMDCValues(HttpSession session) {

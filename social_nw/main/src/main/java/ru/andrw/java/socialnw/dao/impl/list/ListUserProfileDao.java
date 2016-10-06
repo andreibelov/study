@@ -100,7 +100,6 @@ class ListUserProfileDao implements UserProfileDao {
                 .filter(p -> p.getEmail() != null)
                 .filter(p -> p.getName() != null)
                 .filter(p -> p.getUserid() != null)
-                .filter(p -> p.getBirthDate() != null)
                 .isPresent();
     }
     @Override

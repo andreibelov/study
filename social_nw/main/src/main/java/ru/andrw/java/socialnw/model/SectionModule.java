@@ -31,6 +31,8 @@ public class SectionModule implements Serializable {
     // Properties ----------------------------------------------------------------
 
     private String sectionName;
+    private String pageTitle;
+    private String data;
     private String jspFile;
     private String cssFile;
     private String jsFile;

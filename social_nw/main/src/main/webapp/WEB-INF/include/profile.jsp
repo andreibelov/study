@@ -1,5 +1,5 @@
-<div class="main_content row-fluid"><div class="widget profile_cont">
-
+<div class="main_content row-fluid">
+    <div class="widget profile_cont">
     <section class="group">
         <div class="info">
             <img src="profile_files/1.jpg" alt="Profile picture">
@@ -147,5 +147,5 @@
 
         </div>
     </section>
-</div>
+    </div>
 </div><!--/row-->

@@ -20,7 +20,7 @@ import java.io.IOException;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home"})
+@WebServlet(name = "HomeServlet", urlPatterns = {"/"})
 public class Home extends HttpServlet {
 
     private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Home");
@@ -34,6 +34,10 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String uri = request.getRequestURI()
+                .substring(request.getContextPath().length());
+
         request.setAttribute("pageTitle", "Welcome!");
         request.getRequestDispatcher("/WEB-INF/jsp/welcome.jsp").include(request, response);
     }

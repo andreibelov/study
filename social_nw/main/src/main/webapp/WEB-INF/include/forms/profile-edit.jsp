@@ -8,11 +8,10 @@
 </c:if>
 <div class="col-sm-12 col-md-8">
     <form id="editor" class="form-horizontal"
-          action="${pageContext.request.contextPath}/profile" method="post"  role="form" data-toggle="validator" >
+          action="${pageContext.request.contextPath}/profile" method="post"  role="form" data-toggle="validator">
         <c:if test ="${empty requestScope.action}">
             <c:set var="action" value="add"/>
         </c:if>
-
         <input type="hidden" id="action" name="action" value="${action}">
         <input type="hidden" id="userProfileId" name="userProfileId" value="${profile.id}">
         <div class="form-group">

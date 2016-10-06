@@ -105,8 +105,9 @@ public class LastLog extends HttpServlet {
         UrlCssBuilder cssBuilder = new UrlCssBuilder();
         cssBuilder.setUrl("/main/static/css/pk.css");
         layout.setCssBuilder(cssBuilder);
-        layout.setPattern("%d%thread%level%logger{25}%mdc{"
-                + Constants.USERID_MDC_KEY + "}%msg");
+//        layout.setPattern("%d%thread%level%logger{25}%mdc{"
+//                + Constants.USERID_MDC_KEY + "}%msg");
+        layout.setPattern("%d%thread%level%logger{25}%mdc{ip}%msg");
         layout.setTitle("Last Logging Events");
         layout.start();
     }

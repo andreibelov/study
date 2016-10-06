@@ -1,9 +1,25 @@
 body {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     background-color: #eee;
 }
-
+#login-form-link.active{
+    color: #337ab7;;
+    font-size: 18px;
+}
+#register-form-link.active{
+    color: #029f5b;
+    font-size: 18px;
+}
+.panel-heading h3{
+    cursor: pointer;
+    cursor: hand;
+}
+.panel-heading{
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
 .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -37,4 +53,7 @@ body {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+.form-group {
+    margin-bottom: 0;
 }

@@ -7,6 +7,8 @@ import javax.persistence.Persistence;
 
 /**
  * Created by john on 7/17/2016.
+ * @author andrei.belov aka john
+ * @link http://vk.com/andrei.belov
  */
 public class Main {
     public static void main(String[] args) {

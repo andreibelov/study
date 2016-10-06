@@ -65,7 +65,10 @@ public class AdminService {
         Optional<String> s_section = ofNullable(request.getParameter("sec"));
         if(s_section.isPresent()) {
             request.setAttribute("section", sections.get(s_section.get()));
-        } else request.setAttribute("admin_default", "admin_default");
+        } else {
+            request.setAttribute("admin_default", "admin_default");
+            request.setAttribute("section", sections.get("profiles"));
+        }
         String nextJSP = "/WEB-INF/jsp/dashboard.jsp";
         request.setAttribute("pageTitle", "Admin Console");
         request.setAttribute("sections", sections.entrySet());

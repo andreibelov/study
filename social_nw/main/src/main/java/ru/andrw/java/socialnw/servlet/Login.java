@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.UserDao;
+import ru.andrw.java.socialnw.model.SectionModule;
 import ru.andrw.java.socialnw.model.User;
 import ru.andrw.java.socialnw.service.LoginService;
+import ru.andrw.java.socialnw.service.ProfileService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -41,12 +43,16 @@ public class Login extends HttpServlet {
         ServletContext sc = config.getServletContext();
         DaoFactory daoFactory =   (DaoFactory) sc.getAttribute("daoFactory");
         userDao = daoFactory.getUserDao();
+        LoginService.setUserDao(userDao);
+        LoginService.setProfileDao(daoFactory.getProfileDao());
     }
 
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").include(request, response);
+        if (request.getSession().getAttribute("user") != null)
+            response.sendRedirect(request.getContextPath() +"/home"); // Go to some start page.
+        else LoginService.performGetAction(request,response);
     }
 
     @Override
@@ -54,28 +60,6 @@ public class Login extends HttpServlet {
                           HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") != null)
             response.sendRedirect(request.getContextPath() +"/home"); // Go to some start page.
-        else {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            Optional<User> user = empty();
-            try {
-                user = userDao.findUser(email, encode(password));
-            } catch (DaoException e) {
-                logger.error("UserDao err", e);
-            }
-
-            if (user.isPresent()) LoginService.onLoginSuccess(request,response,user.get());
-            else {
-                logger.error("Bad login try "+email);
-                request.setAttribute("error", "Unknown login, try again"); // Set error msg for ${error}
-                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").include(request, response); // Go back to login page.
-            }
-
-        }
-
-    }
-
-    private String encode(String password) {
-        return MD5Encoder.encode(ConcurrentMessageDigest.digestMD5(password.getBytes()));
+        else LoginService.performPostAction(request,response);
     }
 }
