@@ -1,4 +1,4 @@
-package com.example.chat.dao.impl;
+package com.example.chat.dao.impl.postgres;
 
 import com.example.chat.dao.DaoException;
 import com.example.chat.dao.UserDao;
@@ -25,7 +25,7 @@ public class PostgreUserDao implements UserDao {
     }
 
     @Override
-    public Optional<User> find(String email, String password) throws DaoException {
+    public Optional<User> findUser(String email, String password) throws DaoException {
         User user = null;
         try {
             PreparedStatement preparedStatement = connection.
@@ -35,10 +35,8 @@ public class PostgreUserDao implements UserDao {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 user = new User();
-                user.setUserid(rs.getInt("userid"));
-                user.setFirstName(rs.getString("firstname"));
-                user.setLastName(rs.getString("lastname"));
-                user.setDob(rs.getDate("dob"));
+                user.setId(rs.getLong("userid"));
+                user.setLogin(rs.getString("firstname"));
                 user.setEmail(email);
             }
         } catch (SQLException e) {
@@ -54,9 +52,7 @@ public class PostgreUserDao implements UserDao {
                     .prepareStatement("INSERT INTO USERS(FIRSTNAME,LASTNAME,DOB,EMAIL,PASSWORD) " +
                             "VALUES (?, ?, ?, ?, ?)");
             // Parameters start with 1
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setDate(3, new Date(user.getDob().getTime()));
+            preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getPassword());
             preparedStatement.executeUpdate();
@@ -64,6 +60,11 @@ public class PostgreUserDao implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deleteUser(Long userId) throws DaoException {
+
     }
 
     public void deleteUser(int userId) {
@@ -84,12 +85,10 @@ public class PostgreUserDao implements UserDao {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("UPDATE USERS SET FIRSTNAME=?, LASTNAME=?, DOB=?, EMAIL=?, PASSWORD=?" +
                             "WHERE USERId=?");
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setDate(3, new Date(user.getDob().getTime()));
+            preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setInt(6, user.getUserid());
+            preparedStatement.setInt(6, user.getId().intValue());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -104,10 +103,8 @@ public class PostgreUserDao implements UserDao {
             ResultSet rs = statement.executeQuery("SELECT * FROM USERS");
             while (rs.next()) {
                 User user = new User();
-                user.setUserid(rs.getInt("userid"));
-                user.setFirstName(rs.getString("firstname"));
-                user.setLastName(rs.getString("lastname"));
-                user.setDob(rs.getDate("dob"));
+                user.setId(rs.getLong("userid"));
+                user.setLogin(rs.getString("firstname"));
                 user.setEmail(rs.getString("email"));
                 users.add(user);
             }
@@ -116,6 +113,11 @@ public class PostgreUserDao implements UserDao {
         }
 
         return users;
+    }
+
+    @Override
+    public Optional<User> getUserById(Long userId) throws DaoException {
+        return null;
     }
 
     public User getUserById(int userId) {
@@ -127,10 +129,8 @@ public class PostgreUserDao implements UserDao {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                user.setUserid(rs.getInt("userid"));
-                user.setFirstName(rs.getString("firstname"));
-                user.setLastName(rs.getString("lastname"));
-                user.setDob(rs.getDate("dob"));
+                user.setId(rs.getLong("userid"));
+                user.setLogin(rs.getString("firstname"));
                 user.setEmail(rs.getString("email"));
             }
         } catch (SQLException e) {

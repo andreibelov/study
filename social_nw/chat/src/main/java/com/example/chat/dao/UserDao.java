@@ -19,11 +19,11 @@ public interface UserDao {
      * @return The user from the database matching the given email and password, otherwise null.
      * @throws DaoException If something fails at database level.
      */
-    Optional<User> find(String login, String password) throws DaoException;
+    Optional<User> findUser(String login, String password) throws DaoException;
 
-    public void addUser(User user);
-    public void deleteUser(int userId);
-    public void updateUser(User user);
-    public List<User> getAllUsers();
-    public User getUserById(int userId);
+    public void addUser(User user) throws DaoException;
+    public void deleteUser(Long userId) throws DaoException;
+    public void updateUser(User user) throws DaoException;
+    public List<User> getAllUsers() throws DaoException;
+    public Optional<User> getUserById(Long userId) throws DaoException;
 }

@@ -1,8 +1,8 @@
 package com.example.chat.listener;
 
-import com.example.chat.dao.impl.PgDaoFactory;
-import com.example.chat.dao.impl.PostgreUserDao;
-import com.example.chat.util.DbUtil;
+import com.google.gson.Gson;
+
+import com.example.chat.dao.impl.list.ListDaoFactory;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -18,12 +18,14 @@ import javax.servlet.annotation.WebListener;
 public class InitListener implements ServletContextListener {
 
     private final String DAO_FACTORY = "daoFactory";
+    private final String GSON = "gson";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
 
         ServletContext servletContext = sce.getServletContext();
-        servletContext.setAttribute(DAO_FACTORY, new PgDaoFactory(new DbUtil()));
+        servletContext.setAttribute(DAO_FACTORY, new ListDaoFactory());
+        servletContext.setAttribute(GSON, new Gson());
     }
 
     @Override

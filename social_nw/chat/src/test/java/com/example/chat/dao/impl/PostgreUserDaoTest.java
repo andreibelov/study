@@ -1,6 +1,7 @@
 package com.example.chat.dao.impl;
 
 import com.example.chat.dao.UserDao;
+import com.example.chat.dao.impl.postgres.PostgreUserDao;
 import com.example.chat.model.User;
 import com.example.chat.util.DbUtil;
 import org.junit.Before;
@@ -10,10 +11,8 @@ import java.sql.Connection;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static org.junit.Assert.*;
-
 /**
- * com.example.chat.dao.impl.PostgreUserDao Tester.
+ * com.example.chat.dao.impl.postgres.PostgreUserDao Tester.
  *
  * @author <Authors name>
  * @version 1.0

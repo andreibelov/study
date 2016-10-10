@@ -1,4 +1,4 @@
-package com.example.chat.dao.impl;
+package com.example.chat.dao.impl.postgres;
 
 import com.example.chat.dao.MessageDao;
 import com.example.chat.model.Message;

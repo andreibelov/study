@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ru.andrw.java.socialnw.dao.DaoFactory;
+import ru.andrw.java.socialnw.dao.TokensDao;
 import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.User;
@@ -19,7 +20,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -37,6 +40,7 @@ public class ListDaoFactory implements DaoFactory {
             .getLogger("ru.andrw.java.socialnw.dao.impl.list.ListDaoFactory");
 
     private UserProfileDao profileDao;
+    private TokensDao tokensDao;
     private UserDao userDao;
 
     public ListDaoFactory(){
@@ -84,6 +88,10 @@ public class ListDaoFactory implements DaoFactory {
         }
         this.profileDao = new ListUserProfileDao(profileList,counter);
 
+        Map<String, Long> tokensList = new ConcurrentHashMap<>();
+
+        this.tokensDao = new ListTokensDao(tokensList);
+
     }
 
     @Override
@@ -94,5 +102,10 @@ public class ListDaoFactory implements DaoFactory {
     @Override
     public UserProfileDao getProfileDao() {
         return profileDao;
+    }
+
+    @Override
+    public TokensDao getTokensDao() {
+        return tokensDao;
     }
 }

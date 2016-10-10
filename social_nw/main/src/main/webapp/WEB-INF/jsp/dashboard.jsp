@@ -52,13 +52,11 @@
             <!-- end Adminsidebar -->
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
             <c:choose>
                 <c:when test="${not empty requestScope.admin_default}">
                     <jsp:include page="/WEB-INF/include/admin/admin-console.jsp" />
                 </c:when>
             </c:choose>
-
             <h2 class="sub-header" id="sectionName">${requestScope.section.sectionName}</h2>
             <div id="sec1" class="row" style="border-bottom: 1px solid #eee;">
                 <!-- Section content -->

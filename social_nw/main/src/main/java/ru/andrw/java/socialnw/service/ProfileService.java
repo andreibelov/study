@@ -152,7 +152,7 @@ public class ProfileService {
         long userProfileId = 0;
         String nextJSP;
         try {
-            userProfileId = profileDao.addUserProfile(profile);
+            userProfileId = profileDao.addUserProfile(profile).getId();
             nextJSP = "/WEB-INF/include/admin/profiles-table.jsp";
             req.setAttribute("message","User added successfully");
             req.setAttribute("profileList", profileDao.getUserProfilesSubList(0,30));

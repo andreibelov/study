@@ -9,4 +9,5 @@ package ru.andrw.java.socialnw.dao;
 public interface DaoFactory {
     public UserDao getUserDao();
     public UserProfileDao getProfileDao();
+    public TokensDao getTokensDao();
 }

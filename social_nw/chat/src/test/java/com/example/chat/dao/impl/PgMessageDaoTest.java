@@ -1,6 +1,7 @@
 package com.example.chat.dao.impl;
 
 import com.example.chat.dao.MessageDao;
+import com.example.chat.dao.impl.postgres.PgMessageDao;
 import com.example.chat.model.Message;
 import com.example.chat.util.DbUtil;
 import org.junit.Before;
@@ -11,10 +12,8 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-import static org.junit.Assert.*;
-
 /**
- * com.example.chat.dao.impl.PgMessageDao Tester.
+ * com.example.chat.dao.impl.postgres.PgMessageDao Tester.
  *
  * @author <Authors name>
  * @version 1.0

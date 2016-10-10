@@ -22,7 +22,6 @@
     <div id="navbar-top" class="navbar-collapse collapse">
         <ul class="nav navbar-right top-nav">
             <li><a href="${pageContext.request.contextPath}/admin">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
             <li class="dropdown">
                 <c:if test="${not empty pageContext.request.session.getAttribute('user')}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user">

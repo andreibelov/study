@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.DaoFactory;
+import ru.andrw.java.socialnw.dao.TokensDao;
 import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.model.SectionModule;
 import ru.andrw.java.socialnw.model.User;
@@ -36,15 +37,16 @@ public class Login extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Login");
 
     private UserDao userDao;
+    private TokensDao tokensDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext sc = config.getServletContext();
         DaoFactory daoFactory =   (DaoFactory) sc.getAttribute("daoFactory");
-        userDao = daoFactory.getUserDao();
-        LoginService.setUserDao(userDao);
+        LoginService.setUserDao(daoFactory.getUserDao());
         LoginService.setProfileDao(daoFactory.getProfileDao());
+        LoginService.setTokensDao(daoFactory.getTokensDao());
     }
 
     @Override

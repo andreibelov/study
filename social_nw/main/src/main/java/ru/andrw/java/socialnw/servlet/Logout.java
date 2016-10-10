@@ -24,23 +24,10 @@ public class Logout extends HttpServlet {
     private final Logger logger = LoggerFactory
             .getLogger("ru.andrw.java.socialnw.servlet.Logout");
 
-    private void logout(HttpServletRequest request,
-                        HttpServletResponse response)
-            throws ServletException, IOException {
-        LogoutService.onLogOut(request,response);
-    }
-
     @Override
-    protected void doGet(HttpServletRequest request,
+    protected void service(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
-        logout(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
-            throws ServletException, IOException {
-        logout(request, response);
+        LogoutService.onLogOut(request,response);
     }
 }

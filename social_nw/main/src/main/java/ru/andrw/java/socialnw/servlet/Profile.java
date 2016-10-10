@@ -36,7 +36,7 @@ public class Profile extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext sc = config.getServletContext();
-        DaoFactory daoFactory =   (DaoFactory) sc.getAttribute("daoFactory");
+        DaoFactory daoFactory = (DaoFactory) sc.getAttribute("daoFactory");
         ProfileService.setProfileDao(daoFactory.getProfileDao());
     }
 

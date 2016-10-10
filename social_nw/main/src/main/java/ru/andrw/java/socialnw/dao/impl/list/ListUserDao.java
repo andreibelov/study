@@ -68,10 +68,10 @@ class ListUserDao implements UserDao {
     }
 
     @Override
-    public Long addUser(User user) throws DaoException {
+    public User addUser(User user) throws DaoException {
         if(!userValidator(user)) throw new DaoException();
         else users.add(user.setId(al.getAndIncrement()));
-        return user.getId();
+        return user;
     }
 
     private boolean userValidator(User user){

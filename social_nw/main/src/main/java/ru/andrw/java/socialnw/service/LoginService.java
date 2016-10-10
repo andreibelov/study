@@ -6,12 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ru.andrw.java.socialnw.dao.DaoException;
+import ru.andrw.java.socialnw.dao.TokensDao;
 import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.SectionModule;
 import ru.andrw.java.socialnw.model.User;
 import ru.andrw.java.socialnw.model.UserProfile;
-import ru.andrw.java.socialnw.util.Constants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -42,6 +42,7 @@ public class LoginService {
     private static final Map<String, ServiceMethod> methods = new ConcurrentHashMap<>();
     private static UserProfileDao profileDao;
     private static UserDao userDao;
+    private static TokensDao tokensDao;
 
     static {
         sections.put("login", (new SectionModule())
@@ -83,7 +84,6 @@ public class LoginService {
         section = (s_action.isPresent() && sections.containsKey(s_action.get())) ?
                 sections.get(s_action.get()) : sections.get("login");
         request.setAttribute("section", section);
-        request.setAttribute("pageTitle", section.getPageTitle());
         request.setAttribute("logindata", section.getData());
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
 
@@ -115,19 +115,22 @@ public class LoginService {
             logger.error("UserDao err", e);
         }
 
-        if (user.isPresent()) onLoginSuccess(request,response,user.get());
-        else {
+        if (user.isPresent()) {
+            onLoginSuccess(request,response,user.get());
+            response.sendRedirect(request.getContextPath() + "/home"); // Go to some start page.
+        } else {
             logger.warn("Bad login try "+email);
             forwardToLogin(request, response, "Provided credentials are not valid, try again!");
         }
 
     }
 
-    private static void forwardToLogin(HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
+    private static void forwardToLogin(HttpServletRequest request,
+                                       HttpServletResponse response, String message)
+                                    throws ServletException, IOException {
         request.setAttribute("errormessage", message); // Set error msg for ${error}
         SectionModule section = sections.get("login");
         request.setAttribute("section", section);
-        request.setAttribute("pageTitle", section.getPageTitle());
         request.setAttribute("logindata", section.getData());
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
     }
@@ -149,8 +152,8 @@ public class LoginService {
             doSignUp(request, response, signUpData);
 
         } else {
-
-            forwardToSignUp(request, response,"Provided information is not valid, please try again!");
+            String message = "Provided information is not valid, please try again!";
+            forwardToSignUp(request,response,message);
         }
     }
 
@@ -166,18 +169,21 @@ public class LoginService {
             if(o_user.isPresent())
                 forwardToSignUp(request, response,"Username is already taken!");
             else {
-                User user = (new User()).setLogin(username)
+                User user = (new User())
+                        .setLogin(username)
                         .setAccessLevel(3)
                         .setEmail(email)
                         .setPassword(encode(password));
-                Long userid = userDao.addUser(user);
+                user = userDao.addUser(user);
                 UserProfile profile = (new UserProfile())
-                        .setUserid(userid)
+                        .setUserid(user.getId())
                         .setEmail(email)
                         .setName("New")
                         .setLastName("User");
-                profileDao.addUserProfile(profile);
-                tryLogin(request,response);
+                profile = profileDao.addUserProfile(profile);
+                request.getSession().setAttribute("profile", profile);
+                onLoginSuccess(request,response,user);
+                response.sendRedirect(request.getContextPath() + "/welcome"); // Go to welcome page.
             }
         } catch (DaoException e) {
             logger.warn(e.getMessage(),e);
@@ -191,7 +197,6 @@ public class LoginService {
         request.setAttribute("errormessage", message);
         SectionModule section = sections.get("signup");
         request.setAttribute("section", section);
-        request.setAttribute("pageTitle", section.getPageTitle());
         request.setAttribute("logindata", section.getData());
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
     }
@@ -201,12 +206,10 @@ public class LoginService {
                                                     throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("user", user); // Put user in a session.
-        session.setAttribute(Constants.USERID_SESSION_KEY, user.getLogin()); // Put userid in a session.
-        session.setAttribute(Constants.EMAIL_SESSION_KEY, user.getEmail()); // Put email in a session.
         logger.info("User "+user.getLogin()+" successfully logged in.");
-        Cookie userName = new Cookie("user", user.getLogin());
-        response.addCookie(userName);
-        response.sendRedirect(request.getContextPath() + "/home"); // Go to some start page.
+        tokensDao.addToken(user);
+        Cookie loginCookie = new Cookie("token", encode(user.getLogin()));
+        response.addCookie(loginCookie);
     }
 
     private static void recoverPass(HttpServletRequest request,
@@ -225,5 +228,9 @@ public class LoginService {
 
     public static void setProfileDao(UserProfileDao profileDao) {
         LoginService.profileDao = profileDao;
+    }
+
+    public static void setTokensDao(TokensDao tokensDao) {
+        LoginService.tokensDao = tokensDao;
     }
 }

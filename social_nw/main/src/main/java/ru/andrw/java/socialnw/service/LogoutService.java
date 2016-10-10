@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.model.User;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,6 +28,20 @@ public class LogoutService {
         if(session != null){
             User user = (User) session.getAttribute("user");
             session.removeAttribute("user");
+            Cookie loginCookie = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("token")) {
+                        loginCookie = cookie;
+                        break;
+                    }
+                }
+            }
+            if (loginCookie != null) {
+                loginCookie.setMaxAge(0);
+                response.addCookie(loginCookie);
+            }
             logger.info("User "+user.getLogin()+" successfully logged out.");
             session.invalidate();
         }

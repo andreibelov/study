@@ -7,7 +7,7 @@ package com.example.chat.dao;
  * @link http://vk.com/andrei.belov
  */
 public interface DaoFactory {
-    public MessageDao getMessageDao();
     public UserDao getUserDao();
-    public ChatRoomDao getChatDao();
+    public ChatMessageDao getChatMessageDao();
+    public UserProfileDao getProfileDao();
 }

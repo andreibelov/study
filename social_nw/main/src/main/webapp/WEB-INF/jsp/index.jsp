@@ -11,7 +11,9 @@
     <meta name="author" content="">
     <link rel="icon" href="${pageContext.request.contextPath}/static/favicon.ico">
 
-    <title>${requestScope.pageTitle}</title>
+    <c:if test="${not empty requestScope.section}">
+        <title>${requestScope.section.pageTitle}</title>
+    </c:if>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -50,15 +52,24 @@
             </c:when>
             <c:otherwise>
                     <!-- Side Menu Items -->
-                    <jsp:include page="/WEB-INF/include/sidebar.jsp" />
-                    <!-- ./Side Menu Items -->
-                    <!-- Main content -->
-                    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                        <c:if test="${not empty requestScope.section}">
-                            <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/${requestScope.section.jsFile}"></script>
-                        </c:if>
-                        <jsp:include page="${requestScope.includeSection}" />
+                    <div class="col-sm-3 col-md-2 sidebar">
+                        <jsp:include page="/WEB-INF/include/sidebar.jsp" />
                     </div>
+                    <!-- ./Side Menu Items -->
+
+                    <!-- Main content -->
+                    <div id="main-column" class="col-xs-12 col-sm-9 col-sm-offset-3 col-md-6 col-md-offset-2 main">
+                        <!-- Section content -->
+                        <c:if test="${not empty requestScope.section}">
+                            <jsp:include page="/WEB-INF/include/sections/${requestScope.section.jspFile}" />
+                        </c:if>
+                        <!-- end Section content -->
+                    </div><!-- end Main content -->
+
+                    <!-- Right panel Items -->
+                    <div class="hidden-xs hidden-sm col-md-4 pull-right rightbar">
+                        <jsp:include page="/WEB-INF/include/rightbar.jsp" />
+                    </div><!-- end Right panel Items -->
             </c:otherwise>
         </c:choose>
         </div>

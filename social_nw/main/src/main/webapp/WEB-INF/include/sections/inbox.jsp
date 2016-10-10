@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"
 %><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"
-%><jsp:useBean id="date" class="java.util.Date" /><div class="col-xs-12 col-md-9 inbox">
+%><%@ taglib prefix="m" uri="/WEB-INF/taglib.tld" %>
+<jsp:useBean id="date" class="java.util.Date" /><div class="inbox">
     <ul class="media-list">
         <li class="media">
             <a data-medium-element="true" class="pull-left" href="#">
@@ -16,7 +17,7 @@
         <c:forEach begin="0" end="10" varStatus="loop">
             <li class="media">
                 <p class="text-center"><span class="text-muted">${date}</span>
-                <a href="#"> Andrei Belov </a></p>
+                <a href="#"><m:fullName /></a></p>
                 <div class="media-body text-right" style="padding-left: 10%;">
                     <p data-medium-element="true">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra.</p>
                 </div>
@@ -53,12 +54,4 @@
             <hr>
         </c:forEach>
     </ul>
-</div>
-<div id="sidebar" class="col-xs-12 col-md-3 sidebar-offcanvas">
-    <div class="list-group">
-        <a href="#" class="list-group-item active">Link 1</a>
-        <c:forEach begin="2" end="10" varStatus="loop">
-            <a href="#" class="list-group-item">Link: ${loop.current}</a>
-        </c:forEach>
-    </div>
 </div>

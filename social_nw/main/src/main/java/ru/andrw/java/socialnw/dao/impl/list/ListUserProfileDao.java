@@ -78,11 +78,11 @@ class ListUserProfileDao implements UserProfileDao {
     }
 
     @Override
-    public Long addUserProfile(UserProfile profile) throws DaoException {
+    public UserProfile addUserProfile(UserProfile profile) throws DaoException {
         if(!userProfileValidator(profile)) throw new DaoException("Provided profile is not valid");
         profile.setId(counter.getAndIncrement());
         userProfileList.add(profile);
-        return profile.getId();
+        return profile;
     }
 
     @Override

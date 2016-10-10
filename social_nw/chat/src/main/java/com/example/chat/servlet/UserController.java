@@ -1,8 +1,12 @@
 package com.example.chat.servlet;
 
+import com.example.chat.dao.DaoException;
 import com.example.chat.dao.DaoFactory;
 import com.example.chat.dao.UserDao;
 import com.example.chat.model.User;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -16,6 +20,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * Created by john on 8/12/2016.
@@ -25,6 +30,8 @@ import java.util.Date;
  */
 @WebServlet(name = "UserController", urlPatterns = {"/users"})
 public class UserController extends HttpServlet {
+
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private static String INSERT_OR_EDIT = "/user.jsp";
     private static String LIST_USER = "/listUser.jsp";
@@ -41,22 +48,25 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
         String action = request.getParameter("action");
-
-        if (action.equalsIgnoreCase("delete")){
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            userDao.deleteUser(userId);
-            forward = LIST_USER;
-            request.setAttribute("users", userDao.getAllUsers());
-        } else if (action.equalsIgnoreCase("edit")){
-            forward = INSERT_OR_EDIT;
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            User user = userDao.getUserById(userId);
-            request.setAttribute("user", user);
-        } else if (action.equalsIgnoreCase("listUser")){
-            forward = LIST_USER;
-            request.setAttribute("users", userDao.getAllUsers());
-        } else {
-            forward = INSERT_OR_EDIT;
+        try {
+            if (action.equalsIgnoreCase("delete")) {
+                Long userId = Long.parseLong(request.getParameter("userId"));
+                userDao.deleteUser(userId);
+                forward = LIST_USER;
+                request.setAttribute("users", userDao.getAllUsers());
+            } else if (action.equalsIgnoreCase("edit")) {
+                forward = INSERT_OR_EDIT;
+                Long userId = Long.parseLong(request.getParameter("userId"));
+                Optional<User> o_user = userDao.getUserById(userId);
+                if (o_user.isPresent())request.setAttribute("user", o_user.get());
+            } else if (action.equalsIgnoreCase("listUser")) {
+                forward = LIST_USER;
+                request.setAttribute("users", userDao.getAllUsers());
+            } else {
+                forward = INSERT_OR_EDIT;
+            }
+        } catch (DaoException ex){
+            logger.error(ex.getMessage(),ex);
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -64,30 +74,5 @@ public class UserController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = new User();
-        user.setFirstName(request.getParameter("firstName"));
-        user.setLastName(request.getParameter("lastName"));
-        try {
-            Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
-            user.setDob(dob);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        user.setEmail(request.getParameter("email"));
-        user.setPassword(request.getParameter("password"));
-        String userid = request.getParameter("userid");
-        if(userid == null || userid.isEmpty())
-        {
-            userDao.addUser(user);
-        }
-        else
-        {
-            user.setUserid(Integer.parseInt(userid));
-            userDao.updateUser(user);
-        }
-        RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-        request.setAttribute("users", userDao.getAllUsers());
-        view.forward(request, response);
     }
-
 }

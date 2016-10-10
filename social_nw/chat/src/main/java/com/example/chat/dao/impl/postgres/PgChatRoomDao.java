@@ -1,4 +1,4 @@
-package com.example.chat.dao.impl;
+package com.example.chat.dao.impl.postgres;
 
 import com.example.chat.dao.ChatRoomDao;
 import com.example.chat.model.User;
@@ -65,7 +65,7 @@ public class PgChatRoomDao implements ChatRoomDao {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("INSERT INTO CHAT_USERS(CHAT_USER, CHAT_ROOM) VALUES (?,?)");
-            preparedStatement.setInt(1, user.getUserid());
+            preparedStatement.setInt(1, user.getId().intValue());
             preparedStatement.setInt(2, roomId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -101,9 +101,8 @@ public class PgChatRoomDao implements ChatRoomDao {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setUserid(rs.getInt("userid"));
-                user.setFirstName(rs.getString("firstname"));
-                user.setFirstName(rs.getString("lastname"));
+                user.setId(rs.getLong("userid"));
+                user.setLogin(rs.getString("firstname"));
                 users.add(user);
             }
         } catch (SQLException e) {

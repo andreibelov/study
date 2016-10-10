@@ -39,10 +39,16 @@ $(document).ready(function() {
 
     section.delegate( "table > tbody > tr#loadMore", "click", function() {
         offset += parseInt(limit);
-        loadMore(offset,limit)
+        loadMore()
     });
 
-    section.delegate( "#accept", "click", function() {
+    section.delegate( "button#cancel", "click", function() {
+        offset = 0;
+        limit = 3;
+        load()
+    });
+    section.delegate( "form#editor", "submit", function(e) {
+        e.preventDefault();
         saveProfile();
     });
 
@@ -61,8 +67,7 @@ $(document).ready(function() {
         });
     }
 
-    function load(offset, limit) {
-
+    function load() {
         $.ajax({
            data: {
                action: "list",
@@ -73,7 +78,7 @@ $(document).ready(function() {
             section.html(result);
         });
     }
-    function loadMore(offset, limit) {
+    function loadMore() {
         $.ajax({
            data: {
                action: "append",

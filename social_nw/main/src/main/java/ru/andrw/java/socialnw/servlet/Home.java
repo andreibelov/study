@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.dao.DaoFactory;
+import ru.andrw.java.socialnw.service.DispatchService;
 import ru.andrw.java.socialnw.service.ProfileService;
 
 import javax.servlet.ServletConfig;
@@ -34,12 +35,7 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String uri = request.getRequestURI()
-                .substring(request.getContextPath().length());
-
-        request.setAttribute("pageTitle", "Welcome!");
-        request.getRequestDispatcher("/WEB-INF/jsp/welcome.jsp").include(request, response);
+        DispatchService.doDispatch(request,response);
     }
 
     @Override

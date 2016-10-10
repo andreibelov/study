@@ -8,10 +8,9 @@
         <c:set var="hideLogin" value="style='display: none;'"/>
         <c:set var="hideSignup" value=""/>
     </c:when>
-</c:choose><div class="hidden-sm col-md-4"></div>
-    <div class="col-xs-12 col-md-4 main">
+</c:choose>
+    <div class="center-block" style="max-width: 400px;min-width: 400px; padding-top: 50px">
         <div class="well">
-
             <div class="row panel-heading">
                 <div id="login-form-link" class="col-xs-6 active">
                     <h3 class="form-signin form-signin-heading">Login</h3>
@@ -80,6 +79,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-xs-4" for="terms"></label>
+                            <div class="col-xs-8">
+                                <input id="terms" name="terms" type="checkbox"> I agree with the <a href="#">Terms and Conditions</a>.
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <!-- Button -->
                             <div class="col-xs-12">
                                 <button class="btn btn-lg btn-success btn-block">Sign up</button>
@@ -91,4 +97,3 @@
             </div>
         </div>
     </div>
-<div class="hidden-sm col-md-4"></div>

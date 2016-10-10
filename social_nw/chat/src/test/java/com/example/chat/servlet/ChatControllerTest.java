@@ -1,7 +1,7 @@
 package com.example.chat.servlet;
 
 import com.example.chat.dao.MessageDao;
-import com.example.chat.dao.impl.PgMessageDao;
+import com.example.chat.dao.impl.postgres.PgMessageDao;
 import com.example.chat.model.JsonPack;
 import com.example.chat.model.Message;
 import com.example.chat.model.User;
@@ -13,17 +13,13 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 import java.io.*;
-import javax.servlet.ServletConfig;
-import javax.servlet.http.*;
-import org.apache.commons.io.FileUtils;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.util.Date;
 import java.util.UUID;
 import java.util.function.Supplier;
-
-import static org.junit.Assert.*;
 
 /**
  * com.example.chat.servlet.ChatController Tester.

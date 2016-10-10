@@ -1,10 +1,19 @@
 $(document).ready(function() {
-    //load();
-    $("#send").on("click", send);
-    $("#clc").on("click",clc);
-    //$("#attch").on("click",concatenate);
+
+    var contextpath = document.location.pathname.substring(1).split(/\//)[0];
+    var webSocket;
+
+    var chat = document.getElementById("chat");
+    var list = document.getElementById("msgs");
+    var sendButton = document.getElementById("send");
+    var openButton = document.getElementById("open");
+    var closeButton = document.getElementById("close");
     var msg = $("#msg");
     var flag = true;
+
+    openSocket();
+
+
     msg.on("focus",function () {
         if (flag == true){
             msg.val("");
@@ -22,74 +31,69 @@ $(document).ready(function() {
             send();
         }
     });
-    function load() {
-        $.ajax({
-            type: 'GET',
-            url: '/xml/xml.php',
-            cache: false,
-            dataType: "xml",
-            success : function (result) {
-                parser(result);
-            },
-            error : function () {
-                alert('Load - NOT OK!');
+
+    sendButton.addEventListener("click",send);
+    openButton.addEventListener("click",openSocket);
+    closeButton.addEventListener("click",closeSocket);
+
+    function openSocket(){
+        // Ensures only one connection is open at a time
+        if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED){
+            writeResponse("server", "WebSocket is already opened.");
+            return;
+        }
+        // Create a new instance of the websocket
+        //webSocket = new WebSocket("ws://"+ document.location.host + document.location.pathname + "websocket");
+        webSocket = new WebSocket("ws://"+ document.location.host + "/"+contextpath+"/websocket");
+
+        /**
+         * Binds functions to the listeners for the websocket.
+         */
+        webSocket.onopen = function(event){
+            // For reasons I can't determine, onopen gets called twice
+            // and the first time event.data is undefined.
+            // Leave a comment if you know the answer.
+            if(event.data === undefined) {
+                return;
             }
-        });
+            writeResponse("Welcome!", event.data);
+        };
+
+        webSocket.onmessage = function(event){
+            var msg = JSON.parse(event.data);
+            writeResponse(msg.sender, msg.text);
+        };
+
+        webSocket.onclose = function(event){
+            writeResponse("server", "Connection closed");
+            setTimeout(function(){openSocket();}, 500);
+        };
     }
 
-    function send() {
+    /**
+     * Sends the value of the text input to the server
+     */
+    function send(){
         if (flag == true) return;
-        var chuid = "chatuser1";
+        var text = msg.val().trim();
         if(text == ""){
             msg.val("");
             return;
         }
-        var txtmsg = {};
-        txtmsg.text = msg.val().trim();
-        txtmsg.
-
-        var xmlDoc = $($.parseXML('<?xml version="1.0" encoding="utf-8" ?><root />'));
-        var obj = $('root',xmlDoc).append($('<message />', xmlDoc));
-        $('message',obj).append($('<chuid />', xmlDoc).text(chuid));
-        $('message',obj).append($('<text />', xmlDoc).html(text));
-        var str = (new XMLSerializer()).serializeToString(xmlDoc.context);
-        $.ajax({
-            type: 'POST',
-            url: '/xml/xml.php',
-            cache: false,
-            dataType: "xml",
-            data: str,
-            processData: false,
-            contentType: "application/xml; charset=UTF-8",
-            success : function (result) {
-                parser(result);
-            },
-            error : function () {
-                alert('Load - NOT OK!');
-            }
-        });
+        webSocket.send(text);
         msg.val("");
         msg.focus();
     }
 
-    function clc() {
-        $('dl').empty();
-    }
-
-    function parser(result) {
-        var list = $('dl');
-        list.empty();
-        $(result).find('message').each(function (index, element) {
-            var message = $(element);
-            var chuid = message.find('chuid').text();
-            var text = message.find('text').text().replace(/\r\n|\r|\n/g, "<br />")
-                .replace("<![CDATA[", "").replace("]]>","");
-            var id = message.find('id').text();
-            list.append('<dt id="' + id + '">' + chuid + ': </dt>')
-                .append('<dd id="' + id + '">' + text + '</dd>');
-        });
+    function writeResponse(user, text){
+        list.innerHTML += "<dt>" +user+ "</dt>" +
+                          "<dd >" + text + "</dd>";
         var d = $('#chat');
         d.animate({scrollTop: d.prop("scrollHeight")}, 250);
+    }
+
+    function closeSocket(){
+        webSocket.close();
     }
 
 });

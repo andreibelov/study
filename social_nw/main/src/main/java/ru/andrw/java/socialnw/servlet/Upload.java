@@ -49,10 +49,7 @@ public class Upload extends HttpServlet {
     public void doGet(HttpServletRequest request,
                        HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("pageTitle", "File Upload");
-        request.setAttribute("includeSection", "/WEB-INF/include/upload.jsp");
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
-
     }
 
     public void doPost(HttpServletRequest request,

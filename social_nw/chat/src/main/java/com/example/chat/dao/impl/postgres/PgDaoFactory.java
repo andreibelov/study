@@ -1,9 +1,11 @@
-package com.example.chat.dao.impl;
+package com.example.chat.dao.impl.postgres;
 
+import com.example.chat.dao.ChatMessageDao;
 import com.example.chat.dao.ChatRoomDao;
 import com.example.chat.dao.DaoFactory;
 import com.example.chat.dao.MessageDao;
 import com.example.chat.dao.UserDao;
+import com.example.chat.dao.UserProfileDao;
 
 import java.sql.Connection;
 import java.util.function.Supplier;
@@ -27,17 +29,17 @@ public class PgDaoFactory implements DaoFactory {
     }
 
     @Override
-    public MessageDao getMessageDao() {
-        return this.messageDao;
-    }
-
-    @Override
     public UserDao getUserDao() {
         return this.userDao;
     }
 
     @Override
-    public ChatRoomDao getChatDao() {
-        return this.chatDao;
+    public ChatMessageDao getChatMessageDao() {
+        return null;
+    }
+
+    @Override
+    public UserProfileDao getProfileDao() {
+        return null;
     }
 }
