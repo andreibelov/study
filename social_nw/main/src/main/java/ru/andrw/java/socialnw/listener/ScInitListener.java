@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.impl.h2.H2DaoFactory;
-//import ru.andrw.java.socialnw.dao.impl.list.ListDaoFactory;
+import ru.andrw.java.socialnw.dao.impl.list.ListDaoFactory;
 import ru.andrw.java.socialnw.pooling.ConnectionPool;
 
 import javax.servlet.ServletContext;
@@ -49,13 +49,13 @@ public class ScInitListener implements ServletContextListener {
                 .getRealPath(RESOURCES_FILE_PATH + DB_PREPARE_FILE_NAME);
 
 
-        connectionPool = ConnectionPool
-                .create(dbPropertiesFilePath)
-                .executeScript(dbPrepareFilePath);
+//        connectionPool = ConnectionPool
+//                .create(dbPropertiesFilePath)
+//                .executeScript(dbPrepareFilePath);
+//
+//        final DaoFactory daoFactory = new H2DaoFactory(connectionPool);
 
-        final DaoFactory daoFactory = new H2DaoFactory(connectionPool);
-
-//        servletContext.setAttribute(DAO_FACTORY, new ListDaoFactory());
+        servletContext.setAttribute(DAO_FACTORY, new ListDaoFactory());
 
         servletContext.setAttribute(PROJECT_NAME, "VAULT-TEC");
         ClassLoader ctcc = Thread.currentThread().getContextClassLoader();
