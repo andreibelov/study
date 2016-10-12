@@ -9,9 +9,9 @@ import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.TokensDao;
 import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
-import ru.andrw.java.socialnw.model.SectionModule;
-import ru.andrw.java.socialnw.model.User;
-import ru.andrw.java.socialnw.model.UserProfile;
+import ru.andrw.java.socialnw.model.Section;
+import ru.andrw.java.socialnw.model.auth.User;
+import ru.andrw.java.socialnw.model.Profile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -38,14 +38,14 @@ public class LoginService {
     private static final Logger logger = LoggerFactory
             .getLogger("ru.andrw.java.socialnw.service.LoginService");
 
-    private static final Map<String, SectionModule> sections = new ConcurrentHashMap<>();
+    private static final Map<String, Section> sections = new ConcurrentHashMap<>();
     private static final Map<String, ServiceMethod> methods = new ConcurrentHashMap<>();
     private static UserProfileDao profileDao;
     private static UserDao userDao;
     private static TokensDao tokensDao;
 
     static {
-        sections.put("login", (new SectionModule())
+        sections.put("login", (new Section())
                 .setSectionName("Login")
                 .setPageTitle("Login")
                 .setCssFile("login.css")
@@ -53,7 +53,7 @@ public class LoginService {
                 .setJspFile("forms/login-form.jsp")
                 .setData("login")
         );
-        sections.put("signup", (new SectionModule())
+        sections.put("signup", (new Section())
                 .setSectionName("Signup")
                 .setPageTitle("Register")
                 .setCssFile("login.css")
@@ -61,7 +61,7 @@ public class LoginService {
                 .setJspFile("forms/login-form.jsp")
                 .setData("signup")
         );
-        sections.put("recover", (new SectionModule())
+        sections.put("recover", (new Section())
                 .setSectionName("Recover password")
                 .setPageTitle("Recover password")
                 .setCssFile("login.css")
@@ -79,7 +79,7 @@ public class LoginService {
     public static void performGetAction(HttpServletRequest request,
                                         HttpServletResponse response)
             throws ServletException, IOException {
-        SectionModule section;
+        Section section;
         Optional<String> s_action = ofNullable(request.getParameter("action"));
         section = (s_action.isPresent() && sections.containsKey(s_action.get())) ?
                 sections.get(s_action.get()) : sections.get("login");
@@ -129,7 +129,7 @@ public class LoginService {
                                        HttpServletResponse response, String message)
                                     throws ServletException, IOException {
         request.setAttribute("errormessage", message); // Set error msg for ${error}
-        SectionModule section = sections.get("login");
+        Section section = sections.get("login");
         request.setAttribute("section", section);
         request.setAttribute("logindata", section.getData());
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
@@ -165,24 +165,23 @@ public class LoginService {
         String password = signUpData[2];
 
         try {
-            Optional<User> o_user = userDao.getUserByLogin(username);
-            if(o_user.isPresent())
+            Optional<User> o_user;
+            if(userDao.getUserByLogin(username).isPresent())
                 forwardToSignUp(request, response,"Username is already taken!");
+            else if(userDao.getUserByEmail(email).isPresent()){
+                forwardToSignUp(request, response,"User with email:"+email+" is already registered!");
+            }
             else {
-                User user = (new User())
-                        .setLogin(username)
-                        .setAccessLevel(3)
+                Profile profile = (new Profile())
+                        .setFirstName("New")
+                        .setLastName("User");
+                profile.setLogin(username)
                         .setEmail(email)
                         .setPassword(encode(password));
-                user = userDao.addUser(user);
-                UserProfile profile = (new UserProfile())
-                        .setUserid(user.getId())
-                        .setEmail(email)
-                        .setName("New")
-                        .setLastName("User");
                 profile = profileDao.addUserProfile(profile);
                 request.getSession().setAttribute("profile", profile);
-                onLoginSuccess(request,response,user);
+                o_user = userDao.getUserByEmail(email);
+                onLoginSuccess(request,response,profile);
                 response.sendRedirect(request.getContextPath() + "/welcome"); // Go to welcome page.
             }
         } catch (DaoException e) {
@@ -195,7 +194,7 @@ public class LoginService {
                                         HttpServletResponse response, String message)
             throws ServletException, IOException {
         request.setAttribute("errormessage", message);
-        SectionModule section = sections.get("signup");
+        Section section = sections.get("signup");
         request.setAttribute("section", section);
         request.setAttribute("logindata", section.getData());
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);

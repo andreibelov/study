@@ -13,8 +13,7 @@
                     <thead>
                     <tr>
                         <td>#</td>
-                        <td>User ID</td>
-                        <td>Name</td>
+                        <td>First Name</td>
                         <td>Last name</td>
                         <td>Birth date</td>
                         <td>Country</td>

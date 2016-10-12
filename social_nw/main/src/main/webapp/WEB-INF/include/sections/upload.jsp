@@ -10,8 +10,11 @@
 Select a file to upload: <br />
 <form action="${pageContext.request.contextPath}/upload" method="post"
       enctype="multipart/form-data">
-    <label class="control-label">Select File</label>
-    <input id="file-input" name="file" type="file" class="file">
-    <br />
+
+    <label class="btn btn-primary" for="my-file-selector">
+        <input name="file" id="my-file-selector" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
+        Button Text Here
+    </label>
+    <span class='label label-info' id="upload-file-info"></span>
     <input type="submit" value="Upload File" />
 </form>

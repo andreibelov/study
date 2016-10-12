@@ -1,9 +1,6 @@
 package ru.andrw.java.socialnw.servlet;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -14,14 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.diffplug.common.base.Errors;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ru.andrw.java.socialnw.model.Section;
 import ru.andrw.java.socialnw.service.UploadService;
 
 /**
@@ -49,6 +42,10 @@ public class Upload extends HttpServlet {
     public void doGet(HttpServletRequest request,
                        HttpServletResponse response)
             throws ServletException, IOException {
+        Section section = (new Section())
+                .setPageTitle("File Upload")
+                .setJspFile("upload.jsp");
+        request.setAttribute("section",section);
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
     }
 

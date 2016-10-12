@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import ru.andrw.java.socialnw.dao.TokensDao;
-import ru.andrw.java.socialnw.model.User;
+import ru.andrw.java.socialnw.model.auth.User;
 
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -18,6 +18,7 @@ import static java.util.Optional.of;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
+@SuppressWarnings("WeakerAccess")
 public class ListTokensDao implements TokensDao {
 
     private Map<String, Long> tokens;
@@ -31,7 +32,7 @@ public class ListTokensDao implements TokensDao {
         String hashcode = encode(user.getLogin());
         Long userid = user.getId();
         if (userid != null && hashcode != null)
-        tokens.put(hashcode, userid);
+        tokens.putIfAbsent(hashcode, userid);
     }
 
     @Override

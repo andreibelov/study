@@ -17,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ru.andrw.java.socialnw.model.Section;
+
 /**
  * Created by john on 9/27/2016.
  *
@@ -72,16 +74,20 @@ public class UploadService {
             } catch (Exception ex) {
                 logger.error(ex.getMessage(), ex);
                 request.setAttribute("errorMessage",ex.getMessage());
-                request.setAttribute("pageTitle", "File Upload");
-                request.setAttribute("includeSection", "/WEB-INF/include/upload.jsp");
+                Section section = (new Section())
+                        .setPageTitle("File Upload")
+                        .setJspFile("upload.jsp");
+                request.setAttribute("section",section);
                 request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
             }
         } else {
             message = "You've sent wrong request. Probably it's not a file";
         }
         request.setAttribute("errorMessage",message);
-        request.setAttribute("pageTitle", "File Upload");
-        request.setAttribute("includeSection", "/WEB-INF/include/upload.jsp");
+        Section section = (new Section())
+                .setPageTitle("File Upload")
+                .setJspFile("upload.jsp");
+        request.setAttribute("section",section);
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
     }
 

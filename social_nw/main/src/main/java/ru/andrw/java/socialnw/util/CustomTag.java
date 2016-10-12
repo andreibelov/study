@@ -17,8 +17,8 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
-import ru.andrw.java.socialnw.model.User;
-import ru.andrw.java.socialnw.model.UserProfile;
+import ru.andrw.java.socialnw.model.auth.User;
+import ru.andrw.java.socialnw.model.Profile;
 
 /**
  * Created by john on 10/2/2016.
@@ -50,14 +50,14 @@ public class CustomTag extends TagSupport {
         DaoFactory daoFactory = (DaoFactory) sc.getAttribute("daoFactory");
         profileDao = daoFactory.getProfileDao();
 
-        Optional<UserProfile> profile = Optional.empty();
+        Optional<Profile> profile = Optional.empty();
         Optional<User> user = Optional.ofNullable((User) session.getAttribute("user"));
         if (user.isPresent())
         profile = profileDao.searchUserProfileByEmail(user.get().getEmail());
         StringBuffer s_out = new StringBuffer();
         if (profile.isPresent()){
             s_out.append(" ")
-                    .append(profile.get().getName())
+                    .append(profile.get().getFirstName())
                     .append(" ")
                     .append(profile.get().getLastName())
                     .append(" ");

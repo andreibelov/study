@@ -7,8 +7,7 @@
     <td>
         <a href="#" id="edit">${profile.id}</a>
     </td>
-    <td>${profile.userid}</td>
-    <td>${profile.name}</td>
+    <td>${profile.firstName}</td>
     <td>${profile.lastName}</td>
     <td><fmt:formatDate value="${profile.birthDate}" pattern="dd-MM-yyyy" /></td>
     <td>${profile.country}</td>

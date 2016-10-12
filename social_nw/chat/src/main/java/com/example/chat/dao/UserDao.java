@@ -14,12 +14,12 @@ public interface UserDao {
 
     /**
      * Returns the user from the database matching the given email and password, otherwise null.
-     * @param login The login of the user to be returned.
+     * @param email The login of the user to be returned.
      * @param password The password of the user to be returned.
      * @return The user from the database matching the given email and password, otherwise null.
      * @throws DaoException If something fails at database level.
      */
-    Optional<User> findUser(String login, String password) throws DaoException;
+    Optional<User> findUser(String email, String password) throws DaoException;
 
     public void addUser(User user) throws DaoException;
     public void deleteUser(Long userId) throws DaoException;

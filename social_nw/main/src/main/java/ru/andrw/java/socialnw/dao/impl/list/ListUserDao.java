@@ -2,7 +2,7 @@ package ru.andrw.java.socialnw.dao.impl.list;
 
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.UserDao;
-import ru.andrw.java.socialnw.model.User;
+import ru.andrw.java.socialnw.model.auth.User;
 
 import java.util.List;
 import java.util.Objects;
@@ -58,6 +58,12 @@ class ListUserDao implements UserDao {
     @Override
     public Optional<User> getUserByLogin(String login) throws DaoException {
         return users.stream().filter(user -> login.equals(user.getLogin()))
+                .findAny();
+    }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) throws DaoException {
+        return users.stream().filter(user -> email.equals(user.getEmail()))
                 .findAny();
     }
 

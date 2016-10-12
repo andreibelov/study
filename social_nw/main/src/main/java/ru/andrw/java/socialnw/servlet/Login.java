@@ -1,17 +1,12 @@
 package ru.andrw.java.socialnw.servlet;
 
-import org.apache.tomcat.util.security.ConcurrentMessageDigest;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.andrw.java.socialnw.dao.DaoException;
+
 import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.TokensDao;
 import ru.andrw.java.socialnw.dao.UserDao;
-import ru.andrw.java.socialnw.model.SectionModule;
-import ru.andrw.java.socialnw.model.User;
 import ru.andrw.java.socialnw.service.LoginService;
-import ru.andrw.java.socialnw.service.ProfileService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -20,11 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.Optional;
 
-import static java.util.Optional.empty;
+import java.io.IOException;
 
 /**
  * Created by john on 9/25/2016.

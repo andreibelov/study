@@ -4,20 +4,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
-import ru.andrw.java.socialnw.model.UserProfile;
+import ru.andrw.java.socialnw.model.Profile;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static java.util.UUID.fromString;
 
 /**
  * Created by john on 9/26/2016.
@@ -68,7 +68,7 @@ public class ProfileService {
         try {
             String nextJSP = "/WEB-INF/include/admin/profiles-rows.jsp";
 
-            List<UserProfile> profileList = profileDao
+            List<Profile> profileList = profileDao
                     .getUserProfilesSubList(offset,limit);
             req.setAttribute("profileList",profileList);
             req.getServletContext()
@@ -96,7 +96,7 @@ public class ProfileService {
         try {
             String nextJSP = "/WEB-INF/include/admin/profiles-table.jsp";
 
-            List<UserProfile> profileList = profileDao
+            List<Profile> profileList = profileDao
                     .getUserProfilesSubList(offset,limit);
             req.setAttribute("profileList",profileList);
             req.getServletContext()
@@ -114,7 +114,7 @@ public class ProfileService {
         String s = req.getParameter("userProfileId");
         if (s != null){
             Long userProfileId = Long.valueOf(s);
-            Optional<UserProfile> profile = profileDao.getUserProfileById(userProfileId);
+            Optional<Profile> profile = profileDao.getUserProfileById(userProfileId);
 
             if (profile.isPresent()) {
                 req.setAttribute("userProfileId", userProfileId);
@@ -134,18 +134,16 @@ public class ProfileService {
             throws ServletException, IOException {
         String pattern = "dd-mm-yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
-        UserProfile profile = null;
+        Profile profile = null;
         try {
-            profile = (new UserProfile())
-                    .setName(req.getParameter("name"))
-                    .setUserid(Long.valueOf(req.getParameter("userid")))
+            profile = (new Profile())
+                    .setPhoto(fromString(req.getParameter("photo")))
+                    .setFirstName(req.getParameter("name"))
                     .setLastName(req.getParameter("lastName"))
                     .setCountry(req.getParameter("country"))
                     .setCity(req.getParameter("city"))
-                    .setEmail(req.getParameter("email"))
-                    .setStatus(req.getParameter("status"))
-                    .setPhotoid(req.getParameter("photoUuid"))
                     .setBirthDate(format.parse(req.getParameter("birthDate")));
+            profile.setEmail(req.getParameter("email"));
         } catch (ParseException e) {
             logger.error("Could not parse date provided",e);
         }
@@ -175,19 +173,17 @@ public class ProfileService {
         Long userProfileId = Long.valueOf(req.getParameter("userProfileId"));
         String pattern = "dd-mm-yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
-        UserProfile profile = null;
+        Profile profile = null;
         try {
-            profile = (new UserProfile())
-                    .setName(req.getParameter("name"))
-                    .setUserid(Long.valueOf(req.getParameter("userid")))
+            profile = (new Profile())
+                    .setFirstName(req.getParameter("name"))
                     .setLastName(req.getParameter("lastName"))
                     .setCountry(req.getParameter("country"))
                     .setCity(req.getParameter("city"))
-                    .setEmail(req.getParameter("email"))
                     .setStatus(req.getParameter("status"))
-                    .setPhotoid(req.getParameter("photoUuid"))
-                    .setId(userProfileId)
+                    .setPhoto(fromString(req.getParameter("photoUuid")))
                     .setBirthDate(format.parse(req.getParameter("birthDate")));
+            profile.setId(userProfileId).setEmail(req.getParameter("email"));
         } catch (ParseException e) {
             logger.error("Could not parse date provided",e);
         }

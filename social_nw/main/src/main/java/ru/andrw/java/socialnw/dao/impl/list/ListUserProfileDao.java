@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
-import ru.andrw.java.socialnw.model.UserProfile;
+import ru.andrw.java.socialnw.model.Profile;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,16 +29,16 @@ class ListUserProfileDao implements UserProfileDao {
     private final Logger logger = LoggerFactory
             .getLogger("ru.andrw.java.socialnw.dao.impl.list.ListUserProfileDao");
 
-    private List<UserProfile> userProfileList;
+    private List<Profile> userProfileList;
     private AtomicLong counter;
 
-    ListUserProfileDao(List<UserProfile> list, AtomicLong al){
+    ListUserProfileDao(List<Profile> list, AtomicLong al){
         this.userProfileList = list;
         this.counter = al;
     }
 
     @Override
-    public List<UserProfile> getUserProfilesSubList(Integer offset, Integer limit)
+    public List<Profile> getUserProfilesSubList(Integer offset, Integer limit)
             throws DaoException {
         Integer result =
                 Stream.of(offset,limit)
@@ -54,31 +54,31 @@ class ListUserProfileDao implements UserProfileDao {
     }
 
     @Override
-    public List<UserProfile> searchUserProfilesByName(String name) {
-        Comparator<UserProfile> groupByComparator = Comparator.comparing(UserProfile::getName)
-                .thenComparing(UserProfile::getLastName);
+    public List<Profile> searchUserProfilesByName(String name) {
+        Comparator<Profile> groupByComparator = Comparator.comparing(Profile::getFirstName)
+                .thenComparing(Profile::getLastName);
         return userProfileList.stream()
-                .filter(e -> e.getName().equalsIgnoreCase(name) || e.getLastName().equalsIgnoreCase(name))
+                .filter(e -> e.getFirstName().equalsIgnoreCase(name) || e.getLastName().equalsIgnoreCase(name))
                 .sorted(groupByComparator)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<UserProfile> searchUserProfileByEmail(String email) {
+    public Optional<Profile> searchUserProfileByEmail(String email) {
         return userProfileList.stream()
         .filter(e -> e.getEmail().equals(email))
         .findFirst();
     }
 
     @Override
-    public Optional<UserProfile> getUserProfileById(Long id) {
+    public Optional<Profile> getUserProfileById(Long id) {
         return userProfileList.stream()
                 .filter(e -> e.getId().equals(id))
                 .findFirst();
     }
 
     @Override
-    public UserProfile addUserProfile(UserProfile profile) throws DaoException {
+    public Profile addUserProfile(Profile profile) throws DaoException {
         if(!userProfileValidator(profile)) throw new DaoException("Provided profile is not valid");
         profile.setId(counter.getAndIncrement());
         userProfileList.add(profile);
@@ -86,7 +86,7 @@ class ListUserProfileDao implements UserProfileDao {
     }
 
     @Override
-    public void updateUserProfile(UserProfile profile) throws DaoException {
+    public void updateUserProfile(Profile profile) throws DaoException {
         if(!userProfileValidator(profile)) throw new DaoException("UserProfile not valid!");
         else {
             IntStream.range(0, userProfileList.size())
@@ -95,16 +95,16 @@ class ListUserProfileDao implements UserProfileDao {
         }
     }
 
-    private boolean userProfileValidator(UserProfile profile) {
+    private boolean userProfileValidator(Profile profile) {
         return ofNullable(profile).filter(p -> p != null)
                 .filter(p -> p.getEmail() != null)
-                .filter(p -> p.getName() != null)
-                .filter(p -> p.getUserid() != null)
+                .filter(p -> p.getFirstName() != null)
+                .filter(p -> p.getId() != null)
                 .isPresent();
     }
     @Override
     public boolean deleteUserProfile(Long id) {
-        Predicate<UserProfile> profile = p -> p.getId().equals(id);
+        Predicate<Profile> profile = p -> p.getId().equals(id);
         return userProfileList.removeIf(profile);
     }
 }

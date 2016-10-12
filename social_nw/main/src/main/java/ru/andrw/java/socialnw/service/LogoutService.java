@@ -2,7 +2,7 @@ package ru.andrw.java.socialnw.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.andrw.java.socialnw.model.User;
+import ru.andrw.java.socialnw.model.auth.User;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

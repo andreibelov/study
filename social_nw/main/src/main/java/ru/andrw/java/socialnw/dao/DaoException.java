@@ -1,5 +1,6 @@
 package ru.andrw.java.socialnw.dao;
 
+import java.sql.SQLException;
 import java.util.Iterator;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Iterator;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-public class DaoException extends Exception implements Iterable<Throwable> {
+public class DaoException extends RuntimeException implements Iterable<Throwable> {
 
     public DaoException() {
         super();

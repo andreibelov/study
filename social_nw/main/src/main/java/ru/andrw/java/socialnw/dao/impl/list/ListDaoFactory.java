@@ -10,15 +10,14 @@ import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.TokensDao;
 import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
-import ru.andrw.java.socialnw.model.User;
-import ru.andrw.java.socialnw.model.UserProfile;
+import ru.andrw.java.socialnw.model.auth.User;
+import ru.andrw.java.socialnw.model.Profile;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -59,7 +58,7 @@ public class ListDaoFactory implements DaoFactory {
         AtomicLong counter = new AtomicLong(500L);
 
         String csvPath = "initial_profiles.csv";
-        List<UserProfile> profileList = new CopyOnWriteArrayList<>();
+        List<Profile> profileList = new CopyOnWriteArrayList<>();
         CSVReader reader = null;
         try {
             Optional<URL> csvFileUrl = ofNullable(getClass()
@@ -72,15 +71,15 @@ public class ListDaoFactory implements DaoFactory {
             String pattern = "dd-MM-yyyy";
             SimpleDateFormat format = new SimpleDateFormat(pattern);
             while ((line = reader.readNext()) != null) {
-                profileList.add((new UserProfile())
-                        .setUserid(Long.valueOf(line[0]))
-                        .setName(line[1])
+                Profile profile = (new Profile())
+                        .setFirstName(line[1])
                         .setLastName(line[2])
                         .setBirthDate(format.parse(line[3]))
                         .setCountry(line[4])
-                        .setCity(line[5])
-                        .setEmail(line[6])
-                        .setId(counter.getAndIncrement()));
+                        .setCity(line[5]);
+                profile.setEmail(line[6])
+                        .setId(counter.getAndIncrement());
+                profileList.add(profile);
             }
             reader.close();
         } catch (IOException | ParseException e) {

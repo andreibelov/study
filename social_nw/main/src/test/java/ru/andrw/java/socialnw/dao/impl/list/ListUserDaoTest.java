@@ -5,9 +5,8 @@ import org.apache.tomcat.util.security.MD5Encoder;
 import org.junit.Before;
 import org.junit.Test;
 import ru.andrw.java.socialnw.dao.UserDao;
-import ru.andrw.java.socialnw.model.User;
+import ru.andrw.java.socialnw.model.auth.User;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;

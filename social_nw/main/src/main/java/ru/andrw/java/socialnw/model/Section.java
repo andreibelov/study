@@ -2,6 +2,10 @@ package ru.andrw.java.socialnw.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -12,8 +16,9 @@ import lombok.experimental.Accessors;
  * @link http://vk.com/andrei.belov
  */
 @Data
+@Entity
 @Accessors(chain = true)
-public class SectionModule implements Serializable {
+public class Section implements Serializable {
 
     // Constants -----------------------------------------------------------------
 
@@ -21,7 +26,7 @@ public class SectionModule implements Serializable {
 
     // Constructor ---------------------------------------------------------------
 
-    public SectionModule(){
+    public Section(){
         this.cssFile = "empty.css";
         this.jsFile = "empty.js";
         this.jspFile = "empty.jsp";
@@ -30,6 +35,9 @@ public class SectionModule implements Serializable {
 
     // Properties ----------------------------------------------------------------
 
+    @Id
+    @GeneratedValue
+    private Long id;
     private String sectionName;
     private String pageTitle;
     private String data;

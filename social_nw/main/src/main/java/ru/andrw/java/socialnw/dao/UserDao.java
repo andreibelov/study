@@ -1,6 +1,6 @@
 package ru.andrw.java.socialnw.dao;
 
-import ru.andrw.java.socialnw.model.User;
+import ru.andrw.java.socialnw.model.auth.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,5 +29,6 @@ public interface UserDao {
     public List<User> getUsersSubList(Integer offset, Integer limit) throws DaoException;
     public Optional<User> getUserById(Long userId) throws DaoException;
     public Optional<User> getUserByLogin(String login) throws DaoException;
+    public Optional<User> getUserByEmail(String email) throws DaoException;
 }
 
