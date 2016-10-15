@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -90,9 +91,8 @@ class ListUserDao implements UserDao {
 
     @Override
     public void deleteUser(Long userId) throws DaoException {
-        IntStream.range(0, users.size())
-                .filter(i -> users.get(i).getId().equals(userId))
-                .findAny().ifPresent(i -> users.remove(i));
+        Predicate<User> user = u -> u.getId().equals(userId);
+        if (!users.removeIf(user)) throw new DaoException("Deleting user failed, no rows affected.");
     }
 
     @Override

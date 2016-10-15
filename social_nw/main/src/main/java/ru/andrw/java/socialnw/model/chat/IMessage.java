@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BooleanSupplier;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,7 @@ public class IMessage implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(unique=true, nullable=false)
     private UUID uuid;
     private Timestamp created;
     private String content;

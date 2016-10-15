@@ -39,7 +39,7 @@ class H2UserDao implements Dao, UserDao {
     private final String SQL_SELECT_BY_LOGIN = "SELECT ID, ACCESSLEVEL, EMAIL FROM "+FULL_TABLE_NAME+" WHERE LOGIN=?;";
     private final String SQL_SELECT_BY_EMAIL = "SELECT ID, ACCESSLEVEL, LOGIN FROM "+FULL_TABLE_NAME+" WHERE EMAIL=?;";
     private final String SQL_SELECT_FIND = "SELECT ID, ACCESSLEVEL, LOGIN FROM "+FULL_TABLE_NAME+" WHERE EMAIL=? AND PASSWORD=?;";
-    private final String SQL_UPDATE = "UPDATE "+FULL_TABLE_NAME+" SET ACCESSLEVEL = ?, EMAIL=?, LOGIN=?, PASSWORD=?, DTYPE=? WHERE ID=?;";
+    private final String SQL_UPDATE = "UPDATE "+FULL_TABLE_NAME+" SET ACCESSLEVEL = ?, EMAIL=?, LOGIN=?, PASSWORD=? WHERE ID=?;";
     private final String SQL_UPDATE_PASS = "UPDATE "+FULL_TABLE_NAME+" SET PASSWORD=? WHERE ID=?;";
     private final String SQL_DELETE = "DELETE FROM "+FULL_TABLE_NAME+" WHERE ID = ?;";
 
@@ -114,7 +114,7 @@ class H2UserDao implements Dao, UserDao {
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException("Deleing user failed, no rows affected.");
+                throw new SQLException("Deleting user failed, no rows affected.");
             }
 
         } catch (SQLException e) {
@@ -152,9 +152,7 @@ class H2UserDao implements Dao, UserDao {
             ps.setString(2,user.getEmail());
             ps.setString(3,user.getLogin());
             ps.setString(4,user.getPassword());
-            ps.setString(5,user.getClass().getSimpleName());
-            ps.setLong(6,user.getId());
-
+            ps.setLong(5,user.getId());
 
             int affectedRows = ps.executeUpdate();
 

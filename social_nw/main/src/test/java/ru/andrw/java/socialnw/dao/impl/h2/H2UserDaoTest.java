@@ -28,12 +28,11 @@ public class H2UserDaoTest {
     private static final String DB_PROPERTIES_FILE_NAME = "h2.db.properties";
     private UserDao userDao;
     private String email = "nyaka@email.com";
-
     private String login = "nyaka.nyaka";
     private String pass = "encoded_string";
     private String new_pass = "new_encoded_string";
     private User user;
-    private volatile Long id;
+
     @Before
     public void setUp() throws Exception {
 

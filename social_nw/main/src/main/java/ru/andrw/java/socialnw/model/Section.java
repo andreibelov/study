@@ -35,8 +35,7 @@ public class Section implements Serializable {
 
     // Properties ----------------------------------------------------------------
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
     private String sectionName;
     private String pageTitle;

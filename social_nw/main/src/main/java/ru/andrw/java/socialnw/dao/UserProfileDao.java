@@ -18,5 +18,5 @@ public interface UserProfileDao {
     public Optional<Profile> getUserProfileById(Long id);
     public Profile addUserProfile(Profile profile) throws DaoException;
     public void updateUserProfile(Profile profile) throws DaoException;
-    public boolean deleteUserProfile(Long id);
+    public void deleteUserProfile(Long id) throws DaoException;
 }

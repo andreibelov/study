@@ -209,11 +209,17 @@ public class ProfileService {
     private static void removeUserProfile(HttpServletRequest req,
                                          HttpServletResponse resp) {
         long userProfileId = Long.valueOf(req.getParameter("userProfileId"));
-        boolean confirm = profileDao.deleteUserProfile(userProfileId);
-        if (confirm){
-            String message = "The profile has been successfully removed.";
-            req.setAttribute("message", message);
+        String message;
+        try {
+
+            profileDao.deleteUserProfile(userProfileId);
+            message = "The profile has been successfully removed.";
+
+        } catch (DaoException ex){
+            message = "The profile was not removed =(";
         }
+            req.setAttribute("message", message);
+
     }
 
     public static void setProfileDao(UserProfileDao profileDao) {

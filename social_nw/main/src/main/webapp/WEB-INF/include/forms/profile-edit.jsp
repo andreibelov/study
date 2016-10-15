@@ -15,16 +15,17 @@
             </c:if>
             <input type="hidden" id="action" name="action" value="${action}">
             <input type="hidden" id="userProfileId" name="userProfileId" value="${profile.id}">
+            <input type="hidden" id="photoUuid" name="photoUuid" value="f3ccdd27-d200-3e3f-9255-a7e3e2c48800">
             <div class="form-group">
-                <label for="userid" class="control-label col-xs-4">User ID:</label>
+                <label for="userid" class="control-label col-xs-4">Profile ID:</label>
                 <div class="col-xs-8">
-                    <input type="text" name="userid" id="userid" class="form-control input-sm" value="${profile.userid}" readonly/>
+                    <input type="text" name="userid" id="userid" class="form-control input-sm" value="${profile.id}" readonly/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="name" class="control-label col-xs-4">Name:</label>
                 <div class="col-xs-8">
-                    <input type="text" name="name" id="name" class="form-control input-sm" value="${profile.name}" required="true"/>
+                    <input type="text" name="name" id="name" class="form-control input-sm" value="${profile.firstName}" required="true"/>
                 </div>
             </div>
             <div class="form-group">

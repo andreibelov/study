@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,6 +31,7 @@ public class Attach implements Serializable {
 
     // Properties ----------------------------------------------------------------
 
+    @Column(unique=true, nullable=false)
     private UUID uuid;
     @Enumerated(EnumType.STRING)
     private AttType type;

@@ -10,4 +10,5 @@ public interface DaoFactory {
     public UserDao getUserDao();
     public UserProfileDao getProfileDao();
     public TokensDao getTokensDao();
+    public FriendsDao getFriendsDao();
 }

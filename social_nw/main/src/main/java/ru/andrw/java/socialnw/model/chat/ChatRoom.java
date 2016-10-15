@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,7 @@ public class ChatRoom implements Serializable {
 
     @Id @GeneratedValue
     private Long id;
+    @Column(unique=true, nullable=false)
     private UUID uuid;
     private String description;
     @OneToMany

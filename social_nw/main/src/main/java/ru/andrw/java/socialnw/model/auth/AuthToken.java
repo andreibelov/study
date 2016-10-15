@@ -28,7 +28,7 @@ public class AuthToken implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(unique=true)
+    @Column(unique=true, nullable=false)
     private String key;
     private Long value;
 

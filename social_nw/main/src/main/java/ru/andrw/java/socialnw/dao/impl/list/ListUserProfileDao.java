@@ -103,8 +103,8 @@ class ListUserProfileDao implements UserProfileDao {
                 .isPresent();
     }
     @Override
-    public boolean deleteUserProfile(Long id) {
+    public void deleteUserProfile(Long id) {
         Predicate<Profile> profile = p -> p.getId().equals(id);
-        return userProfileList.removeIf(profile);
+        if (!userProfileList.removeIf(profile)) throw new DaoException("Deleting userProfile failed, no rows affected.");
     }
 }

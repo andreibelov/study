@@ -5,6 +5,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ import javax.persistence.InheritanceType;
 @Data
 @Entity
 @Accessors(chain = true)
-@Inheritance(strategy= InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.JOINED)
 public class User implements Serializable {
 
     // Constants -----------------------------------------------------------------
@@ -37,7 +38,9 @@ public class User implements Serializable {
     // Properties ----------------------------------------------------------------
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    @Column(unique=true, nullable=false)
     private String email;
+    @Column(unique=true)
     private String login;
     private String password;
     private Integer accessLevel;

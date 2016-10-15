@@ -5,8 +5,10 @@ import org.eclipse.persistence.annotations.Customizer;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import ru.andrw.java.socialnw.model.auth.User;
+import ru.andrw.java.socialnw.model.enums.Gender;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -16,6 +18,8 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,6 +39,7 @@ import static javax.persistence.ConstraintMode.PROVIDER_DEFAULT;
 @Data
 @Entity
 @Accessors(chain = true)
+@ToString(callSuper=true, includeFieldNames=true)
 @EqualsAndHashCode(callSuper = true, exclude={"status"})
 public class Profile extends User implements Serializable{
 
@@ -47,7 +52,8 @@ public class Profile extends User implements Serializable{
     private String firstName;
     private String lastName;
     private Date birthDate;
-    private String sex;
+    @Enumerated(EnumType.STRING)
+    private Gender sex;
     private String country;
     private String city;
     private Timestamp regDate;

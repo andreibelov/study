@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,7 @@ public class Post implements Serializable {
 
     @Id @GeneratedValue
     private Long id;
+    @Column(unique=true, nullable=false)
     private UUID uuid;
     private Timestamp created;
     private Long profileid;

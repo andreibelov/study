@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 
 import com.epam.courses.jf.dao.Dao;
 import ru.andrw.java.socialnw.dao.DaoFactory;
+import ru.andrw.java.socialnw.dao.FriendsDao;
 import ru.andrw.java.socialnw.dao.TokensDao;
 import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
@@ -21,6 +22,7 @@ public class H2DaoFactory implements DaoFactory, Dao {
 
     private UserDao userDao;
     private TokensDao tokensDao;
+    private H2FriendsDao friendsDao;
     private UserProfileDao profileDao;
 
     public H2DaoFactory(Supplier<Connection> supplier){
@@ -28,6 +30,7 @@ public class H2DaoFactory implements DaoFactory, Dao {
         this.profileDao = new H2UserProfileDao(connectionSupplier);
         this.userDao = new H2UserDao(connectionSupplier);
         this.tokensDao = new H2TokensDao(connectionSupplier);
+        this.friendsDao = new H2FriendsDao(connectionSupplier);
     }
 
     @Override
@@ -43,6 +46,11 @@ public class H2DaoFactory implements DaoFactory, Dao {
     @Override
     public TokensDao getTokensDao() {
         return tokensDao;
+    }
+
+    @Override
+    public FriendsDao getFriendsDao() {
+        return friendsDao;
     }
 
     @Override

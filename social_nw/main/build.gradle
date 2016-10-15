@@ -15,6 +15,7 @@ dependencies {
     compile 'javax.servlet:jstl:1.2'
     compile 'com.google.code.gson:gson:+'
     compile 'org.postgresql:postgresql:+'
+    compile 'org.owasp.esapi:esapi:2.1.0.1'
     compile 'com.diffplug.durian:durian:3.4.0'
     compile 'org.eclipse.persistence:eclipselink:+'
     compile 'javax.websocket:javax.websocket-api:1.0'
