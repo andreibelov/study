@@ -29,19 +29,18 @@ class H2UserDao implements Dao, UserDao {
 
     private final Supplier<Connection> supplier;
     private final String SPLITERATOR = ".";
-    private final String DB_NAME = "TEST";
     private final String SCHEMA_NAME = "PUBLIC";
-    private final String TABLE_NAME = "USER";
-    private final String FULL_TABLE_NAME = DB_NAME+SPLITERATOR+SCHEMA_NAME+SPLITERATOR+TABLE_NAME;
-    private final String SQL_INSERT = "INSERT INTO "+FULL_TABLE_NAME+" (ACCESSLEVEL, EMAIL, LOGIN, PASSWORD, DTYPE) VALUES (?,?,?,?,?);";
-    private final String SQL_SELECT = "SELECT ID, ACCESSLEVEL, EMAIL, LOGIN  FROM "+FULL_TABLE_NAME+" LIMIT ? OFFSET ?;";
-    private final String SQL_SELECT_BY_ID = "SELECT ACCESSLEVEL, EMAIL, LOGIN  FROM "+FULL_TABLE_NAME+" WHERE ID=?;";
-    private final String SQL_SELECT_BY_LOGIN = "SELECT ID, ACCESSLEVEL, EMAIL FROM "+FULL_TABLE_NAME+" WHERE LOGIN=?;";
-    private final String SQL_SELECT_BY_EMAIL = "SELECT ID, ACCESSLEVEL, LOGIN FROM "+FULL_TABLE_NAME+" WHERE EMAIL=?;";
-    private final String SQL_SELECT_FIND = "SELECT ID, ACCESSLEVEL, LOGIN FROM "+FULL_TABLE_NAME+" WHERE EMAIL=? AND PASSWORD=?;";
-    private final String SQL_UPDATE = "UPDATE "+FULL_TABLE_NAME+" SET ACCESSLEVEL = ?, EMAIL=?, LOGIN=?, PASSWORD=? WHERE ID=?;";
-    private final String SQL_UPDATE_PASS = "UPDATE "+FULL_TABLE_NAME+" SET PASSWORD=? WHERE ID=?;";
-    private final String SQL_DELETE = "DELETE FROM "+FULL_TABLE_NAME+" WHERE ID = ?;";
+    private final String USER_TBL = "USER";
+    private final String USER_TNAME = SCHEMA_NAME+SPLITERATOR+ USER_TBL;
+    private final String SQL_INSERT = "INSERT INTO "+ USER_TNAME +" (ACCESSLEVEL, EMAIL, LOGIN, PASSWORD, DTYPE) VALUES (?,?,?,?,?);";
+    private final String SQL_SELECT = "SELECT ID, ACCESSLEVEL, EMAIL, LOGIN  FROM "+ USER_TNAME +" LIMIT ? OFFSET ?;";
+    private final String SQL_SELECT_BY_ID = "SELECT ID, ACCESSLEVEL, EMAIL, LOGIN  FROM "+ USER_TNAME +" WHERE ID=?;";
+    private final String SQL_SELECT_BY_LOGIN = "SELECT ID, ACCESSLEVEL, EMAIL, LOGIN FROM "+ USER_TNAME +" WHERE LOGIN=?;";
+    private final String SQL_SELECT_BY_EMAIL = "SELECT ID, ACCESSLEVEL, EMAIL, LOGIN FROM "+ USER_TNAME +" WHERE EMAIL=?;";
+    private final String SQL_SELECT_FIND = "SELECT ID, ACCESSLEVEL, EMAIL, LOGIN FROM "+ USER_TNAME +" WHERE EMAIL=? AND PASSWORD=?;";
+    private final String SQL_UPDATE = "UPDATE "+ USER_TNAME +" SET ACCESSLEVEL = ?, EMAIL=?, LOGIN=?, PASSWORD=? WHERE ID=?;";
+    private final String SQL_UPDATE_PASS = "UPDATE "+ USER_TNAME +" SET PASSWORD=? WHERE ID=?;";
+    private final String SQL_DELETE = "DELETE FROM "+ USER_TNAME +" WHERE ID = ?;";
 
     H2UserDao(Supplier<Connection> supplier){
         this.supplier = supplier;
@@ -58,12 +57,7 @@ class H2UserDao implements Dao, UserDao {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                user = new User();
-                user.setId(rs.getLong(1))
-                        .setAccessLevel(rs.getInt(2))
-                        .setEmail(email)
-                        .setLogin(rs.getString(3))
-                ;
+                user = mapUser(rs);
             }
 
         } catch (SQLException e) {
@@ -78,17 +72,10 @@ class H2UserDao implements Dao, UserDao {
         else try(Connection con = getConnection();
                  PreparedStatement ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)){
 
-            ps.setInt(1,user.getAccessLevel());
-            ps.setString(2,user.getEmail());
-            ps.setString(3,user.getLogin());
-            ps.setString(4,user.getPassword());
+            prepareUser(user,ps);
             ps.setString(5,user.getClass().getSimpleName());
 
-            int affectedRows = ps.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Creating user failed, no rows affected.");
-            }
+            postInspection(ps, "Creating user failed, no rows affected.");
 
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -111,14 +98,18 @@ class H2UserDao implements Dao, UserDao {
              PreparedStatement ps = con.prepareStatement(SQL_DELETE);
         ) {
             ps.setLong(1, userId);
-            int affectedRows = ps.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Deleting user failed, no rows affected.");
-            }
+            postInspection(ps, "Deleting user failed, no rows affected.");
 
         } catch (SQLException e) {
             throw new DaoException(e);
+        }
+    }
+
+    private void postInspection(PreparedStatement ps, String reason) throws SQLException {
+        int affectedRows = ps.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException(reason);
         }
     }
 
@@ -130,12 +121,7 @@ class H2UserDao implements Dao, UserDao {
             ps.setString(1,pass);
             ps.setLong(2,userId);
 
-
-            int affectedRows = ps.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Deleing user failed, no rows affected.");
-            }
+            postInspection(ps, "Changing password failed, no rows affected.");
 
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -148,17 +134,9 @@ class H2UserDao implements Dao, UserDao {
         else try (Connection con = getConnection();
              PreparedStatement ps = con.prepareStatement(SQL_UPDATE);
         ) {
-            ps.setInt(1,user.getAccessLevel());
-            ps.setString(2,user.getEmail());
-            ps.setString(3,user.getLogin());
-            ps.setString(4,user.getPassword());
+            prepareUser(user, ps);
             ps.setLong(5,user.getId());
-
-            int affectedRows = ps.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Deleing user failed, no rows affected.");
-            }
+            postInspection(ps, "Updating user failed, no rows affected.");
 
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -180,12 +158,7 @@ class H2UserDao implements Dao, UserDao {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                userList.add((new User())
-                        .setId(rs.getLong(1))
-                        .setAccessLevel(rs.getInt(2))
-                        .setEmail(rs.getString(3))
-                        .setLogin(rs.getString(4))
-                );
+                userList.add(mapUser(rs));
             }
 
         } catch (SQLException e) {
@@ -204,11 +177,7 @@ class H2UserDao implements Dao, UserDao {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                user = (new User())
-                        .setId(userId)
-                        .setAccessLevel(rs.getInt(1))
-                        .setEmail(rs.getString(2))
-                        .setLogin(rs.getString(3));
+                user = mapUser(rs);
             }
 
         } catch (SQLException e) {
@@ -219,53 +188,47 @@ class H2UserDao implements Dao, UserDao {
 
     @Override
     public Optional<User> getUserByLogin(String login) throws DaoException {
-        User user = null;
-        try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_SELECT_BY_LOGIN);
-        ) {
-            ps.setString(1, login);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                user = (new User())
-                        .setId(rs.getLong(1))
-                        .setAccessLevel(rs.getInt(2))
-                        .setEmail(rs.getString(3))
-                        .setLogin(login);
-            }
-
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-        return ofNullable(user);
+        return getUserByString(login, SQL_SELECT_BY_LOGIN);
     }
 
     @Override
     public Optional<User> getUserByEmail(String email) throws DaoException {
-        User user = null;
-        try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_SELECT_BY_EMAIL);
-        ) {
-            ps.setString(1, email);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                user = (new User())
-                        .setId(rs.getLong(1))
-                        .setAccessLevel(rs.getInt(2))
-                        .setEmail(email)
-                        .setLogin(rs.getString(3));
-            }
-
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-        return ofNullable(user);
+        return getUserByString(email, SQL_SELECT_BY_EMAIL);
     }
 
     @Override
     public Connection getConnection() {
         return supplier.get();
+    }
+
+    // Private methods ------------------------------------------------------------------
+
+    private Optional<User> getUserByString(String string, String SQL) {
+        User user = null;
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(SQL);
+        ) {
+            ps.setString(1, string);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = mapUser(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return ofNullable(user);
+    }
+
+    private User mapUser(ResultSet rs) throws SQLException {
+        User user;
+        user = (new User())
+                .setId(rs.getLong(1))
+                .setAccessLevel(rs.getInt(2))
+                .setEmail(rs.getString(3))
+                .setLogin(rs.getString(4));
+        return user;
     }
 
     private boolean userValidator(User user){
@@ -276,5 +239,11 @@ class H2UserDao implements Dao, UserDao {
                 .isPresent();
     }
 
+    private void prepareUser(User user, PreparedStatement ps) throws SQLException {
+        ps.setInt(1,user.getAccessLevel());
+        ps.setString(2,user.getEmail());
+        ps.setString(3,user.getLogin());
+        ps.setString(4,user.getPassword());
+    }
 
 }

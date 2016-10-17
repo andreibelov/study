@@ -33,12 +33,12 @@ class H2FriendsDao implements FriendsDao {
     private final String RELATION_TABLE_NAME = SCHEMA_NAME+SPLITERATOR+RELATION_TABLE;
     private final String DELETE = "DELETE FROM "+RELATION_TABLE_NAME+" WHERE ((? IS NOT NULL ) AND (IDREQUESTER = ?) AND (IDREQUESTEE = ?) AND (? IS NOT NULL));";
     private final String PROFILE_TABLE_NAME = SCHEMA_NAME+SPLITERATOR+PROFILE_TABLE;
-    private final String INSERT_OR_UPDATE = "MERGE INTO "+RELATION_TABLE_NAME+" (ID, IDREQUESTEE, IDREQUESTER, STATUS) VALUES (?,?,?,?);";
+    private final String INSERT_OR_UPDATE = "MERGE INTO "+RELATION_TABLE_NAME+" (IDREQUESTEE, IDREQUESTER, STATUS) VALUES (?,?,?,?);";
     private final String SELECT_STATUS =
             "SELECT STATUS " +
                     "FROM "+RELATION_TABLE_NAME+" " +
                 "WHERE ((IDREQUESTER = ?) AND (IDREQUESTEE = ?)) " +
-            "UNION " +
+            "UNION ALL" +
                     "SELECT STATUS " +
                         "FROM "+RELATION_TABLE_NAME+" " +
                     "WHERE ((IDREQUESTER = ?) AND (IDREQUESTEE = ?));";
@@ -127,10 +127,9 @@ class H2FriendsDao implements FriendsDao {
                  PreparedStatement ps = con
                          .prepareStatement(status
                                  .equals(RowStatus.UNDEFINED)?DELETE:INSERT_OR_UPDATE)){
-            ps.setString(1,requesterId.toString()+"."+requesteeId.toString());
-            ps.setLong(2,requesterId);
-            ps.setLong(3,requesteeId);
-            ps.setInt(4,status.ordinal());
+            ps.setLong(1,requesterId);
+            ps.setLong(2,requesteeId);
+            ps.setInt(3,status.ordinal());
 
             if (ps.executeUpdate() == 0) {
                 throw new SQLException("Creating relation failed, no rows affected.");

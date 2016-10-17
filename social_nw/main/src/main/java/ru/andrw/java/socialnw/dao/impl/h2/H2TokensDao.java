@@ -17,7 +17,9 @@ import ru.andrw.java.socialnw.model.auth.User;
  */
 class H2TokensDao implements TokensDao, Dao {
 
-    private Supplier<Connection> supplier;
+    private final Supplier<Connection> supplier;
+    private final String SPLITERATOR = ".";
+    private final String SCHEMA_NAME = "PUBLIC";
 
     H2TokensDao(Supplier<Connection> connectionSupplier) {
         this.supplier = connectionSupplier;

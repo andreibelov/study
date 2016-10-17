@@ -4,10 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 import lombok.Data;
+import ru.andrw.java.socialnw.model.enums.RowStatus;
+import ru.andrw.java.socialnw.model.pkeys.RelationPK;
 
 /**
  * Created by john on 10/11/2016.
@@ -17,6 +22,7 @@ import lombok.Data;
  */
 @Data
 @Entity
+@IdClass(value=RelationPK.class)
 public class Relation implements Serializable {
 
     // Constants -----------------------------------------------------------------
@@ -26,8 +32,9 @@ public class Relation implements Serializable {
     // Properties ----------------------------------------------------------------
 
     @Id
-    private String id;
     private Long idRequester;
+    @Id
     private Long idRequestee;
-    private Integer status;
+    @Enumerated(EnumType.ORDINAL)
+    private RowStatus status;
 }

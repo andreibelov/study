@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.FriendsDao;
+import ru.andrw.java.socialnw.dao.IMDao;
 import ru.andrw.java.socialnw.dao.TokensDao;
 import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
@@ -111,6 +112,11 @@ public class ListDaoFactory implements DaoFactory {
 
     @Override
     public FriendsDao getFriendsDao() {
+        return null;
+    }
+
+    @Override
+    public IMDao getIMDao() {
         return null;
     }
 }

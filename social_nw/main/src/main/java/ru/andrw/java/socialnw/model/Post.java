@@ -1,8 +1,9 @@
 package ru.andrw.java.socialnw.model;
 
+import org.eclipse.persistence.annotations.Index;
+
 import java.io.Serializable;
 import java.security.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -31,9 +33,9 @@ public class Post implements Serializable {
 
     // Properties ----------------------------------------------------------------
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true, nullable=false)
+    @Index @Column(nullable=false, unique = true, columnDefinition = "binary(16)")
     private UUID uuid;
     private Timestamp created;
     private Long profileid;

@@ -11,5 +11,6 @@ public enum AttType {
     IMG,
     AUDIO,
     VIDEO,
-    POST
+    POST,
+    IMESSAGE
 }

@@ -11,4 +11,7 @@ public interface DaoFactory {
     public UserProfileDao getProfileDao();
     public TokensDao getTokensDao();
     public FriendsDao getFriendsDao();
+    public IMDao getIMDao();
+    public PostDao getPostDao();
+    public SectionDao getSectionDao();
 }

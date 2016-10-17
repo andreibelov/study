@@ -12,6 +12,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import ru.andrw.java.socialnw.dao.TokensDao;
+import ru.andrw.java.socialnw.dao.UserDao;
+import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.auth.User;
 import ru.andrw.java.socialnw.pooling.ConnectionPool;
 import ru.andrw.java.socialnw.model.Profile;
@@ -26,6 +29,7 @@ import static org.junit.Assert.*;
  * @version 1.0
  * @since <pre></pre>
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class H2DaoFactoryTest {
 
     private static final String DB_PROPERTIES_FILE_NAME = "h2.db.properties";
@@ -33,34 +37,13 @@ public class H2DaoFactoryTest {
 
     private static ConnectionPool connectionPool;
     private H2DaoFactory daoFactory;
+    private UserDao userDao;
+    private TokensDao tokensDao;
+    private H2FriendsDao friendsDao;
+    private UserProfileDao profileDao;
 
     @Before
     public void setUp() throws Exception {
-
-//        Persistence.generateSchema("samplePU",new HashMap());
-//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("samplePU");
-//        EntityManager em = entityManagerFactory.createEntityManager();
-//        EntityTransaction et = em.getTransaction();
-//
-//        et.begin();
-//
-//        User user = (new User())
-//                .setLogin("login")
-//                .setPassword("pass")
-//                .setEmail("mail")
-//                .setAccessLevel(3);
-//
-//        em.persist(user);
-//
-//        Profile profile = (new Profile())
-//                .setFirstName("Andrei")
-//                .setLastName("Belov")
-//                .setPhone("+79112935537");
-//        profile.setEmail("andrei.belov@mail.ru");
-//        em.persist(profile);
-//
-//        et.commit();
-
 
         URL dbPropertiesURL = H2UserDao.class.getClassLoader()
                 .getResource(DB_PROPERTIES_FILE_NAME);
@@ -76,7 +59,8 @@ public class H2DaoFactoryTest {
      */
     @Test
     public void getUserDao() throws Exception {
-        //TODO: Test goes here...
+
+        assertTrue(daoFactory.getUserDao() != null);
 
     }
 
@@ -85,7 +69,7 @@ public class H2DaoFactoryTest {
      */
     @Test
     public void getProfileDao() throws Exception {
-
+        assertTrue(daoFactory.getProfileDao() != null);
     }
 
     /**
@@ -93,7 +77,7 @@ public class H2DaoFactoryTest {
      */
     @Test
     public void getTokensDao() throws Exception {
-        //TODO: Test goes here...
+        assertTrue(daoFactory.getTokensDao() != null);
 
     }
 

@@ -1,5 +1,7 @@
 package ru.andrw.java.socialnw.model;
 
+import org.eclipse.persistence.annotations.Index;
+
 import java.io.Serializable;
 import java.net.URI;
 import java.util.UUID;
@@ -13,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import ru.andrw.java.socialnw.model.enums.AttType;
 
 /**
@@ -23,6 +26,7 @@ import ru.andrw.java.socialnw.model.enums.AttType;
  */
 @Data
 @Embeddable
+@Accessors(chain = true)
 public class Attach implements Serializable {
 
     // Constants -----------------------------------------------------------------
@@ -31,9 +35,10 @@ public class Attach implements Serializable {
 
     // Properties ----------------------------------------------------------------
 
-    @Column(unique=true, nullable=false)
+    @Index
+    @Column(nullable=false, unique = true, columnDefinition = "binary(16)")
     private UUID uuid;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private AttType type;
     private URI uri;
 

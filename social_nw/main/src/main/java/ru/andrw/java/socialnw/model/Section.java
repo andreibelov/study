@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Data;
@@ -35,7 +36,7 @@ public class Section implements Serializable {
 
     // Properties ----------------------------------------------------------------
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String sectionName;
     private String pageTitle;

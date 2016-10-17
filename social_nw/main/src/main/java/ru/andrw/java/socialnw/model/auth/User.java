@@ -1,5 +1,7 @@
 package ru.andrw.java.socialnw.model.auth;
 
+import org.eclipse.persistence.annotations.Index;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -38,10 +40,11 @@ public class User implements Serializable {
     // Properties ----------------------------------------------------------------
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true, nullable=false)
+    @Index @Column(unique=true, nullable=false, columnDefinition = "VARCHAR (32)")
     private String email;
-    @Column(unique=true)
+    @Index @Column(unique=true, nullable=false, columnDefinition = "VARCHAR (16)")
     private String login;
+    @Index @Column(unique=true, nullable=false, columnDefinition = "VARCHAR (32)")
     private String password;
     private Integer accessLevel;
 

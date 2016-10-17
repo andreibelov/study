@@ -43,11 +43,11 @@ class H2UserProfileDao implements UserProfileDao, Dao {
         "SELECT * FROM " +
                "(SELECT t0.ID, t0.ACCESSLEVEL, t0.EMAIL, t0.LOGIN, t1.BIRTHDATE, t1.CITY, t1.COUNTRY, t1.FIRSTNAME, t1.LASTNAME, t1.PHONE, t1.PHOTO, t1.REGDATE, t1.SEX, t1.STATUS " +
                 "FROM "+USER_TABLE_NAME+" t0, "+PROFILE_TABLE_NAME+" t1 " +
-                    "WHERE ((LOWER(t1.FIRSTNAME) LIKE ?)  AND ((t1.ID = t0.ID) AND (t0.DTYPE = ?))) " +
+                    "WHERE ((LOWER(t1.FIRSTNAME) LIKE ? ESCAPE '')  AND ((t1.ID = t0.ID) AND (t0.DTYPE = ?))) " +
                 "UNION " +
                 "SELECT t0.ID, t0.ACCESSLEVEL, t0.EMAIL, t0.LOGIN, t1.BIRTHDATE, t1.CITY, t1.COUNTRY, t1.FIRSTNAME, t1.LASTNAME, t1.PHONE, t1.PHOTO, t1.REGDATE, t1.SEX, t1.STATUS " +
                     "FROM "+USER_TABLE_NAME+" t0, "+PROFILE_TABLE_NAME+" t1 " +
-                    "WHERE ((LOWER(t1.LASTNAME) LIKE ?)  AND ((t1.ID = t0.ID) AND (t0.DTYPE = ?)))) " +
+                    "WHERE ((LOWER(t1.LASTNAME) LIKE ? ESCAPE '')  AND ((t1.ID = t0.ID) AND (t0.DTYPE = ?)))) " +
                 "ORDER BY ID LIMIT ? OFFSET ?";
     private final String USER_UPDATE = "UPDATE "+USER_TABLE_NAME+" SET ACCESSLEVEL = ?, EMAIL=?, LOGIN=?, PASSWORD=? WHERE ID=?;";
     private final String PROFILE_UPDATE = "UPDATE "+PROFILE_TABLE_NAME+" SET BIRTHDATE = ?, CITY = ?, COUNTRY = ?, FIRSTNAME = ?, LASTNAME = ?, PHONE = ?, PHOTO = ?, REGDATE = ?, SEX = ?, STATUS =? WHERE ID=?;";
@@ -126,12 +126,11 @@ class H2UserProfileDao implements UserProfileDao, Dao {
              PreparedStatement ps = con.prepareStatement(SEARCH_BY_NAME)
         ) {
 
-            String query = "%"+name.toLowerCase()+"%";
             int limit = 30;
             int offset = 0;
-            ps.setString(1, query);
+            ps.setString(1, name.toLowerCase()+"%");
             ps.setString(2, Profile.class.getSimpleName());
-            ps.setString(3, query);
+            ps.setString(3, name.toLowerCase()+"%");
             ps.setString(4, Profile.class.getSimpleName());
             ps.setInt(5, limit);
             ps.setInt(6, offset);

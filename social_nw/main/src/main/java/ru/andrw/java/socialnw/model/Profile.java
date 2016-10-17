@@ -1,8 +1,7 @@
 package ru.andrw.java.socialnw.model;
 
-import org.eclipse.persistence.annotations.Customizer;
+import org.eclipse.persistence.annotations.Index;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -11,24 +10,10 @@ import ru.andrw.java.socialnw.model.auth.User;
 import ru.andrw.java.socialnw.model.enums.Gender;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import static javax.persistence.ConstraintMode.PROVIDER_DEFAULT;
+import javax.persistence.*;
 
 /**
  * Created by john on 9/25/2016.
@@ -39,7 +24,6 @@ import static javax.persistence.ConstraintMode.PROVIDER_DEFAULT;
 @Data
 @Entity
 @Accessors(chain = true)
-@ToString(callSuper=true, includeFieldNames=true)
 @EqualsAndHashCode(callSuper = true, exclude={"status"})
 public class Profile extends User implements Serializable{
 
@@ -49,16 +33,25 @@ public class Profile extends User implements Serializable{
 
     // Properties -----------------------------------------------------------------
 
+    @Index @Column(columnDefinition = "VARCHAR (32)")
     private String firstName;
+    @Index @Column(columnDefinition = "VARCHAR (32)")
     private String lastName;
+    @Index
     private Date birthDate;
     @Enumerated(EnumType.STRING)
     private Gender sex;
+    @Index @Column(columnDefinition = "VARCHAR (2)")
     private String country;
+    @Index @Column(columnDefinition = "VARCHAR (27)")
     private String city;
-    private Timestamp regDate;
+    @Index
+    private Date regDate;
+    @Index @Column(columnDefinition = "VARCHAR (16)")
     private String phone;
+    @Column(columnDefinition = "VARCHAR (64)")
     private String status;
+    @Column(nullable=false, columnDefinition = "binary(16)")
     private UUID photo;
 
 }

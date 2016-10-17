@@ -1,28 +1,26 @@
 package ru.andrw.java.socialnw.model.chat;
 
-
 import org.eclipse.persistence.annotations.Index;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.IdClass;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.Accessors;
-import ru.andrw.java.socialnw.model.Attach;
+
 
 /**
- * Created by john on 9/30/2016.
+ * Created by john on 10/16/2016.
  *
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
@@ -30,28 +28,30 @@ import ru.andrw.java.socialnw.model.Attach;
 @Data
 @Entity
 @Accessors(chain = true)
-public class IMessage implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper=true, includeFieldNames=true)
+public class Dialogue extends Conversation implements Serializable {
 
     // Constants ------------------------------------------------------------------
 
     private static final long serialVersionUID = 1L;
 
+    // Constructors ---------------------------------------------------------------
+
+    public Dialogue(final Long person1, final Long person2){
+        this.person1 = person1;
+        this.person2 = person2;
+    }
+
+    public Dialogue(){}
+
     // Properties -----------------------------------------------------------------
 
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
     private Long id;
-    @Index @Column(nullable=false, unique = true, columnDefinition = "binary(16)")
-    private UUID uuid;
     @Index
-    private Date created;
-    private String content;
-    @Index @Column(nullable=true)
-    private Long convoId;
-    @Index @Column(nullable=false, columnDefinition = "binary(16)")
-    private UUID convoUuid;
-    private Long sender;
-    @Column(nullable=false)
-    private boolean isRead = false;
-    @ElementCollection
-    private List<Attach> attachments;
+    private Long person1;
+    @Index
+    private Long person2;
+
 }

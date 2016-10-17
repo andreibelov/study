@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
+
 
 
 import javax.persistence.EntityManager;
@@ -70,16 +70,6 @@ public class H2UserProfileDaoTest {
 
     @Before
     public void setUp() throws Exception {
-
-        CertificateFactory cf = CertificateFactory.getInstance("X.509");
-        List<Certificate> list = new ArrayList<Certificate>();
-
-        InputStream is = H2UserProfileDao.class.getClassLoader()
-                .getResourceAsStream(CERT_FILE_NAME);
-        Certificate c = cf.generateCertificate(is);
-        list.add(c);
-
-        CertPath cp = cf.generateCertPath(list);
 
 
         URL dbPropertiesURL = H2UserDao.class.getClassLoader()

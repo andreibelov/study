@@ -19,7 +19,7 @@ import static java.util.Optional.of;
  * @link http://vk.com/andrei.belov
  */
 @SuppressWarnings("WeakerAccess")
-public class ListTokensDao implements TokensDao {
+class ListTokensDao implements TokensDao {
 
     private Map<String, Long> tokens;
 

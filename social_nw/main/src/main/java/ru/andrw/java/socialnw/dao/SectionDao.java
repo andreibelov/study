@@ -3,9 +3,10 @@ package ru.andrw.java.socialnw.dao;
 import com.epam.courses.jf.dao.Dao;
 
 /**
- * Created by john on 10/12/2016.
+ * Created by john on 10/17/2016.
+ *
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-public interface PostDao extends Dao{
+public interface SectionDao extends Dao{
 }
