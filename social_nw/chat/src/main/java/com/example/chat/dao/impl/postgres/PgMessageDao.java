@@ -1,5 +1,6 @@
 package com.example.chat.dao.impl.postgres;
 
+import com.example.chat.dao.DaoException;
 import com.example.chat.dao.MessageDao;
 import com.example.chat.model.Message;
 import com.example.chat.util.DbUtil;
@@ -25,7 +26,7 @@ public class PgMessageDao implements MessageDao {
     }
 
     @Override
-    public Message addMessage(Message message) {
+    public Message addMessage(Message message) throws DaoException{
         PreparedStatement preparedStatement = null;
         PGobject pgUuid = new PGobject();
         try {
@@ -45,7 +46,7 @@ public class PgMessageDao implements MessageDao {
             e.printStackTrace();
         } finally {
             try { if (preparedStatement != null) preparedStatement.close();
-            } catch (Exception e) {};
+            } catch (Exception e) { throw new DaoException(e.getMessage(),e);};
         }
         return this.getMessageByUuid(message.getUuid().toString());
 

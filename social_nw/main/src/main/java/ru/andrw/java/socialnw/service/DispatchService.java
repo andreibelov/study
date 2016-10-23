@@ -74,6 +74,8 @@ public class DispatchService {
         Section section = sections.get("default");
         if(sectionName.isPresent()) section = sections.get(sectionName.get());
         request.setAttribute("section",section);
+        request.setAttribute("action", "edit");
+        request.setAttribute("sections", sections.entrySet());
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
     }
 
@@ -87,6 +89,7 @@ public class DispatchService {
         if(o_profile.isPresent()) {
             session.removeAttribute(attrib);
             request.setAttribute(attrib, o_profile.get());
+            request.setAttribute("action", "edit");
         }
     }
 }

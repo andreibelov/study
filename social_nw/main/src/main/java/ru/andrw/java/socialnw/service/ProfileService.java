@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.Profile;
+import ru.andrw.java.socialnw.model.enums.Gender;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.UUID.fromString;
@@ -39,7 +41,6 @@ public class ProfileService {
         methods.put("edit",ProfileService::editUserProfile);
         methods.put("remove",ProfileService::removeUserProfile);
     }
-
     public static void doAction(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
@@ -136,14 +137,17 @@ public class ProfileService {
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         Profile profile = null;
         try {
-            profile = (new Profile())
-                    .setPhoto(fromString(req.getParameter("photo")))
-                    .setFirstName(req.getParameter("name"))
-                    .setLastName(req.getParameter("lastName"))
+            profile = (new Profile());
+            profile.setEmail(req.getParameter("email"))
+                    .setLogin(req.getParameter("login"));
+            profile.setBirthDate(format.parse(req.getParameter("birthDate")))
                     .setCountry(req.getParameter("country"))
                     .setCity(req.getParameter("city"))
-                    .setBirthDate(format.parse(req.getParameter("birthDate")));
-            profile.setEmail(req.getParameter("email"));
+                    .setFirstName(req.getParameter("firstName"))
+                    .setLastName(req.getParameter("lastName"))
+                    .setPhone(req.getParameter("mobile"))
+                    .setPhoto(fromString(req.getParameter("photo")))
+                    .setSex(Gender.values()[Integer.parseInt(req.getParameter("gender"))]);
         } catch (ParseException e) {
             logger.error("Could not parse date provided",e);
         }
@@ -170,20 +174,25 @@ public class ProfileService {
     private static void editUserProfile(HttpServletRequest req,
                                         HttpServletResponse resp)
             throws ServletException, IOException {
-        Long userProfileId = Long.valueOf(req.getParameter("userProfileId"));
+        Long profileId = Long.valueOf(req.getParameter("userProfileId"));
         String pattern = "dd-mm-yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
-        Profile profile = null;
+        Optional<Profile> o_profile = profileDao.getUserProfileById(profileId);
+        Profile profile = o_profile.isPresent() ? o_profile.get() : new Profile();
         try {
-            profile = (new Profile())
-                    .setFirstName(req.getParameter("name"))
-                    .setLastName(req.getParameter("lastName"))
+            profile.setId(profileId)
+                .setAccessLevel(3) //TODO
+                .setEmail(req.getParameter("email"))
+                .setLogin(req.getParameter("login"));
+            profile.setBirthDate(format.parse(req.getParameter("birthDate")))
                     .setCountry(req.getParameter("country"))
                     .setCity(req.getParameter("city"))
-                    .setStatus(req.getParameter("status"))
-                    .setPhoto(fromString(req.getParameter("photoUuid")))
-                    .setBirthDate(format.parse(req.getParameter("birthDate")));
-            profile.setId(userProfileId).setEmail(req.getParameter("email"));
+                    .setFirstName(req.getParameter("firstName"))
+                    .setLastName(req.getParameter("lastName"))
+                    .setPhone(req.getParameter("mobile"))
+                    .setPhoto(fromString(req.getParameter("photo")))
+                    .setSex(Gender.values()[Integer.parseInt(req.getParameter("gender"))])
+                    .setStatus("");
         } catch (ParseException e) {
             logger.error("Could not parse date provided",e);
         }
@@ -195,7 +204,7 @@ public class ProfileService {
             req.setAttribute("profileList", profileDao.getUserProfilesSubList(0,30));
         } catch (DaoException e) {
             logger.error("Profile not updated",e);
-            req.setAttribute("userProfileId",userProfileId);
+            req.setAttribute("userProfileId",profileId);
             req.setAttribute("message","User not updated!");
             req.setAttribute("action","edit");
             req.setAttribute("profile",profile);

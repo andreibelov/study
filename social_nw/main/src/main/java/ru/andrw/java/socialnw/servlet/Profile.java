@@ -38,12 +38,7 @@ public class Profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Section section = new Section();
-        section.setCssFile("profile.css").setJsFile("profile.js");
-        request.setAttribute("section", section);
-        request.setAttribute("pageTitle", "Profile edit");
-        request.setAttribute("includeSection", "/WEB-INF/include/profile.jsp");
-        request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").include(request, response);
+
     }
 
     @Override

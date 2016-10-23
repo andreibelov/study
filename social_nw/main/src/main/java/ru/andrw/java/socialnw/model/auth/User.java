@@ -2,6 +2,7 @@ package ru.andrw.java.socialnw.model.auth;
 
 import org.eclipse.persistence.annotations.Index;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -23,6 +24,7 @@ import javax.persistence.InheritanceType;
  */
 @Data
 @Entity
+@AllArgsConstructor
 @Accessors(chain = true)
 @Inheritance(strategy=InheritanceType.JOINED)
 public class User implements Serializable {
@@ -34,10 +36,11 @@ public class User implements Serializable {
     // Constructor ---------------------------------------------------------------
 
     public User(){
-        this.accessLevel = 3;
+
     }
 
     // Properties ----------------------------------------------------------------
+    
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @Index @Column(unique=true, nullable=false, columnDefinition = "VARCHAR (32)")
@@ -46,7 +49,7 @@ public class User implements Serializable {
     private String login;
     @Index @Column(unique=true, nullable=false, columnDefinition = "VARCHAR (32)")
     private String password;
-    private Integer accessLevel;
+    private Integer accessLevel = 3;
 
     // Object overrides -----------------------------------------------------------
 

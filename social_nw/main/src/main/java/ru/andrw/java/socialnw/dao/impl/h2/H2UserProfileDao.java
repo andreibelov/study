@@ -1,22 +1,34 @@
 package ru.andrw.java.socialnw.dao.impl.h2;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+import com.diffplug.common.base.Errors;
 import com.epam.courses.jf.dao.Dao;
+
+import org.intellij.lang.annotations.Language;
+
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.Profile;
+import ru.andrw.java.socialnw.model.auth.User;
 import ru.andrw.java.socialnw.model.enums.Gender;
+
+import static ru.andrw.java.socialnw.util.UuidUtils.asBytes;
+import static ru.andrw.java.socialnw.util.UuidUtils.asUuid;
 
 /**
  * Created by john on 10/11/2016.
@@ -35,6 +47,7 @@ class H2UserProfileDao implements UserProfileDao, Dao {
     private final String PROFILE_TABLE_NAME = SCHEMA_NAME+SPLITERATOR+PROFILE_TABLE;
     private final String INSERT_USER = "INSERT INTO "+USER_TABLE_NAME+" (ACCESSLEVEL, EMAIL, LOGIN, PASSWORD, DTYPE) VALUES (?, ?, ?, ?, ?);";
     private final String INSERT_PROFILE = "INSERT INTO "+PROFILE_TABLE_NAME+" (BIRTHDATE, CITY, COUNTRY, FIRSTNAME, LASTNAME, PHONE, PHOTO, REGDATE, SEX, STATUS, ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private final String REG_PROFILE = "INSERT INTO "+PROFILE_TABLE_NAME+" (FIRSTNAME, LASTNAME, REGDATE, ID) VALUES (?,?,?,?);";
     private final String SELECT = "SELECT t0.ID, t0.ACCESSLEVEL, t0.EMAIL, t0.LOGIN, t1.BIRTHDATE, t1.CITY, t1.COUNTRY, t1.FIRSTNAME, t1.LASTNAME, t1.PHONE, t1.PHOTO, t1.REGDATE, t1.SEX, t1.STATUS FROM "+USER_TABLE_NAME+" t0, "+PROFILE_TABLE_NAME+" t1 WHERE ((t1.ID = t0.ID) AND (t0.DTYPE = ?)) LIMIT ? OFFSET ?;";
     private final String SELECT_BY_ID = "SELECT t0.ID, t0.ACCESSLEVEL, t0.EMAIL, t0.LOGIN, t1.BIRTHDATE, t1.CITY, t1.COUNTRY, t1.FIRSTNAME, t1.LASTNAME, t1.PHONE, t1.PHOTO, t1.REGDATE, t1.SEX, t1.STATUS FROM "+USER_TABLE_NAME+" t0, "+PROFILE_TABLE_NAME+" t1 WHERE ((t0.ID = ?) AND ((t1.ID = t0.ID) AND (t0.DTYPE = ?)))";
     private final String SELECT_BY_EMAIL = "SELECT t0.ID, t0.ACCESSLEVEL, t0.EMAIL, t0.LOGIN, t1.BIRTHDATE, t1.CITY, t1.COUNTRY, t1.FIRSTNAME, t1.LASTNAME, t1.PHONE, t1.PHOTO, t1.REGDATE, t1.SEX, t1.STATUS FROM "+USER_TABLE_NAME+" t0, "+PROFILE_TABLE_NAME+" t1 WHERE ((t0.EMAIL = ?) AND ((t1.ID = t0.ID) AND (t0.DTYPE = ?)))";
@@ -49,7 +62,8 @@ class H2UserProfileDao implements UserProfileDao, Dao {
                     "FROM "+USER_TABLE_NAME+" t0, "+PROFILE_TABLE_NAME+" t1 " +
                     "WHERE ((LOWER(t1.LASTNAME) LIKE ? ESCAPE '')  AND ((t1.ID = t0.ID) AND (t0.DTYPE = ?)))) " +
                 "ORDER BY ID LIMIT ? OFFSET ?";
-    private final String USER_UPDATE = "UPDATE "+USER_TABLE_NAME+" SET ACCESSLEVEL = ?, EMAIL=?, LOGIN=?, PASSWORD=? WHERE ID=?;";
+    @Language("H2")
+    private final String USER_UPDATE = "UPDATE "+USER_TABLE_NAME+" SET ACCESSLEVEL = ?, EMAIL=?, LOGIN=?, PASSWORD=CASEWHEN( ? IS NULL, PASSWORD,PASSWORD) WHERE ID=?;";
     private final String PROFILE_UPDATE = "UPDATE "+PROFILE_TABLE_NAME+" SET BIRTHDATE = ?, CITY = ?, COUNTRY = ?, FIRSTNAME = ?, LASTNAME = ?, PHONE = ?, PHOTO = ?, REGDATE = ?, SEX = ?, STATUS =? WHERE ID=?;";
     private final String PROFILE_DELETE = "DELETE FROM "+PROFILE_TABLE_NAME+" WHERE ID = ?;";
     private final String USER_DELETE = "DELETE FROM "+USER_TABLE_NAME+" WHERE ID = ?;";
@@ -59,22 +73,21 @@ class H2UserProfileDao implements UserProfileDao, Dao {
     }
 
     @Override
-    public Profile addUserProfile(Profile profile) throws DaoException {
-
-        if(!validator(profile)) throw new DaoException("Profile is not valid!");
+    public Profile regNewProfile(Profile profile) throws DaoException {
+        if(!validator(profile.setId(0L),User.class)) throw new DaoException("Null field: "+Arrays
+                .stream(User.class.getDeclaredFields())
+                .peek(f -> f.setAccessible(true))
+                .filter(Errors.rethrow().wrap((Field f) -> f.get(profile) == null))
+                .findAny().get().getName());
         else try(Connection con = getConnection();
                  PreparedStatement ps1 = con.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
-                 PreparedStatement ps2 = con.prepareStatement(INSERT_PROFILE, Statement.RETURN_GENERATED_KEYS)
+                 PreparedStatement ps2 = con.prepareStatement(REG_PROFILE)
         ){
 
             prepareFirst(profile, ps1);
             ps1.setString(5,profile.getClass().getSimpleName());
 
-            int affectedRows = ps1.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Creating profile failed, no rows affected.");
-            }
+            postInspection(ps1, "Creating profile failed, no rows affected.");
 
             try (ResultSet generatedKeys = ps1.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -85,14 +98,41 @@ class H2UserProfileDao implements UserProfileDao, Dao {
                 }
             }
 
-            prepareSecond(profile, ps2);
+            registerProfile(profile, ps2);
+            postInspection(ps2,"Creating profile failed, no rows affected.");
 
-            affectedRows = ps2.executeUpdate();
+            profile.setFirstName("NEW").setLastName("USER");
 
-            if (affectedRows == 0) {
-                throw new SQLException("Creating profile failed, no rows affected.");
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return profile;
+    }
+
+    @Override
+    public Profile addUserProfile(Profile profile) throws DaoException {
+        if(!validator(profile.setId(0L))) throw new DaoException("Null field: "+Arrays
+                .stream(Profile.class.getDeclaredFields())
+                .peek(f -> f.setAccessible(true))
+                .filter(Errors.rethrow().wrap((Field f) -> f.get(profile) == null))
+                .findAny().get().getName());
+        else try(Connection con = getConnection();
+                 PreparedStatement ps1 = con.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
+                 PreparedStatement ps2 = con.prepareStatement(INSERT_PROFILE)
+        ){
+            prepareFirst(profile, ps1);
+            ps1.setString(5,profile.getClass().getSimpleName());
+            postInspection(ps1, "Creating profile failed, no rows affected.");
+            try (ResultSet generatedKeys = ps1.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    profile.setId(generatedKeys.getLong(1));
+                }
+                else {
+                    throw new SQLException("Creating profile failed, no ID obtained.");
+                }
             }
-
+            prepareSecond(profile, ps2);
+            postInspection(ps2,"Creating profile failed, no rows affected.");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -111,13 +151,14 @@ class H2UserProfileDao implements UserProfileDao, Dao {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                profileList.add(getProfile(rs));
+                profileList.add(mapProfile(rs));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
         return profileList;
     }
+
 
     @Override
     public List<Profile> searchUserProfilesByName(String name) {
@@ -137,7 +178,7 @@ class H2UserProfileDao implements UserProfileDao, Dao {
             System.out.println(ps);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                profileList.add(getProfile(rs));
+                profileList.add(mapProfile(rs));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -155,7 +196,7 @@ class H2UserProfileDao implements UserProfileDao, Dao {
             ps.setString(2, Profile.class.getSimpleName());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                profile = getProfile(rs);
+                profile = mapProfile(rs);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -173,7 +214,7 @@ class H2UserProfileDao implements UserProfileDao, Dao {
             ps.setString(2, Profile.class.getSimpleName());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                profile = getProfile(rs);
+                profile = mapProfile(rs);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -188,24 +229,11 @@ class H2UserProfileDao implements UserProfileDao, Dao {
                  PreparedStatement ps1 = con.prepareStatement(USER_UPDATE);
                  PreparedStatement ps2 = con.prepareStatement(PROFILE_UPDATE)
         ){
-
             prepareFirst(profile, ps1);
             ps1.setLong(5,profile.getId());
-
-            int affectedRows = ps1.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Updating profile failed, no rows affected.");
-            }
-
+            postInspection(ps1, "Updating profile failed, no rows affected.");
             prepareSecond(profile, ps2);
-
-            affectedRows = ps2.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Updating profile failed, no rows affected.");
-            }
-
+            postInspection(ps2, "Updating profile failed, no rows affected.");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -218,15 +246,9 @@ class H2UserProfileDao implements UserProfileDao, Dao {
              PreparedStatement ps2 = con.prepareStatement(USER_DELETE)
         ) {
             ps1.setLong(1, id);
-            int affectedRows = ps1.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Deleing profile failed, no rows affected.");
-            }
+            postInspection(ps1, "Deleting profile failed, no rows affected.");
             ps2.setLong(1, id);
-            affectedRows = ps2.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Deleing profile failed, no rows affected.");
-            }
+            postInspection(ps2, "Deleting profile failed, no rows affected.");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -239,9 +261,8 @@ class H2UserProfileDao implements UserProfileDao, Dao {
 
     // Private methods ------------------------------------------------------------------
 
-    private Profile getProfile(ResultSet rs) throws SQLException {
-        Profile profile;
-        profile = new Profile();
+    private Profile mapProfile(ResultSet rs) throws SQLException {
+        Profile profile = new Profile();
         profile.setId(rs.getLong(1))
                 .setAccessLevel(rs.getInt(2))
                 .setEmail(rs.getString(3))
@@ -259,8 +280,16 @@ class H2UserProfileDao implements UserProfileDao, Dao {
         return profile;
     }
 
-    private boolean validator(Profile profile) {
-        return (profile != null);
+    private boolean validator(Object o, Class c) {
+        return o != null && !Arrays
+                .stream(c.getDeclaredFields())
+                .peek(f -> f.setAccessible(true))
+                .filter(Errors.rethrow().wrap((Field f) -> f.get(o) == null))
+                .findAny().isPresent();
+    }
+
+    private boolean validator(Object o) {
+        return validator(o,o.getClass());
     }
 
     private void prepareFirst(Profile profile, PreparedStatement ps1) throws SQLException {
@@ -270,7 +299,6 @@ class H2UserProfileDao implements UserProfileDao, Dao {
         ps1.setString(4,profile.getPassword());
     }
 
-
     private void prepareSecond(Profile profile, PreparedStatement ps2) throws SQLException {
         ps2.setTimestamp(1,new Timestamp(profile.getBirthDate().getTime()));
         ps2.setString(2,profile.getCity());
@@ -278,10 +306,27 @@ class H2UserProfileDao implements UserProfileDao, Dao {
         ps2.setString(4,profile.getFirstName());
         ps2.setString(5,profile.getLastName());
         ps2.setString(6,profile.getPhone());
-        ps2.setObject(7,profile.getPhoto());
+        ps2.setBytes(7,asBytes(profile.getPhoto()));
         ps2.setTimestamp(8,new Timestamp(profile.getRegDate().getTime()));
         ps2.setString(9,profile.getSex().toString());
         ps2.setString(10,profile.getStatus());
         ps2.setLong(11,profile.getId());
+
+    }
+
+
+    private void registerProfile(Profile profile,
+                                 PreparedStatement ps2) throws SQLException {
+        ps2.setString(1,"NEW");
+        ps2.setString(2,"USER");
+        ps2.setTimestamp(3,new Timestamp((new Date()).getTime()));
+        ps2.setLong(4,profile.getId());
+    }
+
+    private void postInspection(PreparedStatement ps1,
+                                String message) throws SQLException {
+        if (ps1.executeUpdate() == 0) {
+            throw new SQLException(message);
+        }
     }
 }

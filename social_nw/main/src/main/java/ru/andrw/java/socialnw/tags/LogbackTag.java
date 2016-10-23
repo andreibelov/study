@@ -1,4 +1,4 @@
-package ru.andrw.java.socialnw.util;
+package ru.andrw.java.socialnw.tags;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

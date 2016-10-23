@@ -1,5 +1,8 @@
 package ru.andrw.java.socialnw.dao.impl.h2;
 
+import com.fasterxml.uuid.EthernetAddress;
+import com.fasterxml.uuid.Generators;
+import com.fasterxml.uuid.impl.TimeBasedGenerator;
 import com.opencsv.CSVReader;
 
 import org.apache.tomcat.util.security.ConcurrentMessageDigest;
@@ -83,6 +86,9 @@ public class H2UserProfileDaoTest {
 
     }
 
+    private static final EthernetAddress addr = EthernetAddress.fromInterface();
+    private static final TimeBasedGenerator uuid = Generators.timeBasedGenerator(addr);
+
     /**
      * Method: addUserProfile
      */
@@ -137,12 +143,12 @@ public class H2UserProfileDaoTest {
                 .setLastName(lastName)
                 .setPhone("+79112935537")
                 .setSex(sex)
-                .setCountry("U.S.")
+                .setCountry("US")
                 .setCity("Brooklyn")
                 .setRegDate(new Timestamp((new Date().getTime())))
                 .setStatus("Welcome!")
                 .setBirthDate(format.parse("01-06-1989"))
-                .setPhoto(UUID.nameUUIDFromBytes(username.getBytes()));
+                .setPhoto(UUID.randomUUID());
         profile.setLogin(username)
                 .setEmail(email)
                 .setPassword(encode(password));

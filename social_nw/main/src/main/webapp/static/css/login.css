@@ -7,6 +7,9 @@ body {
     color: #337ab7;;
     font-size: 18px;
 }
+#register-form{
+    padding-top: 15px;
+}
 #register-form-link.active{
     color: #029f5b;
     font-size: 18px;

@@ -78,6 +78,14 @@ class ListUserProfileDao implements UserProfileDao {
     }
 
     @Override
+    public Profile regNewProfile(Profile profile) throws DaoException {
+        if(!userProfileValidator(profile)) throw new DaoException("Provided profile is not valid");
+        profile.setId(counter.getAndIncrement());
+        userProfileList.add(profile);
+        return profile;
+    }
+
+    @Override
     public Profile addUserProfile(Profile profile) throws DaoException {
         if(!userProfileValidator(profile)) throw new DaoException("Provided profile is not valid");
         profile.setId(counter.getAndIncrement());

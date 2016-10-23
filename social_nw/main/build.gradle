@@ -25,5 +25,6 @@ dependencies {
 //  Provided dependencies:
     providedCompile 'org.apache.tomcat:tomcat-api:+'
     providedCompile 'org.apache.tomcat:tomcat-jasper:+'
+    providedCompile 'org.jetbrains:annotations:+'
 //  Test only dependencies:
 }

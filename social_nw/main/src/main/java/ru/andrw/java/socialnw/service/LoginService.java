@@ -178,7 +178,7 @@ public class LoginService {
                 profile.setLogin(username)
                         .setEmail(email)
                         .setPassword(encode(password));
-                profile = profileDao.addUserProfile(profile);
+                profile = profileDao.regNewProfile(profile);
                 request.getSession().setAttribute("profile", profile);
                 o_user = userDao.getUserByEmail(email);
                 onLoginSuccess(request,response,profile);

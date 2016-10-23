@@ -9,7 +9,7 @@
 
     <tag>
         <name>fullName</name>
-        <tag-class>ru.andrw.java.socialnw.util.CustomTag</tag-class>
+        <tag-class>ru.andrw.java.socialnw.tags.CustomTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>fullName</name>
@@ -20,7 +20,7 @@
 
     <tag>
         <name>log</name>
-        <tag-class>ru.andrw.java.socialnw.util.LogbackTag</tag-class>
+        <tag-class>ru.andrw.java.socialnw.tags.LogbackTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>errorData</name>

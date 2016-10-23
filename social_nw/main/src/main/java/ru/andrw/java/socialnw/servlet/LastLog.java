@@ -20,9 +20,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.read.CyclicBufferAppender;
 
-import ru.andrw.java.socialnw.util.Constants;
-
-import static ru.andrw.java.socialnw.util.Constants.CYCLIC_BUFFER_APPENDER_NAME;
+import static ru.andrw.java.socialnw.filter.Constants.CYCLIC_BUFFER_APPENDER_NAME;
 
 
 /**

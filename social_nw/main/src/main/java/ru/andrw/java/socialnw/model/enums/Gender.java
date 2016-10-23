@@ -7,8 +7,20 @@ package ru.andrw.java.socialnw.model.enums;
  * @link http://vk.com/andrei.belov
  */
 public enum Gender {
-    UNDEFINED,
-    MALE,
-    FEMALE,
-    OTHER
+
+    UNDEFINED("Select"),
+    MALE("Male"),
+    FEMALE("Female"),
+    OTHER("Other");
+
+    private final String sex;
+    Gender(String gender){
+        this.sex = gender;
+    }
+    public String getSex(){
+        return sex;
+    }
+    public final int getOrdinal() {
+        return this.ordinal();
+    }
 }

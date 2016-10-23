@@ -1,4 +1,4 @@
-package ru.andrw.java.socialnw.util;
+package ru.andrw.java.socialnw.tags;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class CustomTag extends TagSupport {
 
     private UserProfileDao profileDao;
     private final Logger logger = LoggerFactory
-            .getLogger("ru.andrw.java.socialnw.util.CustomTag");
+            .getLogger("ru.andrw.java.socialnw.tags.CustomTag");
 
     /**
      * Processing of the start tag that writes data to the
@@ -62,7 +62,7 @@ public class CustomTag extends TagSupport {
                     .append(profile.get().getLastName())
                     .append(" ");
         } else {
-            s_out.append("NEW USER");
+            s_out.append("DELETED DELETED");
         }
         try {
             out.print(s_out);

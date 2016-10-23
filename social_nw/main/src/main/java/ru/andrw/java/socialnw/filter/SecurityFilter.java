@@ -12,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import ru.andrw.java.socialnw.util.Constants;
-
 /**
  * Created by john on 9/25/2016.
  *
@@ -43,13 +41,14 @@ public class SecurityFilter implements Filter {
                 uri.startsWith("/static/") ||
                 uri.equals("/login")) chain.doFilter(request, response);
         else {
-            session.setAttribute(Constants.USERID_SESSION_KEY, "anon"); // Put userid in a session.
-            session.setAttribute(Constants.EMAIL_SESSION_KEY, "anon@domain.com"); // Put email in a session.
-            updateMDCValues(session);
+//            session.setAttribute(Constants.USERID_SESSION_KEY, "anon"); // Put userid in a session.
+//            session.setAttribute(Constants.EMAIL_SESSION_KEY, "anon@domain.com"); // Put email in a session.
+//            updateMDCValues(session);
             // Not logged in, show login page.
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
         }
         MDC.clear();
+
     }
 
     @Override

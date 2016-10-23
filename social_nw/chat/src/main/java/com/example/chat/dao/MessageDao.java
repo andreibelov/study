@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface MessageDao {
 
-    public Message addMessage(Message message);
+    public Message addMessage(Message message) throws DaoException;
     public Message getMessageByUuid(String s);
     public void deleteMessage(long messageId);
     public void editMessage(Message message);

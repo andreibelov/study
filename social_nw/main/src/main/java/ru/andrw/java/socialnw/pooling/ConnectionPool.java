@@ -63,9 +63,11 @@ public interface ConnectionPool extends AutoCloseable, Supplier<Connection> {
 
     default void executeScript(Path path) {
         try (Connection connection = getConnection();
-             Statement statement = connection.createStatement()) {
+             Statement statement = connection.createStatement();
+             Stream<String> stream = Files.lines(path)
+        ) {
 
-            final String[] sqlExpressions = Files.lines(path)
+            final String[] sqlExpressions = stream
                     .collect(Collectors.joining()).split(";");
 
             Arrays.stream(sqlExpressions)
