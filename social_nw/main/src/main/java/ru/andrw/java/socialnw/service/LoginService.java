@@ -9,7 +9,7 @@ import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.TokensDao;
 import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
-import ru.andrw.java.socialnw.model.Section;
+import ru.andrw.java.socialnw.model.view.Section;
 import ru.andrw.java.socialnw.model.auth.User;
 import ru.andrw.java.socialnw.model.Profile;
 import ru.andrw.java.socialnw.service.ifaces.ServiceMethod;
@@ -145,7 +145,7 @@ public class LoginService {
 
         if (user.isPresent()) {
             onLoginSuccess(request,response,user.get());
-            response.sendRedirect(request.getContextPath() + "/home"); // Go to some start page.
+            response.sendRedirect(request.getContextPath() + "/news"); // Go to some start page.
         } else {
             logger.warn("Bad login try "+email);
             forwardToLogin(request, response, "Provided credentials are not valid, try again!");

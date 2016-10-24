@@ -1,5 +1,7 @@
 package ru.andrw.java.socialnw.dao.impl.h2;
 
+import org.intellij.lang.annotations.Language;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,15 +36,9 @@ class H2FriendsDao implements FriendsDao {
     private final String RELATION_TABLE_NAME = SCHEMA_NAME+SPLITERATOR+RELATION_TABLE;
     private final String DELETE = "DELETE FROM "+RELATION_TABLE_NAME+" WHERE ((? IS NOT NULL ) AND (IDREQUESTER = ?) AND (IDREQUESTEE = ?) AND (? IS NOT NULL));";
     private final String PROFILE_TABLE_NAME = SCHEMA_NAME+SPLITERATOR+PROFILE_TABLE;
-    private final String INSERT_OR_UPDATE = "MERGE INTO "+RELATION_TABLE_NAME+" (IDREQUESTEE, IDREQUESTER, STATUS) VALUES (?,?,?,?);";
-    private final String SELECT_STATUS =
-            "SELECT STATUS " +
-                    "FROM "+RELATION_TABLE_NAME+" " +
-                "WHERE ((IDREQUESTER = ?) AND (IDREQUESTEE = ?)) " +
-            "UNION ALL" +
-                    "SELECT STATUS " +
-                        "FROM "+RELATION_TABLE_NAME+" " +
-                    "WHERE ((IDREQUESTER = ?) AND (IDREQUESTEE = ?));";
+    private final String INSERT_OR_UPDATE = "MERGE INTO "+RELATION_TABLE_NAME+" (IDREQUESTER, IDREQUESTEE, STATUS) VALUES (?,?,?);";
+    @Language("H2")
+    private final String SELECT_STATUS = "SELECT STATUS FROM "+RELATION_TABLE_NAME+" WHERE ((IDREQUESTER = ?) AND (IDREQUESTEE = ?));";
     private final String FRIEND_LIST =
             "SELECT P.ID, P.BIRTHDATE, P.CITY, P.COUNTRY, P.FIRSTNAME, P.LASTNAME, P.PHONE, P.PHOTO, P.REGDATE, P.SEX, P.STATUS " +
                     "FROM "+RELATION_TABLE_NAME+" A, "+PROFILE_TABLE_NAME+" P " +
@@ -63,7 +59,7 @@ class H2FriendsDao implements FriendsDao {
                     "FROM "+RELATION_TABLE_NAME+" A " +
                     "  RIGHT JOIN "+RELATION_TABLE_NAME+" B ON A.IDREQUESTEE = B.IDREQUESTER " +
                     "  JOIN "+PROFILE_TABLE_NAME+" P ON P.ID = B.IDREQUESTER " +
-                    "WHERE ((B.IDREQUESTEE = 1) AND (A.IDREQUESTER IS NULL )) " +
+                    "WHERE ((B.IDREQUESTEE = ?) AND (A.IDREQUESTER IS NULL )) " +
                     "ORDER BY ID ASC LIMIT ? OFFSET ?;";
     private final String BLACK_LIST =
             "SELECT P.ID, P.BIRTHDATE, P.CITY, P.COUNTRY, P.FIRSTNAME, P.LASTNAME, P.PHONE, P.PHOTO, P.REGDATE, P.SEX, P.STATUS " +

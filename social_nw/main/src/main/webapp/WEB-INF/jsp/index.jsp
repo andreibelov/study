@@ -67,7 +67,7 @@
                     </div><!-- end Main content -->
 
                     <!-- Right panel Items -->
-                    <div class="hidden-xs hidden-sm col-md-4 pull-right rightbar">
+                    <div class="col-xs-12 col-sm-9 col-md-4 pull-right rightbar">
                         <jsp:include page="/WEB-INF/include/rightbar.jsp" />
                     </div><!-- end Right panel Items -->
             </c:otherwise>

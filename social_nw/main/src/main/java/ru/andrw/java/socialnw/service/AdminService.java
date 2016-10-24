@@ -12,13 +12,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ru.andrw.java.socialnw.model.Section;
+import ru.andrw.java.socialnw.model.view.Section;
 
 import static java.util.Optional.ofNullable;
 
 /**
  * Created by john on 10/3/2016.
- *
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */

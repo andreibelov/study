@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"
 %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"
 %><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"
+%><%@ taglib prefix="m" uri="/WEB-INF/taglib.tld"
 %><jsp:useBean id="date" class="java.util.Date" /><div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-circle" aria-hidden="true"></i> Online</h3>
@@ -15,8 +16,8 @@
 
             <div class="form-group">
                 <!-- Button -->
-                <button class="btn btn-md btn-primary btn-block">Add to friends</button>
-                <button class="btn btn-md btn-default btn-block">Send a message</button>
+                <m:button testId="${profile.id}"/>
+                <button id="sendMessage" class="btn btn-md btn-default btn-block" data-target="${requestScope.profile.id}">Send a message</button>
             </div>
         </div>
             <div class="col-xs-7 col-sm-7 fields">

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ru.andrw.java.socialnw.model.Profile;
-import ru.andrw.java.socialnw.model.Section;
+import ru.andrw.java.socialnw.model.view.Section;
 
 import static java.util.Optional.ofNullable;
 
@@ -108,6 +108,6 @@ class PageBuilder {
             request.setAttribute(attrib, o_profile.get());
             request.setAttribute("action", "edit");
             PageBuilder.buildPage(request, response, section);
-        } else response.sendRedirect(request.getContextPath() + "/home"); // Go to home page.
+        } else response.sendRedirect(request.getContextPath() + "/news"); // Go to home page.
     }
 }

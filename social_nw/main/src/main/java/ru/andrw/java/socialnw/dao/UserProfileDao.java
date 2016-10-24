@@ -16,9 +16,7 @@ public interface UserProfileDao {
     public List<Profile> searchUserProfilesByName(String name);
     public Optional<Profile> searchUserProfileByEmail(String email);
     public Optional<Profile> getUserProfileById(Long id);
-
     Profile regNewProfile(Profile profile) throws DaoException;
-
     public Profile addUserProfile(Profile profile) throws DaoException;
     public void updateUserProfile(Profile profile) throws DaoException;
     public void deleteUserProfile(Long id) throws DaoException;

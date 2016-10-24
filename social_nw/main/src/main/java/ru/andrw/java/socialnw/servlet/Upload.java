@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ru.andrw.java.socialnw.model.Section;
+import ru.andrw.java.socialnw.model.view.Section;
 import ru.andrw.java.socialnw.service.UploadService;
 
 /**

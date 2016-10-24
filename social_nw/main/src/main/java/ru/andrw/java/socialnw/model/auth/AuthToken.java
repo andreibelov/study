@@ -13,7 +13,6 @@ import lombok.Data;
 
 /**
  * Created by john on 10/10/2016.
- *
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */

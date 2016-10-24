@@ -1,4 +1,4 @@
-package ru.andrw.java.socialnw.model;
+package ru.andrw.java.socialnw.model.view;
 
 import java.io.Serializable;
 

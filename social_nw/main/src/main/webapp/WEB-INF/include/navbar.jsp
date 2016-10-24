@@ -11,10 +11,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/home" style="padding-right: 7px;">
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/news" style="padding-right: 7px;">
             <strong>${applicationScope.projectName}</strong>
         </a>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/home" style="padding: 0;">
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/news" style="padding: 0;">
             <img src="${pageContext.request.contextPath}/static/img/VaultTecLogo.png"
                  class="img-responsive" alt="VAULT-TEC" style="padding: 7px 0; height: 100%">
         </a>
@@ -38,7 +38,7 @@
             </li>
             <li><a href="#">Help</a></li>
         </ul>
-        <form class="navbar-form navbar-right">
+        <form class="navbar-form navbar-right" action="${pageContext.request.contextPath}/profiles">
             <input type="text" class="form-control" placeholder="Search...">
         </form>
     </div>

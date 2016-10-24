@@ -15,10 +15,20 @@
             <name>doLink</name>
             <required>false</required>
             <type>boolean</type>
+        </attribute>
+    </tag>
+    <tag>
+        <name>button</name>
+        <tag-class>ru.andrw.java.socialnw.tags.RelationTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>testId</name>
+            <required>true</required>
+            <type>java.lang.Long</type>
+            <fragment>false</fragment>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
-
     <tag>
         <name>log</name>
         <tag-class>ru.andrw.java.socialnw.tags.LogbackTag</tag-class>

@@ -37,6 +37,7 @@ class FriendService{
             .getLogger(FriendService.class);
     private static final Map<String, ServiceMethod> getMethods = new ConcurrentHashMap<>();
     private static final Map<String, ServiceMethod> postMethods = new ConcurrentHashMap<>();
+    private static final Map<String,String> linkMap = new ConcurrentHashMap<>();
     private static final String PROFILES = "/WEB-INF/include/sections/profiles.jsp";
     private static final String ATTRIB = "profileList";
 
@@ -53,6 +54,10 @@ class FriendService{
         postMethods.put("unblock",FriendService::unblockUser);
         postMethods.put("send",FriendService::sendRequest);
         postMethods.put("remove",FriendService::removeRequest);
+
+        linkMap.put("Followers","friends?action=received");
+        linkMap.put("Followees","friends?action=sent");
+        linkMap.put("Friends","friends?action=list");
     }
 
     static void getAction(HttpServletRequest request,
@@ -101,6 +106,8 @@ class FriendService{
             throws ServletException, IOException {
 
         request.setAttribute(ATTRIB, getFollowees(request));
+        request.setAttribute("link", "Followees");
+        request.setAttribute("linkMap", linkMap);
         PageBuilder.getDefault(request,response);
 
     }
@@ -117,6 +124,8 @@ class FriendService{
             throws ServletException, IOException {
 
         request.setAttribute(ATTRIB, getFollowers(request));
+        request.setAttribute("link", "Followers");
+        request.setAttribute("linkMap", linkMap);
         PageBuilder.getDefault(request,response);
 
     }
@@ -132,6 +141,8 @@ class FriendService{
                                       HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute(ATTRIB, getFriendsProfiles(request));
+        request.setAttribute("link", "Friends");
+        request.setAttribute("linkMap", linkMap);
         PageBuilder.getDefault(request,response);
     }
 

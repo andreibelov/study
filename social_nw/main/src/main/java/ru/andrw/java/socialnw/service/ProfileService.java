@@ -6,7 +6,7 @@ import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.Profile;
-import ru.andrw.java.socialnw.model.Section;
+import ru.andrw.java.socialnw.model.view.Section;
 import ru.andrw.java.socialnw.model.auth.User;
 import ru.andrw.java.socialnw.model.enums.Countries;
 import ru.andrw.java.socialnw.model.enums.Gender;
@@ -130,28 +130,6 @@ class ProfileService{
         } catch (DaoException e) {
             logger.error("Limits out of bounds",e);
         }
-    }
-
-    static void getProfilesList(HttpServletRequest request,
-                                         HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String s_offset = ofNullable(request.getParameter("offset"))
-                .orElse(Integer.toString(0));
-        String s_limit = ofNullable(request.getParameter("limit"))
-                .orElse(Integer.toString(30));
-        int offset = Integer.parseInt(s_offset);
-        int limit = Integer.parseInt(s_limit);
-        List<Profile> profileList = profileDao
-                .getUserProfilesSubList(offset,limit);
-        request.setAttribute(ATTRIB,profileList);
-        Section section = (new Section())
-                .setSectionName("Profiles")
-                .setPageTitle("Profiles")
-                .setCssFile("profiles.css")
-                .setJsFile("profiles.js")
-                .setJspFile("profiles.jsp");
-        PageBuilder.buildPage(request,response,section);
     }
 
     private static void postProfilesList(HttpServletRequest req,
@@ -293,15 +271,12 @@ class ProfileService{
         long userProfileId = Long.valueOf(req.getParameter("userProfileId"));
         String message;
         try {
-
             profileDao.deleteUserProfile(userProfileId);
             message = "The profile has been successfully removed.";
-
         } catch (DaoException ex){
             message = "The profile was not removed =(";
         }
             req.setAttribute("message", message);
-
     }
 
     private static void showProfile(HttpServletRequest request,

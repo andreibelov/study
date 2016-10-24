@@ -37,7 +37,7 @@ public class DispatchService{
         getActions.put("welcome", PageBuilder::welcome);
         getActions.put("home", PageBuilder::getDefault);
         getActions.put("profile", ProfileService::getAction);
-        getActions.put("profiles", ProfileService::getProfilesList);
+        getActions.put("profiles", SearchService::getProfilesList);
         getActions.put("friends", FriendService::getAction);
         getActions.put("admin", AdminService::getAction);
         getActions.put("logout", LoginService::onLogOut);
@@ -82,5 +82,6 @@ public class DispatchService{
         MessageService.init(daoFactory);
         FriendService.init(daoFactory);
         PostService.init(daoFactory);
+        SearchService.init(daoFactory);
     }
 }

@@ -64,7 +64,7 @@ public class UserNameTag extends TagSupport {
         Optional<Profile> o_profile = Optional.empty();
         Optional<User> user = Optional.ofNullable((User) session.getAttribute("user"));
         if (user.isPresent())
-        o_profile = profileDao.searchUserProfileByEmail(user.get().getEmail());
+        o_profile = profileDao.getUserProfileById(user.get().getId());
         StringBuffer s_out = new StringBuffer();
         if (o_profile.isPresent()){
             Profile profile = o_profile.get();
