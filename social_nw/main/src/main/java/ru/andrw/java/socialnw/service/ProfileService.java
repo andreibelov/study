@@ -3,22 +3,29 @@ package ru.andrw.java.socialnw.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.dao.DaoException;
+import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.Profile;
+import ru.andrw.java.socialnw.model.Section;
+import ru.andrw.java.socialnw.model.auth.User;
+import ru.andrw.java.socialnw.model.enums.Countries;
 import ru.andrw.java.socialnw.model.enums.Gender;
+import ru.andrw.java.socialnw.service.ifaces.ServiceMethod;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static java.util.Optional.ofNullable;
 import static java.util.UUID.fromString;
 
 /**
@@ -26,30 +33,75 @@ import static java.util.UUID.fromString;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-public class ProfileService {
+class ProfileService{
 
     private static final Logger logger = LoggerFactory
             .getLogger(ProfileService.class);
-    private static final Map<String, ServiceMethod> methods = new ConcurrentHashMap<>();;
+    private static final Map<String, ServiceMethod> getMethods = new ConcurrentHashMap<>();
+    private static final Map<String, ServiceMethod> postMethods = new ConcurrentHashMap<>();
+    private static final String PROFILES = "/WEB-INF/include/sections/profiles.jsp";
+    private static final String ATTRIB = "profileList";
     private static UserProfileDao profileDao;
 
     static {
-        methods.put("getform", ProfileService::getEditForm);
-        methods.put("list", ProfileService::listProfiles);
-        methods.put("append", ProfileService::listAppend);
-        methods.put("add",ProfileService::addUserProfile);
-        methods.put("edit",ProfileService::editUserProfile);
-        methods.put("remove",ProfileService::removeUserProfile);
+        postMethods.put("getform", ProfileService::getEditForm);
+        postMethods.put("list", ProfileService::postProfilesList);
+        postMethods.put("append", ProfileService::listAppend);
+        postMethods.put("add", ProfileService::addUserProfile);
+        postMethods.put("edit", ProfileService::editUserProfile);
+        postMethods.put("remove", ProfileService::removeUserProfile);
+        postMethods.put("update", ProfileService::updateProfile);
+
+        getMethods.put("edit", ProfileService::getEditProfile);
+        getMethods.put("show",ProfileService::showProfile);
     }
-    public static void doAction(HttpServletRequest request,
+
+    private static void getEditProfile(HttpServletRequest request,
+                                       HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        Long id = ((User) session.getAttribute("user")).getId();
+        @SuppressWarnings("OptionalGetWithoutIsPresent")
+        Profile profile = profileDao.getUserProfileById(id).get();
+        request.setAttribute("profile", profile);
+        Section section = (new Section())
+                .setSectionName("Edit profile")
+                .setPageTitle("Edit profile")
+                .setCssFile("profile.css")
+                .setJsFile("profile.js")
+                .setJspFile("profile-edit.jsp");
+        request.setAttribute("action", "update");
+        PageBuilder.buildPage(request, response, section);
+    }
+
+    static void getAction(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = ofNullable(request.getParameter("action")).orElse("show");
+        ServiceMethod serviceMethod = getMethods.get(action);
+        if(serviceMethod != null) {
+            serviceMethod.execute(request,response);
+        } else {
+            logger.error("Requested method unknown");
+            response.sendRedirect(request.getContextPath() + "/home"); // Go to home page.
+        }
+
+    }
+
+    static void postAction(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        ServiceMethod serviceMethod = methods.get(action);
+        ServiceMethod serviceMethod = postMethods.get(action);
         if(serviceMethod != null) {
             serviceMethod.execute(request,response);
-        } else logger.error("Requested method unknown");
+        } else {
+            logger.error("Requested method unknown");
+            response.sendRedirect(request.getContextPath() + "/home"); // Go to home page.
+        }
     }
 
     private static void listAppend(HttpServletRequest req,
@@ -80,8 +132,30 @@ public class ProfileService {
         }
     }
 
-    public static void listProfiles(HttpServletRequest req,
-                                     HttpServletResponse resp)
+    static void getProfilesList(HttpServletRequest request,
+                                         HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String s_offset = ofNullable(request.getParameter("offset"))
+                .orElse(Integer.toString(0));
+        String s_limit = ofNullable(request.getParameter("limit"))
+                .orElse(Integer.toString(30));
+        int offset = Integer.parseInt(s_offset);
+        int limit = Integer.parseInt(s_limit);
+        List<Profile> profileList = profileDao
+                .getUserProfilesSubList(offset,limit);
+        request.setAttribute(ATTRIB,profileList);
+        Section section = (new Section())
+                .setSectionName("Profiles")
+                .setPageTitle("Profiles")
+                .setCssFile("profiles.css")
+                .setJsFile("profiles.js")
+                .setJspFile("profiles.jsp");
+        PageBuilder.buildPage(request,response,section);
+    }
+
+    private static void postProfilesList(HttpServletRequest req,
+                                         HttpServletResponse resp)
             throws ServletException, IOException {
 
         String s_offset = req.getParameter("offset");
@@ -96,10 +170,9 @@ public class ProfileService {
         }
         try {
             String nextJSP = "/WEB-INF/include/admin/profiles-table.jsp";
-
             List<Profile> profileList = profileDao
                     .getUserProfilesSubList(offset,limit);
-            req.setAttribute("profileList",profileList);
+            req.setAttribute(ATTRIB,profileList);
             req.getServletContext()
                     .getRequestDispatcher(nextJSP)
                     .include(req, resp);
@@ -141,7 +214,7 @@ public class ProfileService {
             profile.setEmail(req.getParameter("email"))
                     .setLogin(req.getParameter("login"));
             profile.setBirthDate(format.parse(req.getParameter("birthDate")))
-                    .setCountry(req.getParameter("country"))
+                    .setCountry(Countries.valueOf(req.getParameter("country")))
                     .setCity(req.getParameter("city"))
                     .setFirstName(req.getParameter("firstName"))
                     .setLastName(req.getParameter("lastName"))
@@ -185,7 +258,7 @@ public class ProfileService {
                 .setEmail(req.getParameter("email"))
                 .setLogin(req.getParameter("login"));
             profile.setBirthDate(format.parse(req.getParameter("birthDate")))
-                    .setCountry(req.getParameter("country"))
+                    .setCountry(Countries.valueOf(req.getParameter("country")))
                     .setCity(req.getParameter("city"))
                     .setFirstName(req.getParameter("firstName"))
                     .setLastName(req.getParameter("lastName"))
@@ -231,7 +304,47 @@ public class ProfileService {
 
     }
 
-    public static void setProfileDao(UserProfileDao profileDao) {
-        ProfileService.profileDao = profileDao;
+    private static void showProfile(HttpServletRequest request,
+                                    HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String profileId = ofNullable(request.getParameter("id"))
+                .orElse(((User) session.getAttribute("user")).getId().toString());
+        Optional<Profile> byId = profileDao.getUserProfileById(Long.parseLong(profileId));
+        if(byId.isPresent())request.setAttribute("profile",byId.get());
+        PageBuilder.getDefault(request,response);
+    }
+
+
+    private static void updateProfile(HttpServletRequest req,
+                                      HttpServletResponse resp)
+            throws ServletException, IOException {
+        Long profileId = Long.valueOf(req.getParameter("userid"));
+        String pattern = "dd-mm-yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        try {
+            Optional<Profile> o_profile = profileDao.getUserProfileById(profileId);
+            Profile profile = o_profile.isPresent() ? o_profile.get() : new Profile();
+            profile.setId(profileId)
+                    .setAccessLevel(3) //TODO
+                    .setEmail(req.getParameter("email"))
+                    .setLogin(req.getParameter("login"));
+            profile.setBirthDate(format.parse(req.getParameter("birthDate")))
+                    .setCountry(Countries.valueOf(req.getParameter("country")))
+                    .setCity(req.getParameter("city"))
+                    .setFirstName(req.getParameter("firstName"))
+                    .setLastName(req.getParameter("lastName"))
+                    .setPhone(req.getParameter("mobile"))
+                    .setPhoto(fromString(req.getParameter("photo")))
+                    .setSex(Gender.values()[Integer.parseInt(req.getParameter("gender"))])
+                    .setStatus("");
+            profileDao.updateUserProfile(profile);
+        } catch (ParseException | DaoException e) {
+            logger.error("Could not parse date provided",e);
+        }
+    }
+
+    static void init(DaoFactory daoFactory) throws ServletException, DaoException {
+        profileDao = daoFactory.getProfileDao();
     }
 }

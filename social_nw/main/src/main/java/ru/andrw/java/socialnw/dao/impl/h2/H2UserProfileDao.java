@@ -25,6 +25,7 @@ import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.Profile;
 import ru.andrw.java.socialnw.model.auth.User;
+import ru.andrw.java.socialnw.model.enums.Countries;
 import ru.andrw.java.socialnw.model.enums.Gender;
 
 import static ru.andrw.java.socialnw.util.UuidUtils.asBytes;
@@ -269,7 +270,7 @@ class H2UserProfileDao implements UserProfileDao, Dao {
                 .setLogin(rs.getString(4));
         profile.setBirthDate(rs.getTimestamp(5))
                 .setCity(rs.getString(6))
-                .setCountry(rs.getString(7))
+                .setCountry(Countries.valueOf(rs.getString(7)))
                 .setFirstName(rs.getString(8))
                 .setLastName(rs.getString(9))
                 .setPhone(rs.getString(10))
@@ -302,7 +303,7 @@ class H2UserProfileDao implements UserProfileDao, Dao {
     private void prepareSecond(Profile profile, PreparedStatement ps2) throws SQLException {
         ps2.setTimestamp(1,new Timestamp(profile.getBirthDate().getTime()));
         ps2.setString(2,profile.getCity());
-        ps2.setString(3,profile.getCountry());
+        ps2.setString(3,profile.getCountry().toString());
         ps2.setString(4,profile.getFirstName());
         ps2.setString(5,profile.getLastName());
         ps2.setString(6,profile.getPhone());

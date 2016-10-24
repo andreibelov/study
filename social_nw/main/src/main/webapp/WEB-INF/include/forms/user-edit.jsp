@@ -5,7 +5,7 @@
     </div>
 </c:if>
 <br />
-<form id="editor" action="${pageContext.request.contextPath}/signup" method="post"  role="form" data-toggle="validator" >
+<form id="editor" action="${pageContext.request.contextPath}/login" method="post"  role="form" data-toggle="validator" >
     <c:if test ="${empty requestScope.action}">
         <c:set var="action" value="add"/>
     </c:if>

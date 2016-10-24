@@ -1,4 +1,4 @@
-package ru.andrw.java.socialnw.service;
+package ru.andrw.java.socialnw.service.ifaces;
 
 import java.io.IOException;
 
@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
  * @link http://vk.com/andrei.belov
  */
 @FunctionalInterface
-interface ServiceMethod {
+public interface ServiceMethod {
     void execute(HttpServletRequest request,
-                        HttpServletResponse response) throws ServletException, IOException;
+                               HttpServletResponse response)
+            throws ServletException, IOException;
 }

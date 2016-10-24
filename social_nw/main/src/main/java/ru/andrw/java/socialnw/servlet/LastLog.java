@@ -32,7 +32,7 @@ import static ru.andrw.java.socialnw.filter.Constants.CYCLIC_BUFFER_APPENDER_NAM
 @WebServlet(name = "ViewLastLogServlet", urlPatterns = {"/lastlog"})
 public class LastLog extends HttpServlet {
 
-    Logger logger = LoggerFactory.getLogger(LastLog.class);
+    private Logger logger = LoggerFactory.getLogger(LastLog.class);
 
     private CyclicBufferAppender<ILoggingEvent> cyclicBufferAppender;
     private HTMLLayout layout;

@@ -9,11 +9,12 @@
 
     <tag>
         <name>fullName</name>
-        <tag-class>ru.andrw.java.socialnw.tags.CustomTag</tag-class>
+        <tag-class>ru.andrw.java.socialnw.tags.UserNameTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>fullName</name>
+            <name>doLink</name>
             <required>false</required>
+            <type>boolean</type>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
@@ -33,4 +34,5 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
+
 </taglib>

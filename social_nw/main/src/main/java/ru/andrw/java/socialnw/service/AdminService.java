@@ -22,7 +22,7 @@ import static java.util.Optional.ofNullable;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-public class AdminService {
+class AdminService{
 
     private static final Logger logger = LoggerFactory
             .getLogger("ru.andrw.java.socialnw.service.AdminService");
@@ -55,7 +55,7 @@ public class AdminService {
         );
     }
 
-    public static void doAction(HttpServletRequest request,
+    static void getAction(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
         Optional<String> s_section = ofNullable(request.getParameter("sec"));

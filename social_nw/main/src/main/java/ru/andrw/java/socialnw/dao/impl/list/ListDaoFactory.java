@@ -16,6 +16,7 @@ import ru.andrw.java.socialnw.dao.UserDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.auth.User;
 import ru.andrw.java.socialnw.model.Profile;
+import ru.andrw.java.socialnw.model.enums.Countries;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -79,7 +80,7 @@ public class ListDaoFactory implements DaoFactory {
                         .setFirstName(line[1])
                         .setLastName(line[2])
                         .setBirthDate(format.parse(line[3]))
-                        .setCountry(line[4])
+                        .setCountry(Countries.valueOf(line[4]))
                         .setCity(line[5]);
                 profile.setEmail(line[6])
                         .setId(counter.getAndIncrement());

@@ -13,8 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ru.andrw.java.socialnw.model.Section;
-import ru.andrw.java.socialnw.model.Profile;
+import ru.andrw.java.socialnw.dao.DaoException;
+import ru.andrw.java.socialnw.dao.DaoFactory;
+import ru.andrw.java.socialnw.service.ifaces.ServiceMethod;
 
 import static java.util.Optional.ofNullable;
 
@@ -24,72 +25,62 @@ import static java.util.Optional.ofNullable;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-public class DispatchService {
+public class DispatchService{
 
     private static final Logger logger = LoggerFactory.getLogger(DispatchService.class);
-    private static final Map<String, Section> sections = new ConcurrentHashMap<>();
-    private static final Map<String, ServiceMethod> methods = new ConcurrentHashMap<>();
+    private static final Map<String, ServiceMethod> getActions = new ConcurrentHashMap<>();
+    private static final Map<String, ServiceMethod> postActions = new ConcurrentHashMap<>();
+    private static DaoFactory daoFactory;
 
     static {
-        sections.put("welcome", (new Section())
-                .setSectionName("Welcome")
-                .setPageTitle("Welcome")
-                .setCssFile("profile.css")
-                .setJsFile("profile.js")
-                .setJspFile("welcome.jsp")
-        );
-        sections.put("default", (new Section())
-                .setSectionName("News")
-                .setPageTitle("Welcome back!")
-                .setCssFile("news.css")
-                .setJsFile("news.js")
-                .setJspFile("news.jsp")
-        );
-        sections.put("inbox", (new Section())
-                .setSectionName("Inbox")
-                .setPageTitle("Messages")
-                .setCssFile("inbox.css")
-                .setJsFile("inbox.js")
-                .setJspFile("inbox.jsp")
-        );
-        sections.put("profile", (new Section())
-                .setSectionName("Profile")
-                .setPageTitle("Profile")
-                .setCssFile("profile.css")
-                .setJsFile("profile.js")
-                .setJspFile("profile.jsp")
-        );
-        methods.put("default", DispatchService::welcome);
+        getActions.put("", PageBuilder::getDefault);
+        getActions.put("welcome", PageBuilder::welcome);
+        getActions.put("home", PageBuilder::getDefault);
+        getActions.put("profile", ProfileService::getAction);
+        getActions.put("profiles", ProfileService::getProfilesList);
+        getActions.put("friends", FriendService::getAction);
+        getActions.put("admin", AdminService::getAction);
+        getActions.put("logout", LoginService::onLogOut);
+        getActions.put("inbox", MessageService::getAction);
+        getActions.put("news", PostService::getNews);
+        getActions.put("wall", PostService::getWall);
+
+        postActions.put("profile", ProfileService::postAction);
+        postActions.put("friends", FriendService::postAction);
+        postActions.put("logout", LoginService::onLogOut);
+        postActions.put("inbox", MessageService::postAction);
+        postActions.put("news", PostService::postNews);
+        postActions.put("wall", PostService::postWall);
     }
 
-    public static void doDispatch(HttpServletRequest request,
+    public static void doGet(HttpServletRequest request,
                                   HttpServletResponse response)
             throws ServletException, IOException{
-
         String uri = request.getRequestURI()
                 .substring(request.getContextPath().length()+1);
-
-        Optional<String> sectionName = sections.keySet()
-                .stream().filter(uri::startsWith).findAny();
-        Section section = sections.get("default");
-        if(sectionName.isPresent()) section = sections.get(sectionName.get());
-        request.setAttribute("section",section);
-        request.setAttribute("action", "edit");
-        request.setAttribute("sections", sections.entrySet());
-        request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+        Optional<String> o_sectionName = getActions.keySet()
+                .stream().filter(uri::equals).findAny();
+        if(o_sectionName.isPresent())
+            getActions.get(o_sectionName.get()).execute(request,response);
+        else response.sendRedirect(request.getContextPath() + "/home"); // Go to home page.
     }
 
-    private static void welcome(HttpServletRequest request,
-                                HttpServletResponse response)
+    public static void doPost(HttpServletRequest request,
+                             HttpServletResponse response)
             throws ServletException, IOException{
-        HttpSession session = request.getSession();
-        String attrib = "profile";
-        Optional<Profile> o_profile = ofNullable((Profile) session.getAttribute(attrib));
+        String uri = request.getRequestURI()
+                .substring(request.getContextPath().length()+1);
+        Optional<String> o_sectionName = postActions.keySet()
+                .stream().filter(uri::equals).findAny();
+        if(o_sectionName.isPresent())
+            postActions.get(o_sectionName.get()).execute(request,response);
+    }
 
-        if(o_profile.isPresent()) {
-            session.removeAttribute(attrib);
-            request.setAttribute(attrib, o_profile.get());
-            request.setAttribute("action", "edit");
-        }
+    public static void init(DaoFactory daoFactory) throws ServletException, DaoException {
+        DispatchService.daoFactory = daoFactory;
+        ProfileService.init(daoFactory);
+        MessageService.init(daoFactory);
+        FriendService.init(daoFactory);
+        PostService.init(daoFactory);
     }
 }

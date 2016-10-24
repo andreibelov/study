@@ -21,7 +21,7 @@ import java.io.IOException;
 @WebFilter(filterName = "SecurityFilter", urlPatterns = {"/*"})
 public class SecurityFilter implements Filter {
 
-    Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
+    private static Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
 
     private FilterConfig filterConfig;
 
@@ -41,9 +41,6 @@ public class SecurityFilter implements Filter {
                 uri.startsWith("/static/") ||
                 uri.equals("/login")) chain.doFilter(request, response);
         else {
-//            session.setAttribute(Constants.USERID_SESSION_KEY, "anon"); // Put userid in a session.
-//            session.setAttribute(Constants.EMAIL_SESSION_KEY, "anon@domain.com"); // Put email in a session.
-//            updateMDCValues(session);
             // Not logged in, show login page.
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
         }

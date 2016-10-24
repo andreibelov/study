@@ -29,9 +29,9 @@
                     </i><m:fullName /><b class="caret"></b></a>
                 </c:if>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
+                    <li><a href="${pageContext.request.contextPath}/profile"><i class="fa fa-fw fa-user"></i> Profile</a></li>
                     <li><a href="${pageContext.request.contextPath}/inbox"><i class="fa fa-fw fa-envelope"></i> Inbox</a></li>
-                    <li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
+                    <li><a href="${pageContext.request.contextPath}/profile?action=edit"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
                     <li class="divider"></li>
                     <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
                 </ul>

@@ -11,49 +11,39 @@ import javax.servlet.http.HttpServletResponse;
 
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.DaoFactory;
+import ru.andrw.java.socialnw.dao.IMDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 
 /**
- * Created by john on 10/10/2016.
+ * Created by john on 10/24/2016.
+ *
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-class PostService{
+class MessageService {
+
 
     private static final Logger logger = LoggerFactory
             .getLogger(PostService.class);
-    private static UserProfileDao profileDao;
-
-    static {
-
-    }
+    private static IMDao messageDao;
 
 
     static void init(DaoFactory daoFactory) throws ServletException, DaoException {
-        profileDao = daoFactory.getProfileDao();
+        messageDao = daoFactory.getIMDao();
     }
 
-    static void getNews(HttpServletRequest request,
-                        HttpServletResponse response)
+
+    static void getAction(HttpServletRequest request,
+                          HttpServletResponse response)
             throws ServletException, IOException {
         PageBuilder.getDefault(request,response);
     }
 
-    static void getWall(HttpServletRequest request,
-                        HttpServletResponse response)
+    static void postAction(HttpServletRequest request,
+                                  HttpServletResponse response)
             throws ServletException, IOException {
-
+        PageBuilder.getDefault(request,response);
     }
 
-    static void postNews(HttpServletRequest request,
-                         HttpServletResponse response)
-            throws ServletException, IOException {
 
-    }
-
-    static void postWall(HttpServletRequest request,
-                         HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
 }

@@ -8,7 +8,7 @@ package ru.andrw.java.socialnw.model.enums;
  */
 @SuppressWarnings("unused")
 public enum Countries {
-    UNDEFINED("(please select a country)"),
+    UN("(please select a country)"),
     RU("Russian Federation"),
     BY("Belarus"),
     KZ("Kazakhstan"),

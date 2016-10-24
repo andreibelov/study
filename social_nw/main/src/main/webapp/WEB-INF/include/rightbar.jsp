@@ -2,6 +2,6 @@
 <div class="list-group">
     <a href="#" class="list-group-item active">Link 0</a>
     <c:forEach begin="1" end="10" varStatus="loop">
-        <a href="#" class="list-group-item">Link: ${loop.current}</a>
+        <a href="#" class="list-group-item">Link: ${loop.current} <i class="fa fa-check" aria-hidden="true"></i></a>
     </c:forEach>
 </div>

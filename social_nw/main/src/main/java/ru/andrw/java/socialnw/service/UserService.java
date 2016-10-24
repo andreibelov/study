@@ -11,7 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ru.andrw.java.socialnw.dao.DaoFactory;
 import ru.andrw.java.socialnw.dao.UserDao;
+import ru.andrw.java.socialnw.service.ifaces.ServiceMethod;
 
 /**
  * Created by john on 9/30/2016.
@@ -19,7 +21,7 @@ import ru.andrw.java.socialnw.dao.UserDao;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-public class UserService {
+class UserService {
 
     private static final Logger logger = LoggerFactory
             .getLogger("ru.andrw.java.socialnw.service.UserService");
@@ -83,7 +85,7 @@ public class UserService {
             throws ServletException, IOException {
     }
 
-    public static void setUserDao(UserDao userDao) {
-        UserService.userDao = userDao;
+    static void init(DaoFactory daoFactory) {
+        UserService.userDao = daoFactory.getUserDao();
     }
 }

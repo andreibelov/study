@@ -26,6 +26,7 @@ import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.Profile;
 import ru.andrw.java.socialnw.model.auth.User;
+import ru.andrw.java.socialnw.model.enums.Countries;
 import ru.andrw.java.socialnw.model.enums.Gender;
 import ru.andrw.java.socialnw.pooling.ConnectionPool;
 
@@ -81,7 +82,7 @@ public class H2FriendsDaoTest {
                 .setLastName(lastName)
                 .setPhone("+79112935537")
                 .setSex(sex)
-                .setCountry("U.S.")
+                .setCountry(Countries.valueOf("US"))
                 .setCity("Brooklyn")
                 .setRegDate(new Timestamp((new Date().getTime())))
                 .setStatus("Welcome!")
@@ -112,7 +113,7 @@ public class H2FriendsDaoTest {
                 profile = (new Profile())
                         .setBirthDate(format.parse(line[3]))
                         .setCity(line[5])
-                        .setCountry(line[4])
+                        .setCountry(Countries.valueOf(line[4]))
                         .setFirstName(line[1])
                         .setLastName(line[2])
                         .setPhone("+7-800-200-00-00")

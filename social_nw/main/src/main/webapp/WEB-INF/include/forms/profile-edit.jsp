@@ -84,7 +84,7 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-4">
-                    <button id="cancel" type="button" class="btn btn-danger btn-block">Cancel</button>
+                    <button id="cancel" type="button" class="btn btn-danger btn-block" onclick="history.go(-1);">Cancel</button>
                 </div>
                 <!-- Button -->
                 <div class="col-xs-8">

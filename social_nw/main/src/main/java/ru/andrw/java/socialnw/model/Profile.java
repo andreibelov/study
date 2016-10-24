@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import ru.andrw.java.socialnw.model.auth.User;
+import ru.andrw.java.socialnw.model.enums.Countries;
 import ru.andrw.java.socialnw.model.enums.Gender;
 import ru.andrw.java.socialnw.util.UUIDConverter;
 import org.eclipse.persistence.annotations.Convert;
@@ -52,8 +53,8 @@ public class Profile extends User implements Serializable{
     private Date birthDate;
     @Enumerated(EnumType.STRING) @Column(columnDefinition = "VARCHAR (32) default 'UNDEFINED'")
     private Gender sex = Gender.UNDEFINED;
-    @Index @Column(columnDefinition = "VARCHAR (2)")
-    private String country;
+    @Index @Enumerated(EnumType.STRING) @Column(columnDefinition = "VARCHAR (2) default 'RU'")
+    private Countries country;
     @Index @Column(columnDefinition = "VARCHAR (27)")
     private String city;
     @Index

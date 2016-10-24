@@ -3,7 +3,6 @@ package ru.andrw.java.socialnw.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +32,6 @@ public class Upload extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        ServletContext sc = config.getServletContext();
         // Get the file location where it would be stored.
         UploadService.setFolder(getInitParameter("file-upload"));
 

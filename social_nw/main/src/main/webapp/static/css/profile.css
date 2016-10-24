@@ -49,3 +49,21 @@
         display: block;
     }
 }
+div.fields dl {
+    padding: 0.5em;
+}
+div.fields dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+}
+div.fields dt:after {
+    content: ":";
+}
+div.fields dd {
+    margin: 0 0 0 110px;
+    padding: 0 0 0.5em 0;
+    color: #337ab7;
+}

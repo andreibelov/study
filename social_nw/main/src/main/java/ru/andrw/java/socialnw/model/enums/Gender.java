@@ -8,7 +8,7 @@ package ru.andrw.java.socialnw.model.enums;
  */
 public enum Gender {
 
-    UNDEFINED("Select"),
+    UNDEFINED("Not selected"),
     MALE("Male"),
     FEMALE("Female"),
     OTHER("Other");

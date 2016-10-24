@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.FriendsDao;
 import ru.andrw.java.socialnw.model.Profile;
+import ru.andrw.java.socialnw.model.enums.Countries;
 import ru.andrw.java.socialnw.model.enums.Gender;
 import ru.andrw.java.socialnw.model.enums.RowStatus;
 
@@ -174,7 +175,7 @@ class H2FriendsDao implements FriendsDao {
         profile.setId(rs.getLong(i));
         profile.setBirthDate(rs.getTimestamp(++i))
                 .setCity(rs.getString(++i))
-                .setCountry(rs.getString(++i))
+                .setCountry(Countries.valueOf(rs.getString(++i)))
                 .setFirstName(rs.getString(++i))
                 .setLastName(rs.getString(++i))
                 .setPhone(rs.getString(++i))

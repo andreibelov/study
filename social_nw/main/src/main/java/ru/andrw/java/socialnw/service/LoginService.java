@@ -12,6 +12,7 @@ import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.Section;
 import ru.andrw.java.socialnw.model.auth.User;
 import ru.andrw.java.socialnw.model.Profile;
+import ru.andrw.java.socialnw.service.ifaces.ServiceMethod;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -76,8 +77,8 @@ public class LoginService {
         methods.put("recover", LoginService::recoverPass);
     }
 
-    public static void performGetAction(HttpServletRequest request,
-                                        HttpServletResponse response)
+    public static void doGetAction(HttpServletRequest request,
+                                   HttpServletResponse response)
             throws ServletException, IOException {
         Section section;
         Optional<String> s_action = ofNullable(request.getParameter("action"));
@@ -89,8 +90,8 @@ public class LoginService {
 
     }
 
-    public static void performPostAction(HttpServletRequest request,
-                                         HttpServletResponse response)
+    public static void doPostAction(HttpServletRequest request,
+                                    HttpServletResponse response)
             throws ServletException, IOException {
         Optional<String> s_action = ofNullable(request.getParameter("action"));
         if(s_action.isPresent()) {
@@ -100,6 +101,33 @@ public class LoginService {
             logger.error("Requested method unknown");
             forwardToLogin(request,response,"Requested method unknown");
         }
+    }
+
+    static void onLogOut(HttpServletRequest request,
+                         HttpServletResponse response) throws IOException {
+        //invalidate the session if exists
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            User user = (User) session.getAttribute("user");
+            session.removeAttribute("user");
+            Cookie loginCookie = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("token")) {
+                        loginCookie = cookie;
+                        break;
+                    }
+                }
+            }
+            if (loginCookie != null) {
+                loginCookie.setMaxAge(0);
+                response.addCookie(loginCookie);
+            }
+            logger.info("User "+user.getLogin()+" successfully logged out.");
+            session.invalidate();
+        }
+        response.sendRedirect(request.getContextPath() +"/login");
     }
 
     private static void tryLogin(HttpServletRequest request,
@@ -165,7 +193,6 @@ public class LoginService {
         String password = signUpData[2];
 
         try {
-            Optional<User> o_user;
             if(userDao.getUserByLogin(username).isPresent())
                 forwardToSignUp(request, response,"Username is already taken!");
             else if(userDao.getUserByEmail(email).isPresent()){
@@ -180,7 +207,6 @@ public class LoginService {
                         .setPassword(encode(password));
                 profile = profileDao.regNewProfile(profile);
                 request.getSession().setAttribute("profile", profile);
-                o_user = userDao.getUserByEmail(email);
                 onLoginSuccess(request,response,profile);
                 response.sendRedirect(request.getContextPath() + "/welcome"); // Go to welcome page.
             }

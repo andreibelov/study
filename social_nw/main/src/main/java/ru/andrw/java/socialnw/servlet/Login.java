@@ -46,7 +46,7 @@ public class Login extends HttpServlet {
                          HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") != null)
             response.sendRedirect(request.getContextPath() +"/home"); // Go to some start page.
-        else LoginService.performGetAction(request,response);
+        else LoginService.doGetAction(request,response);
     }
 
     @Override
@@ -54,6 +54,6 @@ public class Login extends HttpServlet {
                           HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") != null)
             response.sendRedirect(request.getContextPath() +"/home"); // Go to some start page.
-        else LoginService.performPostAction(request,response);
+        else LoginService.doPostAction(request,response);
     }
 }
