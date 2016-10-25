@@ -28,13 +28,16 @@ import ru.andrw.java.socialnw.model.enums.RowStatus;
 class H2FriendsDao implements FriendsDao {
 
     private final Supplier<Connection> supplier;
-    private final int[][] statuses = new int[][]{{0,2,5},{3,1,5},{4,4,6}};
+    private final int[][] statuses = new int[][]{
+            {0,2,5},
+            {1,3,5},
+            {4,4,6}};
     private final String SPLITERATOR = ".";
     private final String SCHEMA_NAME = "PUBLIC";
     private final String PROFILE_TABLE = "PROFILE";
     private final String RELATION_TABLE = "RELATION";
     private final String RELATION_TABLE_NAME = SCHEMA_NAME+SPLITERATOR+RELATION_TABLE;
-    private final String DELETE = "DELETE FROM "+RELATION_TABLE_NAME+" WHERE ((? IS NOT NULL ) AND (IDREQUESTER = ?) AND (IDREQUESTEE = ?) AND (? IS NOT NULL));";
+    private final String DELETE = "DELETE FROM "+RELATION_TABLE_NAME+" WHERE ((IDREQUESTER = ?) AND (IDREQUESTEE = ?) AND (? IS NOT NULL));";
     private final String PROFILE_TABLE_NAME = SCHEMA_NAME+SPLITERATOR+PROFILE_TABLE;
     private final String INSERT_OR_UPDATE = "MERGE INTO "+RELATION_TABLE_NAME+" (IDREQUESTER, IDREQUESTEE, STATUS) VALUES (?,?,?);";
     @Language("H2")
@@ -94,6 +97,7 @@ class H2FriendsDao implements FriendsDao {
     @Override
     public Integer friendsStatus(Long requesterId,
                                  Long requesteeId) throws DaoException {
+        if(requesterId.equals(requesteeId)) return 7;
         int out;
         try (Connection con = getConnection();
              PreparedStatement ps1 = con.prepareStatement(SELECT_STATUS);

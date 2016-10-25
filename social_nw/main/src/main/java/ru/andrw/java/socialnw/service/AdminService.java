@@ -48,9 +48,9 @@ class AdminService{
         );
         sections.put("export",(new Section())
                 .setSectionName("Export")
-                .setCssFile("export.css")
-                .setJsFile("export.js")
-                .setJspFile("export.jsp")
+                .setCssFile("empty.css")
+                .setJsFile("empty.js")
+                .setJspFile("empty.jsp")
         );
     }
 

@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 /**
  * Created by john on 9/25/2016.
@@ -25,6 +28,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
+
 
     private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Login");
 
@@ -44,6 +48,8 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
+
+
         if (request.getSession().getAttribute("user") != null)
             response.sendRedirect(request.getContextPath() +"/home"); // Go to some start page.
         else LoginService.doGetAction(request,response);

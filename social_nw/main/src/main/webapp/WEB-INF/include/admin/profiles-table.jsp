@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"
 %><div class="table-responsive"><c:if test="${not empty requestScope.message}">
-    <div class="alert alert-danger alert-dismissible" role="alert">
+    <div class="alert alert-info alert-dismissible" role="alert">
         <span class="close" data-dismiss="alert">&times;</span>
-        <strong>Warning! </strong>${requestScope.message}
+        <strong>Info: </strong>${requestScope.message}
     </div>
     <br />
     </c:if>

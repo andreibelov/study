@@ -74,6 +74,16 @@
         </c:choose>
         </div>
     </div>
+    <c:if test="${not empty requestScope.logindata}">
+        <footer class="footer">
+            <div class="container text-center">
+            <span class="text-muted">
+                <a href="${pageContext.request.contextPath}/locale?lang=ru_RU">Russian</a> |
+                <a href="${pageContext.request.contextPath}/locale?lang=en_US">English</a>
+            </span>
+            </div>
+        </footer>
+    </c:if>
 </div>
 <!-- Bootstrap core JavaScript
 ================================================== -->

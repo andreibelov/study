@@ -22,7 +22,8 @@
                     </div>
                     <div class="media-right">
                         <m:button testId="${profile.id}"/>
-                        <button id="sendMessage" class="btn btn-md btn-default btn-block" data-target="${profile.id}">Send a message</button>
+                        <button class="btn btn-md btn-default message btn-block" data-target="${profile.id}">Send a message</button>
+                        <button class="btn btn-md btn-link btn-block blockUser" data-target="${profile.id}">Block user</button>
                     </div>
                 </li>
                 <hr />

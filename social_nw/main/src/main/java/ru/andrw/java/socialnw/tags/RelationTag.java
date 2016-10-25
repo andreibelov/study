@@ -40,23 +40,25 @@ public class RelationTag extends TagSupport {
         this.testId = testId;
     }
     private String[] buttons1 = {
-            "<button class=\"btn btn-md btn-primary btn-block nonfriendly\" data-target=\"",
-            "<button class=\"btn btn-md btn-success btn-block\" data-target=\"",
-            "<button class=\"btn btn-md btn-default btn-block\" data-target=\"",
-            "<button class=\"btn btn-md btn-default btn-block\" data-target=\"",
-            "<button class=\"btn btn-md btn-info btn-block\" data-target=\"",
-            "<button class=\"btn btn-md btn-danger btn-block\" data-target=\"",
-            "<button class=\"btn btn-md btn-warning btn-block\" data-target=\""
+            "<button class=\"btn btn-md btn-primary btn-block befriendly\" data-target=\"",
+            "<button class=\"btn btn-md btn-default btn-block unfriend\" data-target=\"",
+            "<button class=\"btn btn-md btn-success btn-block befriendly\" data-target=\"",
+            "<button class=\"btn btn-md btn-default btn-block unfriend\" data-target=\"",
+            "<button class=\"btn btn-md btn-info btn-block unblock\" data-target=\"",
+            "<button class=\"btn btn-md btn-danger btn-block disabled\" disabled data-target=\"",
+            "<button class=\"btn btn-md btn-warning btn-block unblock\" data-target=\"",
+            "<button id=\"editProfile\" class=\"btn btn-md btn-default btn-block\" data-target=\"",
     };
 
     private String[] buttons2 = {
             "\">Add to friends</button>",
-            "\">Accept</button>",
             "\">Unsend</button>",
+            "\">Accept</button>",
             "\">Remove</button>",
             "\">Unblock</button>",
             "\">Blocked</button>",
-            "\">Unblock</button>"
+            "\">Unblock</button>",
+            "\">Edit</button>"
 
     };
     /**
@@ -80,14 +82,12 @@ public class RelationTag extends TagSupport {
         FriendsDao friendsDao = daoFactory.getFriendsDao();
 
         int status;
-        Optional<User> o_user = Optional.ofNullable((User) session.getAttribute("user"));
+        User user = (User) session.getAttribute("user");
         StringBuilder s_out = new StringBuilder();
-        if (o_user.isPresent()) {
-            status = friendsDao.friendsStatus(o_user.get().getId(), testId);
-            s_out.append(buttons1[status])
-                    .append(testId)
-                    .append(buttons2[status]);
-        }
+        status = friendsDao.friendsStatus(user.getId(), testId);
+        s_out.append(buttons1[status])
+                .append(testId)
+                .append(buttons2[status]);
         try {
             out.print(s_out.toString());
         } catch (IOException e) {

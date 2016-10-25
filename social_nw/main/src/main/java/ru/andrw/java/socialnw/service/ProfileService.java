@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.DaoFactory;
+import ru.andrw.java.socialnw.dao.FriendsDao;
 import ru.andrw.java.socialnw.dao.UserProfileDao;
 import ru.andrw.java.socialnw.model.Profile;
 import ru.andrw.java.socialnw.model.view.Section;
@@ -11,6 +12,7 @@ import ru.andrw.java.socialnw.model.auth.User;
 import ru.andrw.java.socialnw.model.enums.Countries;
 import ru.andrw.java.socialnw.model.enums.Gender;
 import ru.andrw.java.socialnw.service.ifaces.ServiceMethod;
+import ru.andrw.java.socialnw.util.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +44,9 @@ class ProfileService{
     private static final String PROFILES = "/WEB-INF/include/sections/profiles.jsp";
     private static final String ATTRIB = "profileList";
     private static UserProfileDao profileDao;
+    private static FriendsDao friendsDao;
+
+
 
     static {
         postMethods.put("getform", ProfileService::getEditForm);
@@ -54,25 +59,6 @@ class ProfileService{
 
         getMethods.put("edit", ProfileService::getEditProfile);
         getMethods.put("show",ProfileService::showProfile);
-    }
-
-    private static void getEditProfile(HttpServletRequest request,
-                                       HttpServletResponse response)
-            throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-        Long id = ((User) session.getAttribute("user")).getId();
-        @SuppressWarnings("OptionalGetWithoutIsPresent")
-        Profile profile = profileDao.getUserProfileById(id).get();
-        request.setAttribute("profile", profile);
-        Section section = (new Section())
-                .setSectionName("Edit profile")
-                .setPageTitle("Edit profile")
-                .setCssFile("profile.css")
-                .setJsFile("profile.js")
-                .setJspFile("profile-edit.jsp");
-        request.setAttribute("action", "update");
-        PageBuilder.buildPage(request, response, section);
     }
 
     static void getAction(HttpServletRequest request,
@@ -102,6 +88,25 @@ class ProfileService{
             logger.error("Requested method unknown");
             response.sendRedirect(request.getContextPath() + "/home"); // Go to home page.
         }
+    }
+
+    private static void getEditProfile(HttpServletRequest request,
+                                       HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        Long id = ((User) session.getAttribute("user")).getId();
+        @SuppressWarnings("OptionalGetWithoutIsPresent")
+        Profile profile = profileDao.getUserProfileById(id).get();
+        request.setAttribute("profile", profile);
+        Section section = (new Section())
+                .setSectionName("Edit profile")
+                .setPageTitle("Edit profile")
+                .setCssFile("profile.css")
+                .setJsFile("profile.js")
+                .setJspFile("profile-edit.jsp");
+        request.setAttribute("action", "update");
+        PageBuilder.buildPage(request, response, section);
     }
 
     private static void listAppend(HttpServletRequest req,
@@ -187,6 +192,9 @@ class ProfileService{
         String pattern = "dd-mm-yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         Profile profile = null;
+
+
+
         try {
             profile = (new Profile());
             profile.setEmail(req.getParameter("email"))
@@ -228,42 +236,56 @@ class ProfileService{
         Long profileId = Long.valueOf(req.getParameter("userProfileId"));
         String pattern = "dd-mm-yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
+
+        Optional<Map<String,String>> o_params = Validator.getValidParams(req);
+        String nextJSP = "/WEB-INF/include/forms/profile-edit.jsp";;
         Optional<Profile> o_profile = profileDao.getUserProfileById(profileId);
         Profile profile = o_profile.isPresent() ? o_profile.get() : new Profile();
-        try {
+        if (o_params.isPresent())try {
+            Map<String,String> map = o_params.get();
             profile.setId(profileId)
                 .setAccessLevel(3) //TODO
-                .setEmail(req.getParameter("email"))
-                .setLogin(req.getParameter("login"));
-            profile.setBirthDate(format.parse(req.getParameter("birthDate")))
-                    .setCountry(Countries.valueOf(req.getParameter("country")))
-                    .setCity(req.getParameter("city"))
-                    .setFirstName(req.getParameter("firstName"))
-                    .setLastName(req.getParameter("lastName"))
-                    .setPhone(req.getParameter("mobile"))
-                    .setPhoto(fromString(req.getParameter("photo")))
-                    .setSex(Gender.values()[Integer.parseInt(req.getParameter("gender"))])
+                .setEmail(map.get("email"))
+                .setLogin(map.get("login"));
+            profile.setBirthDate(format.parse(map.get("birthDate")))
+                    .setCountry(Countries.valueOf(map.get("country")))
+                    .setCity(map.get("city"))
+                    .setFirstName(map.get("firstName"))
+                    .setLastName(map.get("lastName"))
+                    .setPhone(map.get("mobile"))
+                    .setPhoto(fromString(map.get("photo")))
+                    .setSex(Gender.values()[Integer.parseInt(map.get("gender"))])
                     .setStatus("");
+
+            try {
+                profileDao.updateUserProfile(profile);
+                nextJSP = "/WEB-INF/include/admin/profiles-table.jsp";
+                req.setAttribute("message","User updated successfully");
+                req.setAttribute("profileList", profileDao.getUserProfilesSubList(0,30));
+            } catch (DaoException e) {
+                logger.error("Profile not updated",e);
+                req.setAttribute("userProfileId",profileId);
+                req.setAttribute("message","User not updated!");
+                req.setAttribute("action","edit");
+                req.setAttribute("profile",profile);
+            }
         } catch (ParseException e) {
             logger.error("Could not parse date provided",e);
-        }
-        String nextJSP;
-        try {
-            profileDao.updateUserProfile(profile);
-            nextJSP = "/WEB-INF/include/admin/profiles-table.jsp";
-            req.setAttribute("message","User updated successfully");
-            req.setAttribute("profileList", profileDao.getUserProfilesSubList(0,30));
-        } catch (DaoException e) {
-            logger.error("Profile not updated",e);
             req.setAttribute("userProfileId",profileId);
-            req.setAttribute("message","User not updated!");
+            req.setAttribute("message","Could not parse date provided!");
             req.setAttribute("action","edit");
             req.setAttribute("profile",profile);
-            nextJSP = "/WEB-INF/include/forms/profile-edit.jsp";
+        } else {
+            logger.warn("Provided information is not valid!");
+            req.setAttribute("userProfileId",profileId);
+            req.setAttribute("message","Provided information is not valid!");
+            req.setAttribute("action","edit");
+            req.setAttribute("profile",profile);
         }
         req.getServletContext()
                 .getRequestDispatcher(nextJSP)
                 .include(req, resp);
+
     }
 
     private static void removeUserProfile(HttpServletRequest req,
@@ -283,13 +305,15 @@ class ProfileService{
                                     HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         String profileId = ofNullable(request.getParameter("id"))
-                .orElse(((User) session.getAttribute("user")).getId().toString());
+                .orElse(user.getId().toString());
         Optional<Profile> byId = profileDao.getUserProfileById(Long.parseLong(profileId));
+        int status = friendsDao.friendsStatus(user.getId(), Long.parseLong(profileId));
         if(byId.isPresent())request.setAttribute("profile",byId.get());
+        request.setAttribute("friendStatus",status);
         PageBuilder.getDefault(request,response);
     }
-
 
     private static void updateProfile(HttpServletRequest req,
                                       HttpServletResponse resp)
@@ -297,21 +321,23 @@ class ProfileService{
         Long profileId = Long.valueOf(req.getParameter("userid"));
         String pattern = "dd-mm-yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
-        try {
+        Optional<Map<String,String>> o_params = Validator.getValidParams(req);
+        if (o_params.isPresent()) try {
+            Map<String,String> map = o_params.get();
             Optional<Profile> o_profile = profileDao.getUserProfileById(profileId);
             Profile profile = o_profile.isPresent() ? o_profile.get() : new Profile();
             profile.setId(profileId)
                     .setAccessLevel(3) //TODO
-                    .setEmail(req.getParameter("email"))
-                    .setLogin(req.getParameter("login"));
-            profile.setBirthDate(format.parse(req.getParameter("birthDate")))
-                    .setCountry(Countries.valueOf(req.getParameter("country")))
-                    .setCity(req.getParameter("city"))
-                    .setFirstName(req.getParameter("firstName"))
-                    .setLastName(req.getParameter("lastName"))
-                    .setPhone(req.getParameter("mobile"))
-                    .setPhoto(fromString(req.getParameter("photo")))
-                    .setSex(Gender.values()[Integer.parseInt(req.getParameter("gender"))])
+                    .setEmail(map.get("email"))
+                    .setLogin(map.get("login"));
+            profile.setBirthDate(format.parse(map.get("birthDate")))
+                    .setCountry(Countries.valueOf(map.get("country")))
+                    .setCity(map.get("city"))
+                    .setFirstName(map.get("firstName"))
+                    .setLastName(map.get("lastName"))
+                    .setPhone(map.get("mobile"))
+                    .setPhoto(fromString(map.get("photo")))
+                    .setSex(Gender.values()[Integer.parseInt(map.get("gender"))])
                     .setStatus("");
             profileDao.updateUserProfile(profile);
         } catch (ParseException | DaoException e) {
@@ -321,5 +347,6 @@ class ProfileService{
 
     static void init(DaoFactory daoFactory) throws ServletException, DaoException {
         profileDao = daoFactory.getProfileDao();
+        friendsDao = daoFactory.getFriendsDao();
     }
 }
