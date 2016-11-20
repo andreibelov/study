@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author luperalt
  */
 public class Employee {
+
     private long id;
     private String name;
     private String lastName;

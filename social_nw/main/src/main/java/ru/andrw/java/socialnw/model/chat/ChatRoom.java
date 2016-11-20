@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -56,4 +58,9 @@ public class ChatRoom extends Conversation implements Serializable {
     private String description;
     @OneToMany
     private List<User> members;
+
+    public void method(){
+        members.stream().parallel().map(User::getId);
+        IntStream.range(0,100).parallel().mapToObj(i->members.get(i)).collect(Collectors.toList());
+    }
 }

@@ -1,0 +1,5 @@
+dependencies {
+    //  Project modules:
+    compile project(":01");
+    compile 'com.diffplug.durian:durian:3.4.0'
+}

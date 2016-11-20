@@ -15,6 +15,7 @@ import ru.andrw.java.socialnw.dao.DaoException;
 import ru.andrw.java.socialnw.dao.FriendsDao;
 import ru.andrw.java.socialnw.model.Profile;
 import ru.andrw.java.socialnw.model.enums.Countries;
+import ru.andrw.java.socialnw.model.enums.FStatus;
 import ru.andrw.java.socialnw.model.enums.Gender;
 import ru.andrw.java.socialnw.model.enums.RowStatus;
 
@@ -29,7 +30,7 @@ class H2FriendsDao implements FriendsDao {
 
     private final Supplier<Connection> supplier;
     private final int[][] statuses = new int[][]{
-            {0,2,5},
+            {FStatus.UNSET.ordinal(),2,5},
             {1,3,5},
             {4,4,6}};
     private final String SPLITERATOR = ".";
@@ -42,6 +43,7 @@ class H2FriendsDao implements FriendsDao {
     private final String INSERT_OR_UPDATE = "MERGE INTO "+RELATION_TABLE_NAME+" (IDREQUESTER, IDREQUESTEE, STATUS) VALUES (?,?,?);";
     @Language("H2")
     private final String SELECT_STATUS = "SELECT STATUS FROM "+RELATION_TABLE_NAME+" WHERE ((IDREQUESTER = ?) AND (IDREQUESTEE = ?));";
+    @Language("H2")
     private final String FRIEND_LIST =
             "SELECT P.ID, P.BIRTHDATE, P.CITY, P.COUNTRY, P.FIRSTNAME, P.LASTNAME, P.PHONE, P.PHOTO, P.REGDATE, P.SEX, P.STATUS " +
                     "FROM "+RELATION_TABLE_NAME+" A, "+PROFILE_TABLE_NAME+" P " +
@@ -97,7 +99,7 @@ class H2FriendsDao implements FriendsDao {
     @Override
     public Integer friendsStatus(Long requesterId,
                                  Long requesteeId) throws DaoException {
-        if(requesterId.equals(requesteeId)) return 7;
+        if(requesterId.equals(requesteeId)) return FStatus.SELF.ordinal();
         int out;
         try (Connection con = getConnection();
              PreparedStatement ps1 = con.prepareStatement(SELECT_STATUS);

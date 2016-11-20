@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 import static java.util.Optional.ofNullable;
 import static java.util.UUID.fromString;
@@ -64,6 +65,7 @@ class ProfileService{
     static void getAction(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
+
 
         String action = ofNullable(request.getParameter("action")).orElse("show");
         ServiceMethod serviceMethod = getMethods.get(action);

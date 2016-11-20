@@ -64,7 +64,6 @@ public class ScInitListener implements ServletContextListener {
         try {
             connectionPool = ConnectionPool
                     .create(dbPropertiesFilePath)
-                    .executeScript(dbDropFilePath)
                     .executeScript(dbCreateFilePath)
                     .executeScript(dbPrepareFilePath);
         } catch (Exception e) {

@@ -31,7 +31,7 @@ public class Validator {
     private static final String namePattern = "^\\p{L}+$";
     private static final String phonePattern = "^(\\+\\d{1,3}[- ]?)?\\d{10}$";
     private static final String uuidPattern = "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$";
-    private static final String genderPattern = "^[0-9]$";
+    private static final String genderPattern = "^[0-3]$";
     private static final String passwordPattern = "^[A-Za-z0-9._](?=\\S+$).{6,}$";
 
     public static Optional<Map<String,String>> getValidParams(HttpServletRequest req){

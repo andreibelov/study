@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -19,7 +20,7 @@ import javax.servlet.annotation.WebFilter;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-@WebFilter(filterName = "StaticFilter", urlPatterns = {"/static/*"})
+@WebFilter(filterName = "StaticFilter", urlPatterns = {"/static/*"}, dispatcherTypes = {DispatcherType.INCLUDE})
 public class StaticFilter implements Filter {
 
     Logger logger = LoggerFactory.getLogger(StaticFilter.class);

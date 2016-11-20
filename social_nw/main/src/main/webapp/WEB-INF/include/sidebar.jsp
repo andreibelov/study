@@ -5,7 +5,6 @@
          class="img-responsive" alt="Generic placeholder thumbnail" width="200" height="200">
     <h4><m:fullName doLink="true" /></h4>
     <span class="text-muted"><a href="${pageContext.request.contextPath}/profile?action=edit">Edit profile</a></span>
-
 </div>
 <ul class="nav nav-sidebar">
     <c:forEach var="entry" items="${requestScope.sections}"

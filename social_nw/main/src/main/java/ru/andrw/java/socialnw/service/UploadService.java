@@ -5,11 +5,13 @@ import com.diffplug.common.base.Errors;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,6 +41,7 @@ public class UploadService {
     public static void performUpload(HttpServletRequest request,
                                      HttpServletResponse response)
             throws ServletException, IOException {
+
 
         String message = "";
 

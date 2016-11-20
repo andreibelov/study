@@ -13,5 +13,6 @@ public enum FStatus {
     FRIENDS,
     BLOCKED_BY_REQUESTER,
     BLOCKED_BY_REQUESTEE,
-    BLOCKED_BY_BOTH
+    BLOCKED_BY_BOTH,
+    SELF
 }

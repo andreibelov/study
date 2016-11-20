@@ -38,4 +38,5 @@ public class DaoException extends RuntimeException implements Iterable<Throwable
             }
         };
     }
+
 }

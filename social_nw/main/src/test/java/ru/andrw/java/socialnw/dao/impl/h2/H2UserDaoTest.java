@@ -63,8 +63,8 @@ public class H2UserDaoTest {
      */
     @Test
     public void getUserByLogin() throws Exception {
-        Optional<User> o_user = userDao.getUserByLogin(login);
-        assertTrue(o_user.isPresent());
+        Optional<User> userOptional = userDao.getUserByLogin(login);
+        assertTrue(userOptional.isPresent());
     }
 
     /**

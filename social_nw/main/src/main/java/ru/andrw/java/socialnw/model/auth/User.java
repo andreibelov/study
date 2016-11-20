@@ -32,6 +32,7 @@ public class User implements Serializable {
     // Constants -----------------------------------------------------------------
 
     private static final long serialVersionUID = 1L;
+    Integer defaultAccessLevel = AccessLevel.USER.ordinal();
 
     // Constructor ---------------------------------------------------------------
 
@@ -49,7 +50,12 @@ public class User implements Serializable {
     private String login;
     @Index @Column(unique=true, nullable=false, columnDefinition = "VARCHAR (32)")
     private String password;
-    private Integer accessLevel = 3;
+    private Integer accessLevel = defaultAccessLevel;
+    public enum AccessLevel{
+        ADMIN,
+        MODER,
+        USER
+    }
 
     // Object overrides -----------------------------------------------------------
 

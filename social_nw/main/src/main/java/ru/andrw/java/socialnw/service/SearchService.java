@@ -45,8 +45,7 @@ class SearchService {
                 .orElse(Integer.toString(30));
         int offset = Integer.parseInt(s_offset);
         int limit = Integer.parseInt(s_limit);
-        List<Profile> profileList = profileDao
-                .getUserProfilesSubList(offset,limit);
+        List<Profile> profileList = profileDao.getUserProfilesSubList(offset,limit);
         request.setAttribute(ATTRIB,profileList);
         Section section = (new Section())
                 .setSectionName("Profiles")

@@ -20,7 +20,7 @@ import java.io.IOException;
  * @author andrei.belov aka john
  * @link http://vk.com/andrei.belov
  */
-@WebServlet(name = "RootServlet", urlPatterns = {"/"})
+@WebServlet(name = "RootServlet", urlPatterns = {"/*"})
 public class Root extends HttpServlet {
 
     private final Logger logger = LoggerFactory.getLogger("ru.andrw.java.socialnw.servlet.Home");
