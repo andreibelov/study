@@ -3,67 +3,62 @@ package com.epam.courses.junit;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.BiPredicate;
+
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 /**
  * com.epam.courses.junit.Range Tester.
- *
  * @author <Authors name>
  * @version 1.0
  * @since <pre></pre>
  */
 public class RangeTest {
 
+    private static final long m = -1000L;
+    private static final long n = 1000L;
+
     private Range range;
+    private Range otherRange;
 
     @Before
     public void setUp() throws Exception {
-
+        range = MyRange.getRandom(m,n);
+        otherRange = MyRange.getRandom(m,n);
     }
 
     /**
-     * Method: isBefore
+     * Methods tested: isBefore, isAfter, isConcurrent
      */
     @Test
-    public void isBefore() throws Exception {
-        //TODO: Test goes here...
+    public void comparisionCheck() throws Exception {
 
+        Map<BiPredicate<Range,Range>,String> comparisionMap = new HashMap<>();
+        comparisionMap.put(Range::isConcurrent,"isConCurrent");
+        comparisionMap.put(Range::isBefore,"isBefore");
+        comparisionMap.put(Range::isAfter,"isAfter");
+
+        Optional<String> stringOptional =
+                comparisionMap.entrySet().stream()
+                        .filter(e->e.getKey().test(range,otherRange))
+                        .map(Map.Entry::getValue).findAny();
+
+        assertTrue(stringOptional.isPresent());
+        System.out.println(stringOptional.get());
     }
 
     /**
-     * Method: isAfter
+     * Methods tested: getUpperBound, getLowerBound.
      */
     @Test
-    public void isAfter() throws Exception {
-        //TODO: Test goes here...
-
-    }
-
-    /**
-     * Method: isConcurrent
-     */
-    @Test
-    public void isConcurrent() throws Exception {
-        //TODO: Test goes here...
-
-    }
-
-    /**
-     * Method: getLowerBound
-     */
-    @Test
-    public void getLowerBound() throws Exception {
-        //TODO: Test goes here...
-
-    }
-
-    /**
-     * Method: getUpperBound
-     */
-    @Test
-    public void getUpperBound() throws Exception {
-        //TODO: Test goes here...
-
+    public void upperBoundIsGraterThanOrEqualsToLowerBound() throws Exception {
+        assertTrue(range.getUpperBound()>=range.getLowerBound());
     }
 
     /**
@@ -71,8 +66,8 @@ public class RangeTest {
      */
     @Test
     public void contains() throws Exception {
-        //TODO: Test goes here...
-
+        final long randomLongInRange = ThreadLocalRandom.current().nextLong(range.getLowerBound(), range.getUpperBound()+1);
+        assertTrue(range.contains(randomLongInRange));
     }
 
     /**
@@ -80,8 +75,8 @@ public class RangeTest {
      */
     @Test
     public void asList() throws Exception {
-        //TODO: Test goes here...
-
+        int expected = Long.valueOf(range.getUpperBound()-range.getLowerBound()+1L).intValue();
+        assertThat(range.asList().size(), is(expected));
     }
 
     /**
@@ -89,8 +84,7 @@ public class RangeTest {
      */
     @Test
     public void asIterator() throws Exception {
-        //TODO: Test goes here...
-
+        assertTrue(range.asIterator() != null);
     }
 
 }
