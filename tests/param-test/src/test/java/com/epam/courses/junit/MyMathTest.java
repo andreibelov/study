@@ -1,5 +1,6 @@
 package com.epam.courses.junit;
 
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -25,11 +26,6 @@ public class MyMathTest {
     private Number inputNumber;
     private Long expectedResult;
 
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
     public MyMathTest(Number inputNumber, Long expectedResult) {
         this.inputNumber = inputNumber;
         this.expectedResult = expectedResult;
@@ -51,6 +47,7 @@ public class MyMathTest {
      */
     @Test
     public void testCalculation(){
+        Assume.assumeTrue(inputNumber.longValue()<=Integer.MAX_VALUE);
         assertThat(MyMath.calculate(inputNumber),is(expectedResult));
     }
 
@@ -60,12 +57,8 @@ public class MyMathTest {
      */
     @Test(expected = ArithmeticException.class)
     public void testException() throws Exception {
+        Assume.assumeTrue(inputNumber.longValue()>Integer.MAX_VALUE);
         assertThat(MyMath.calculate(inputNumber),is(expectedResult));
-    }
-
-    @Ignore @Test
-    public void ignoredTest(){
-        //some ignoredTest.
     }
 
 
